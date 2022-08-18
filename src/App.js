@@ -1,7 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-// SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -20,7 +19,7 @@ function App() {
           Learn React
         </a>
       </header>
-      <p>Evan rules.</p>
+      <p></p>
     </div>
   );
 }

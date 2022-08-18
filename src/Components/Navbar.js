@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Avatar,
-  Link,
   Button,
   Menu,
   MenuButton,
@@ -19,15 +18,8 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen, onClose } = useDisclosure();
   return (
-    // <Link
-    //   _hover={{
-    //     textDecoration: "none",
-    //     bg: useColorModeValue("gray.200", "gray.700"),
-    //   }}
-    //   href={"#"}
-    // >
     <Box bg={useColorModeValue("tomato", "black")} px={4}>
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         <Box fontSize={["36px", "48px"]}>Moments</Box>
@@ -73,6 +65,5 @@ export default function Navbar() {
         </Flex>
       </Flex>
     </Box>
-    // </Link>
   );
 }

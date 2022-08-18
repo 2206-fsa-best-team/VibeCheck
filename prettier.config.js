@@ -19,6 +19,7 @@ module.exports = {
     ".gitignore": "shellscript",
   },
   "emmet.syntaxProfiles": { javascript: "jsx" },
+  // eslint-disable-next-line no-template-curly-in-string
   "window.title": "${activeEditorMedium}${separator}${rootName}",
   "workbench.colorCustomizations": {
     "editorWarning.foreground": "#ec0",

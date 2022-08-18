@@ -2,11 +2,13 @@ import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./Components/Navbar";
+import Auth from "./server/Auth";
 
 function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
+      <Auth />
     </div>
   );
 }
@@ -27,4 +29,9 @@ export default App;
           Learn React
         </a>
       </header>
-      <p></p> */
+
+    </div>
+  );
+}
+
+export default App;*/

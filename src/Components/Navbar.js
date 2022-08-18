@@ -58,7 +58,6 @@ export default function Navbar() {
                   <MenuItem>testing</MenuItem>
                   <MenuItem>Account Settings (testing)</MenuItem>
                   <MenuItem>Logout (tessting)</MenuItem>
-                  {<MenuItem></MenuItem>}
                 </MenuList>
               </Menu>
             </Box>

@@ -2,34 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="./favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Web site created using create-react-app" />
+    <meta name="theme-color" content="#ff6347" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="manifest.json" />
     <!-- iOS support for downloading the app to the phone -->
-    <link rel="apple-touch-icon" href="/logo192.png" />
-    <meta name="apple-mobile-web-app-status-bar" content="$ffffff">
- <!-- service worker registration -->
- <script defer >
-  if('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register("")
-      .then((reg) => { console.log('service worker reg succeeded',reg.scope)})
-      .catch((error) => {console.error('service failed', error) })})
-  } else {
-    console.error('service workers are not supported')
-  }
-  </script>
+    <link rel="apple-touch-icon" href="./logo192.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#ff6347" />
     <title>React App</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-
+    <!-- service worker registration -->
+    <script defer>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./serviceworker.js")
+            .then((reg) => {
+              console.log("service worker reg succeeded", reg.scope);
+            })
+            .catch((error) => {
+              console.error("service failed", error);
+            });
+        });
+      } else {
+        console.error("service workers are not supported");
+      }
+    </script>
   </body>
 </html>

@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
+      <Auth />
     </div>
-     <Auth />
   );
 }
 
@@ -34,4 +34,4 @@ export default App;
   );
 }
 
-export default App;
+export default App;*/

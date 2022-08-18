@@ -3,12 +3,14 @@ import React from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import Auth from "./Components/Auth";
+import Moments from "./Components/Moments";
 
 function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
       <Auth />
+      <Moments />
     </div>
   );
 }

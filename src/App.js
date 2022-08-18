@@ -2,7 +2,7 @@ import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./Components/Navbar";
-import Auth from "./server/Auth";
+import Auth from "./Components/Auth";
 
 function App() {
   return (

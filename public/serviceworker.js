@@ -43,6 +43,8 @@ self.addEventListener('activate', (event) => {
   )
 })
 
+let deferredInstall: null
+
 
 
 

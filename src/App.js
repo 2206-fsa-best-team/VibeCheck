@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 // SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG
+
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <p>Evan rules.</p>
     </div>
   );
 }

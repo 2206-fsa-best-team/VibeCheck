@@ -4,7 +4,7 @@ import {
   Input,
   InputGroup,
   Button,
-  Container,
+  Flex,
   VStack,
   HStack,
   Heading,
@@ -33,9 +33,13 @@ export default function Auth() {
   const handleSignUp = async (email, password) => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signUp({ email, password });
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
       if (error) throw error;
-      alert("You now have an account.");
+
+      alert("Check your email for a verification link.");
     } catch (error) {
       alert(error.error_description || error.message);
     } finally {
@@ -46,7 +50,7 @@ export default function Auth() {
   const handleClick = () => setShow(!show);
 
   return (
-    <Container>
+    <Flex>
       <VStack>
         <Heading size="md">Sign in or sign up with your email below</Heading>
         <VStack>
@@ -96,6 +100,6 @@ export default function Auth() {
           </Button>
         </HStack>
       </VStack>
-    </Container>
+    </Flex>
   );
 }

@@ -9,6 +9,8 @@ import Footer from "./Components/Footer";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
+import { Show } from "@chakra-ui/react";
+import MoodSlider from "./Components/Slider";
 import WelcomeProfile from "./Components/WelcomeProfile";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
     });
   }, []);
 
+  const isLoggedIn = true;
+
   return (
     <div className="App">
       {!session ? (
@@ -30,12 +34,12 @@ function App() {
         </Routes>
       ) : (
         <>
-          <Navbar />
+          <Navbar isLoggedIn={isLoggedIn} />
           <Routes>
             {/* to do: if logged in, take the user to home or display home component, if not, display auth and don't allow any other navigation*/}
             <Route path="/" element={<Navigate to="/moments" />} />
             <Route path="/moments" element={<Moments />} />
-            <Route path="/add" element={<AddMoment />} />
+            <Route path="/addamoment" element={<AddMoment />} />
             <Route
               path="/welcome"
               element={
@@ -44,7 +48,10 @@ function App() {
             />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
-          <Footer />
+          <MoodSlider />
+          <Show below="lg">
+            <Footer />
+          </Show>
         </>
       )}
     </div>

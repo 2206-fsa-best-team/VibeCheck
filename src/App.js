@@ -8,6 +8,7 @@ import Footer from "./Components/Footer";
 import { Routes, Route } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
+import { Show } from "@chakra-ui/react";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         <Route path="/add" element={<AddMoment />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-      <Footer />
+      <Show below="lg">
+        <Footer />
+      </Show>
     </div>
   );
 }

@@ -11,9 +11,11 @@ import AddMoment from "./Components/AddMoment";
 import { Show } from "@chakra-ui/react";
 
 function App() {
+  const isLoggedIn = true
+
   return (
     <div className="App">
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} />
       <Routes>
         {/* to do: if logged in, take the user to home or display home component, if not, display auth and don't allow any other navigation*/}
         <Route path="/" element={<Auth />} />

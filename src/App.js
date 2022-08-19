@@ -21,7 +21,7 @@ function App() {
     <div className="App">
             <Navbar></Navbar>
     <Routes>
-      {/* to do: if logged in, take the user to home or display home component, if not, display auth */}
+      {/* to do: if logged in, take the user to home or display home component, if not, display auth and don't allow any other navigation*/}
       <Route path="/" element={<Auth />}/>
       <Route path='/home' element={<Moments/>} />
       <Route path="/add" element={<AddMoment />}/>

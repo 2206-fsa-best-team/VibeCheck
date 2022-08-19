@@ -4,6 +4,7 @@ import "./App.css";
 import Navbar from "./Components/Navbar";
 import Auth from "./Components/Auth";
 import Moments from "./Components/Moments";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Navbar></Navbar>
       <Auth />
       <Moments />
+      <Footer />
     </div>
   );
 }

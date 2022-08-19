@@ -6,7 +6,6 @@ import {
   SliderMark,
   Box,
   Highlight,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { TbFaceId } from "react-icons/tb";
 import { useState } from "react";
@@ -22,19 +21,19 @@ function MoodSlider() {
   console.log(SliderValue);
   return (
     <Box pl={5} pr={5} pt={5}>
-        <Highlight
-          query="vibe"
-          styles={{
-            fontStyle: "italic",
-            px: "2",
-            py: "1",
-            rounded: "full",
-            bg: "teal.100",
-            fontSize: "16",
-          }}
-        >
-          What's your vibe like?
-        </Highlight>
+      <Highlight
+        query="vibe"
+        styles={{
+          fontStyle: "italic",
+          px: "2",
+          py: "1",
+          rounded: "full",
+          bg: "teal.100",
+          fontSize: "16",
+        }}
+      >
+        What's your vibe like?
+      </Highlight>
       <Slider
         aria-label="vibe-check-slider"
         onChangeEnd={(val) => setSliderValue(val)}

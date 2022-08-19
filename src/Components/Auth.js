@@ -33,10 +33,13 @@ export default function Auth() {
   const handleSignUp = async (email, password) => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+      const { error } = await supabase.auth.signUp(
+        {
+          email,
+          password,
+        },
+        { redirectTo: "http://localhost:3000/welcome" }
+      );
       if (error) throw error;
 
       alert("Check your email for a verification link.");

@@ -1,24 +1,17 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { supabase } from "../server/supabaseClient";
+import { useNavigate } from "react-router-dom";
 
 const AddMoment = () => {
-  const [moments, setMoments] = useState([]);
   const [moment, setMoment] = useState([{ content: "", vibe: 0 }]);
   const { content, vibe } = moment;
-  useEffect(() => {
-    fetchMoments();
-  }, []);
-
-  async function fetchMoments() {
-    const { data } = await supabase.from("moments").select();
-    setMoments(data);
-  }
+  let navigate = useNavigate()
 
   async function createMoment() {
     await supabase.from("moments").insert([{ content, vibe }]).single();
     setMoment({ content: "", vibe: 0 });
-    fetchMoments();
+    navigate("/moments")
   }
 
   return (

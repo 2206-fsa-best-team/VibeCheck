@@ -27,7 +27,7 @@ const FloatingAdd = (props) => {
               aria-label={`Add a new ${location}`}
               alignSelf="flex-end"
               size="lg"
-              bg={useColorModeValue("gray.300", "black")}
+              bg={useColorModeValue("gray.300", "tomato")}
               pos="fixed"
               px={4}
               py={4}

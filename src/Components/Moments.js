@@ -3,6 +3,8 @@ import { supabase } from "../server/supabaseClient";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
+  const [moment, setMoment] = useState([{ content: "", vibe: "" }]);
+  const { content, vibe } = moment;
   useEffect(() => {
     fetchMoments();
   }, []);
@@ -10,21 +12,35 @@ const Moments = () => {
   async function fetchMoments() {
     const { data } = await supabase.from("moments").select();
     setMoments(data);
-    console.log("data:", data);
+  }
+
+  async function createMoment() {
+    await supabase.from("moments").insert([{ content, vibe }]).single();
+    setMoment({ content: "", vibe: "" });
+    fetchMoments();
   }
 
   return (
-    <Box px={4} maxW={"320px"}>
-      <Flex direction={"column"}>
-        {moments.map((moment) => (
-          <div key={moment.id}>
-            <Box py={2} borderBottom="1px" borderColor={"gray.100"}>
-              {moment.content}
-            </Box>
-          </div>
-        ))}
-      </Flex>
-    </Box>
+    <div>
+      <div className="App">
+        <div>
+          {moments.map((moment) => (
+            <div key={moment.id}>
+              <p>{moment.content}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <input
+        value={content}
+        onChange={(evt) => setMoment({ ...moment, content: evt.target.value })}
+      />
+      <input
+        value={vibe}
+        onChange={(evt) => setMoment({ ...moment, vibe: evt.target.value })}
+      />
+      <button onClick={createMoment}>Submit</button>
+    </div>
   );
 };
 

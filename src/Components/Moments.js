@@ -3,7 +3,7 @@ import { supabase } from "../server/supabaseClient";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
-  const [moment, setMoment] = useState([{ content: "", vibe: "" }]);
+  const [moment, setMoment] = useState([{ content: "", vibe: 0 }]);
   const { content, vibe } = moment;
   useEffect(() => {
     fetchMoments();
@@ -16,7 +16,7 @@ const Moments = () => {
 
   async function createMoment() {
     await supabase.from("moments").insert([{ content, vibe }]).single();
-    setMoment({ content: "", vibe: "" });
+    setMoment({ content: "", vibe: 0 });
     fetchMoments();
   }
 

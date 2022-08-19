@@ -4,6 +4,7 @@ import "./App.css";
 import Navbar from "./Components/Navbar";
 import Auth from "./Components/Auth";
 import Moments from "./Components/Moments";
+import Footer from "./Components/Footer";
 import { Routes, Route } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/add" element={<AddMoment />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

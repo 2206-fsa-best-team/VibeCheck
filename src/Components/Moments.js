@@ -60,6 +60,10 @@ const Moments = () => {
             <Text w="100%" p="8px" borderRadius="lg">
               {moment.content}
             </Text>
+            <Text fontSize='10px'
+            color='gray.400'
+
+            >{moment.created_at.slice(0, 9)}</Text>
           </HStack>
         ))}
       </VStack>

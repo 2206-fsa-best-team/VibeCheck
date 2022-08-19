@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../server/supabaseClient";
-import AddMoment from "./AddMoment";
+import { VStack, HStack, Text, StackDivider, Box } from "@chakra-ui/react";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
@@ -14,18 +14,26 @@ const Moments = () => {
   }
 
   return (
-    <div>
-      <div className="App">
-        <div>
-          {moments.map((moment) => (
-            <div key={moment.id}>
-              <p>{moment.content}</p>
-            </div>
-          ))}
-        </div>
-        <AddMoment />
-      </div>
-    </div>
+    <Box p={4}>
+      <VStack
+        divider={<StackDivider />}
+        borderColor="gray.100"
+        borderWidth="2px"
+        p="5"
+        borderRadius="lg"
+        w="100%"
+        maxW={{ base: "90vw", sm: "80vw", lg: "50vw", xl: "30vw" }}
+        alignItems="stretch"
+      >
+        {moments.map((moment) => (
+          <HStack key={moment.id}>
+            <Text w="100%" p="8px" borderRadius="lg">
+              {moment.content}
+            </Text>
+          </HStack>
+        ))}
+      </VStack>
+    </Box>
   );
 };
 

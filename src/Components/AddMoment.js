@@ -4,7 +4,7 @@ import { supabase } from "../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 const AddMoment = () => {
-  const [moment, setMoment] = useState([{ content: "", vibe: 0 }]);
+  const [moment, setMoment] = useState([{ content: "", vibe: "" }]);
   const { content, vibe } = moment;
   let navigate = useNavigate()
 
@@ -17,11 +17,11 @@ const AddMoment = () => {
   return (
     <div>
       <input
-        value={content}
+        value={content || ''}
         onChange={(evt) => setMoment({ ...moment, content: evt.target.value })}
       />
       <input
-        value={vibe}
+        value={vibe || ''}
         onChange={(evt) => setMoment({ ...moment, vibe: evt.target.value })}
       />
       <button onClick={createMoment}>Submit</button>

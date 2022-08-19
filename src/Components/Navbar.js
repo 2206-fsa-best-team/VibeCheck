@@ -15,10 +15,14 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { supabase } from "../server/supabaseClient";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { onOpen, onClose } = useDisclosure();
+  const { isLoggedIn } = props;
+
   return (
     <Box bg={useColorModeValue("tomato", "black")} px={4}>
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
@@ -57,7 +61,19 @@ export default function Navbar() {
                   <MenuDivider />
                   <MenuItem>testing</MenuItem>
                   <MenuItem>Account Settings (testing)</MenuItem>
-                  <MenuItem>Logout (tessting)</MenuItem>
+                  {isLoggedIn ? (
+                    <Link to="/">
+                      <MenuItem
+                        onClick={() => {
+                          supabase.auth.signOut();
+                        }}
+                      >
+                        Logout
+                      </MenuItem>
+                    </Link>
+                  ) : (
+                    <></>
+                  )}
                 </MenuList>
               </Menu>
             </Box>

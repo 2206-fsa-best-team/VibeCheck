@@ -16,6 +16,7 @@ function Footer() {
       bg={useColorModeValue("gray.300", "black")}
       px={4}
       py={2}
+      pb={5}
       pos={"fixed"}
       bottom={0}
       w={"100%"}

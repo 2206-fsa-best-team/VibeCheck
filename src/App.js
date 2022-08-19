@@ -19,7 +19,7 @@ function App() {
         {/* to do: if logged in, take the user to home or display home component, if not, display auth and don't allow any other navigation*/}
         <Route path="/" element={<Auth />} />
         <Route path="/moments" element={<Moments />} />
-        <Route path="/add" element={<AddMoment />} />
+        <Route path="/addamoment" element={<AddMoment />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <MoodSlider />

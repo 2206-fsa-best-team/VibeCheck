@@ -9,6 +9,7 @@ import Footer from "./Components/Footer";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
+import WelcomeProfile from "./Components/WelcomeProfile";
 
 function App() {
   const [session, setSession] = useState("");
@@ -35,6 +36,12 @@ function App() {
             <Route path="/" element={<Navigate to="/moments" />} />
             <Route path="/moments" element={<Moments />} />
             <Route path="/add" element={<AddMoment />} />
+            <Route
+              path="/welcome"
+              element={
+                <WelcomeProfile key={session.user.id} session={session} />
+              }
+            />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
           <Footer />

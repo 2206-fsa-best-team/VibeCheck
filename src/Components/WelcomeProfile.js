@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
-import { supabase } from "./supabaseClient";
+import { supabase } from "../server/supabaseClient";
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState("");
-  const [website, setWebsite] = useState("");
-  const [avatar_url, setAvatarUrl] = useState("");
-  const [dogs, setDogs] = useState([]);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     getProfile();
-    getDogs();
   }, [session]);
 
   async function getProfile() {
@@ -20,7 +16,7 @@ export default function Account({ session }) {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, website, avatar_url`)
+        .select(`email`)
         .eq("id", user.id)
         .single();
 
@@ -29,9 +25,7 @@ export default function Account({ session }) {
       }
 
       if (data) {
-        setUsername(data.username);
-        setWebsite(data.website);
-        setAvatarUrl(data.avatar_url);
+        setEmail(data.email);
       }
     } catch (error) {
       alert(error.message);
@@ -40,16 +34,14 @@ export default function Account({ session }) {
     }
   }
 
-  async function updateProfile({ username, website, avatar_url }) {
+  async function updateProfile({ email }) {
     try {
       setLoading(true);
       const user = supabase.auth.user();
 
       const updates = {
         id: user.id,
-        username,
-        website,
-        avatar_url,
+        email,
         updated_at: new Date(),
       };
 
@@ -67,57 +59,23 @@ export default function Account({ session }) {
     }
   }
 
-  async function getDogs() {
-    try {
-      setLoading(true);
-
-      let { data, error, status } = await supabase
-        .from("dogs")
-        .select(`name, breed, age`);
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        setDogs(data);
-      }
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
-    <div className="form-widget">
+    <div>
+      <h1>Hello</h1>
       <div>
         <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="username">Name</label>
         <input
-          id="username"
+          id="email"
           type="text"
-          value={username || ""}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="website"
-          value={website || ""}
-          onChange={(e) => setWebsite(e.target.value)}
+          value={email || ""}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
 
       <div>
         <button
           className="button block primary"
-          onClick={() => updateProfile({ username, website, avatar_url })}
+          onClick={() => updateProfile({ email })}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}
@@ -132,11 +90,6 @@ export default function Account({ session }) {
           Sign Out
         </button>
       </div>
-      {dogs.map((dog, idx) => (
-        <p key={idx}>
-          {dog.name} the {dog.breed} is {dog.age} years old.
-        </p>
-      ))}
     </div>
   );
 }

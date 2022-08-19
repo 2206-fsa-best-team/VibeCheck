@@ -49,7 +49,6 @@ const SettingsScreen = (props) => {
         <Box
           display="flex"
           width="100%"
-          bg="blue"
           alignItems="center"
           pr="4.5rem"
         >

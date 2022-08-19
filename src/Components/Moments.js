@@ -14,15 +14,17 @@ const Moments = () => {
   }
 
   return (
-    <div className="App">
-      <div>
+    <Box px={4} maxW={"320px"}>
+      <Flex direction={"column"}>
         {moments.map((moment) => (
           <div key={moment.id}>
-            <p>{moment.content}</p>
+            <Box py={2} borderBottom="1px" borderColor={"gray.100"}>
+              {moment.content}
+            </Box>
           </div>
         ))}
-      </div>
-    </div>
+      </Flex>
+    </Box>
   );
 };
 

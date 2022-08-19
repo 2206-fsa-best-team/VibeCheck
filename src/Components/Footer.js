@@ -5,11 +5,10 @@ import {
   IconButton,
   Spacer,
   Divider,
-  Link,
 } from "@chakra-ui/react";
-//import { Link as RouterLink } from "react-router-dom";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdFormatListBulleted } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -23,7 +22,7 @@ function Footer() {
     >
       <Flex align={"space-between"} h={10}>
         <Spacer />
-        <Link  to="/moments">
+        <Link to="/moments">
           <IconButton
             variant="ghost"
             color={"tomato"}
@@ -34,7 +33,7 @@ function Footer() {
         <Spacer />
         <Divider orientation={"vertical"} />
         <Spacer />
-        <Link  to="/journals">
+        <Link to="/journal">
           <IconButton
             variant="ghost"
             color={"tomato"}

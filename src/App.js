@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
 import { Show } from "@chakra-ui/react";
+import MoodSlider from "./Components/Slider";
 
 function App() {
   const isLoggedIn = true
@@ -23,6 +24,7 @@ function App() {
         <Route path="/addamoment" element={<AddMoment />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <MoodSlider />
       <Show below="lg">
         <Footer />
       </Show>

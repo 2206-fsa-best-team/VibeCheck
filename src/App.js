@@ -10,6 +10,7 @@ import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
 import { Show } from "@chakra-ui/react";
 import MoodSlider from "./Components/Slider";
+import SettingsScreen from "./Components/Settings/ProfileScreen";
 
 function App() {
   const isLoggedIn = true
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Auth />} />
         <Route path="/moments" element={<Moments />} />
         <Route path="/addamoment" element={<AddMoment />} />
+        <Route path="/settings" element={<SettingsScreen/>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <MoodSlider />

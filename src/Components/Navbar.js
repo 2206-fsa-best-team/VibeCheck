@@ -57,7 +57,7 @@ export default function Navbar() {
                   <MenuDivider />
                   <MenuItem>testing</MenuItem>
                   <MenuItem>Account Settings (testing)</MenuItem>
-                  <MenuItem>Logout (tessting)</MenuItem>
+                  <MenuItem>Logout</MenuItem>
                 </MenuList>
               </Menu>
             </Box>

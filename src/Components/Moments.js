@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../server/supabaseClient";
+import FloatingAdd from "./FloatingAdd";
 
-const Moments = () => {
+const Moments = (props) => {
   const [moments, setMoments] = useState([]);
   const [moment, setMoment] = useState([{ content: "", vibe: 0 }]);
   const { content, vibe } = moment;
   useEffect(() => {
     fetchMoments();
   }, []);
+  const location = 'moment'
 
   async function fetchMoments() {
     const { data } = await supabase.from("moments").select();
@@ -40,6 +42,7 @@ const Moments = () => {
         onChange={(evt) => setMoment({ ...moment, vibe: evt.target.value })}
       />
       <button onClick={createMoment}>Submit</button>
+      <FloatingAdd location={location}/>
     </div>
   );
 };

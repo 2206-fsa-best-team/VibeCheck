@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../server/supabaseClient";
-import { VStack, HStack, Text, StackDivider, Box } from "@chakra-ui/react";
+import {
+  VStack,
+  HStack,
+  Text,
+  StackDivider,
+  Box,
+  Icon,
+} from "@chakra-ui/react";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
@@ -13,8 +20,25 @@ const Moments = () => {
     setMoments(data);
   }
 
+  const colorSelector = (vibe) => {
+    switch (vibe) {
+      case 1:
+        return "blue.500";
+      case 2:
+        return "blue.100";
+      case 3:
+        return "purple.100";
+      case 4:
+        return "red.300";
+      case 5:
+        return "red.600";
+      default: 
+        return "red.600"
+    }
+  };
+
   return (
-    <Box p={4}>
+    <Box>
       <VStack
         divider={<StackDivider />}
         borderColor="gray.100"
@@ -22,11 +46,17 @@ const Moments = () => {
         p="5"
         borderRadius="lg"
         w="100%"
-        maxW={{ base: "90vw", sm: "80vw", lg: "50vw", xl: "30vw" }}
         alignItems="stretch"
+        maxW="700px"
       >
         {moments.map((moment) => (
           <HStack key={moment.id}>
+            <Icon viewBox="0 0 200 200" color={() => colorSelector(moment.vibe)}>
+              <path
+                fill="currentColor"
+                d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+              />
+            </Icon>
             <Text w="100%" p="8px" borderRadius="lg">
               {moment.content}
             </Text>

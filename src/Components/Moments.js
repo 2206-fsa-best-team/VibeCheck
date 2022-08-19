@@ -8,6 +8,7 @@ import {
   Box,
   Icon,
 } from "@chakra-ui/react";
+import FloatingAdd from "./FloatingAdd";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
@@ -67,6 +68,7 @@ const Moments = () => {
           </HStack>
         ))}
       </VStack>
+      <FloatingAdd location={location}/>
     </Box>
   );
 };

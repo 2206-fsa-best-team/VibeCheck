@@ -10,7 +10,7 @@ import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
 import { Show } from "@chakra-ui/react";
 import MoodSlider from "./Components/Slider";
-import SettingsScreen from "./Components/Settings/ProfileScreen";
+import SettingsScreen from "./Components/Settings/SettingsScreen";
 
 function App() {
   const isLoggedIn = true

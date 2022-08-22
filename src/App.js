@@ -9,15 +9,10 @@ import Footer from "./Components/Footer";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
-<<<<<<< HEAD
-import { Show } from "@chakra-ui/react";
-import MoodSlider from "./Components/Slider";
-import SettingsScreen from "./Components/Settings/SettingsScreen";
-=======
 import { Box, Show } from "@chakra-ui/react";
->>>>>>> main
 import WelcomeProfile from "./Components/WelcomeProfile";
 import SideMenu from "./Components/SideMenu";
+import SettingsScreen from "./Components/Settings/SettingsScreen";
 
 function App() {
   const [session, setSession] = useState("");

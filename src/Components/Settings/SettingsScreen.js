@@ -10,20 +10,35 @@ import {
   Flex,
   Box,
   Text,
+  HStack,
+  Spinner,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import LightDarkButton from "../LightDarkButton";
 
 const SettingsScreen = (props) => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const [loading, setLoading] = useState(false);
+
+  const handleUpdate = (email, password) => {
+    setLoading(true);
+    
+
+
+    alert("Your information has been updated");
+    setLoading(false);
+  };
+
   return (
     <Container>
-      <VStack alignItems="stretch">
+      <VStack alignItems="stretch" p="5" pt="10">
         <InputGroup size="md">
-          <Text alignContent="flex-start" pr='3'>Update your Email</Text>
+          <Text alignContent="flex-start" pr="3">
+            Update your Email
+          </Text>
           <Input
             type="email"
             placeholder="Your email"
@@ -32,7 +47,9 @@ const SettingsScreen = (props) => {
           />
         </InputGroup>
         <InputGroup size="md">
-          <Text alignContent="flex-start" pr='3'>Update your Password</Text>
+          <Text alignContent="flex-start" pr="3">
+            Update your Password
+          </Text>
           <Input
             pr="4.5rem"
             type={show ? "text" : "password"}
@@ -40,25 +57,36 @@ const SettingsScreen = (props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <InputRightElement width="4.5rem">
+          <InputRightElement w="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
               {show ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
         </InputGroup>
-        <Box
+        {loading ? (
+          <Spinner size="md" alignSelf={"center"} />
+        ) : (
+          <Button
+            size="md"
+            w="12rem"
+            alignSelf={"center"}
+            onClick={handleUpdate}
+          >
+            Confirm Update
+          </Button>
+        )}
+        <HStack
           display="flex"
           width="100%"
           alignItems="center"
           pr="4.5rem"
+          pt="10"
         >
-          <Text alignContent="flex-start" w={'6rem'}>
-            {`Toggle off ${colorMode} mode`}
+          <Text alignContent="flex-start" w={"6rem"}>
+            {`Disable ${colorMode} mode`}
           </Text>
-          <Button onClick={toggleColorMode} >
-            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          </Button>
-        </Box>
+          <LightDarkButton />
+        </HStack>
       </VStack>
     </Container>
   );

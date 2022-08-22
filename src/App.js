@@ -25,7 +25,7 @@ function App() {
     });
   }, []);
 
-  const isLoggedIn = true;
+  const isLoggedIn = !!session;
 
   return (
     <div className="App">
@@ -41,6 +41,7 @@ function App() {
             <Route path="/" element={<Navigate to="/moments" />} />
             <Route path="/moments" element={<Moments />} />
             <Route path="/addamoment" element={<AddMoment />} />
+            <Route path="/settings" element={<SettingsScreen />} />
             <Route
               path="/welcome"
               element={

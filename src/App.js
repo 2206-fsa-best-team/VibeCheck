@@ -10,7 +10,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPage";
 import AddMoment from "./Components/AddMoment";
 import { Show } from "@chakra-ui/react";
-import MoodSlider from "./Components/Slider";
 import WelcomeProfile from "./Components/WelcomeProfile";
 
 function App() {
@@ -48,7 +47,6 @@ function App() {
             />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
-          <MoodSlider />
           <Show below="lg">
             <Footer />
           </Show>

@@ -57,7 +57,7 @@ export default function Navbar(props) {
                   <MenuDivider />
                   <MenuItem>testing</MenuItem>
                   <Link to="/settings">
-                    <MenuItem>Account Settings (testing)</MenuItem>
+                    <MenuItem>Settings</MenuItem>
                   </Link>
                   {isLoggedIn ? (
                     <Link to="/">

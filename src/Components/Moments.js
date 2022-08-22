@@ -9,7 +9,7 @@ import {
   Stack,
   Icon,
 } from "@chakra-ui/react";
-// import FloatingAdd from "./FloatingAdd";
+import FloatingAdd from "./FloatingAdd";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
@@ -23,6 +23,8 @@ const Moments = () => {
     setMoments(data);
     setLoading(false);
   }
+
+  const location = "moment";
 
   const colorSelector = (vibe) => {
     switch (vibe) {
@@ -79,7 +81,7 @@ const Moments = () => {
           </Text>
         </HStack>
       ))}
-      {/* <FloatingAdd location={location} /> */}
+      <FloatingAdd location={location} />
     </VStack>
   );
 };

@@ -1,11 +1,21 @@
 import React from "react";
-import { Flex, Heading, Text, Image } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Text,
+  Image,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
     <Flex alignItems="center" justifyContent="center">
-      <Flex direction="column" background="gray.100" p={12}>
+      <Flex
+        direction="column"
+        background={useColorModeValue("white", "gray.800")}
+        p={12}
+      >
         <Heading mb={6}>404 Not Found</Heading>
         <Text fontSize="lg" fontWeight="bold">
           Looks like we can't find what you're looking for. Please click the

@@ -4,9 +4,8 @@ import {
   SliderFilledTrack,
   SliderThumb,
   SliderMark,
-  Box,
-  Highlight,
-} from "@chakra-ui/react";
+} from "@chakra-ui/slider";
+import { Box, Highlight } from "@chakra-ui/react";
 import { TbFaceId } from "react-icons/tb";
 import { useState } from "react";
 
@@ -37,6 +36,8 @@ function MoodSlider() {
       <Slider
         aria-label="vibe-check-slider"
         onChangeEnd={(val) => setSliderValue(val)}
+        name="vibe"
+        defaultValue={50}
       >
         <SliderMark value={25} {...labelStyles}>
           pretty bad

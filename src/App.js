@@ -29,21 +29,6 @@ function App() {
 
   return (
     <div className="App">
-<<<<<<< HEAD
-      <Navbar isLoggedIn={isLoggedIn} />
-      <Routes>
-        {/* to do: if logged in, take the user to home or display home component, if not, display auth and don't allow any other navigation*/}
-        <Route path="/" element={<Auth />} />
-        <Route path="/moments" element={<Moments />} />
-        <Route path="/addamoment" element={<AddMoment />} />
-        <Route path="/settings" element={<SettingsScreen/>} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-      <MoodSlider />
-      <Show below="lg">
-        <Footer />
-      </Show>
-=======
       {!session ? (
         <Routes>
           <Route path="/" element={<Auth />} />
@@ -69,7 +54,6 @@ function App() {
           </Show>
         </>
       )}
->>>>>>> main
     </div>
   );
 }

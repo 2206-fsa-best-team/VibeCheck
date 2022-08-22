@@ -11,16 +11,16 @@ import { Link } from "react-router-dom";
 
 const FloatingAdd = (props) => {
   const { location } = props;
-  console.log(location);
+
   return (
     <Container>
       <Flex alignItems="flex-end" direction="row">
-      <Link to={`/adda${location}`}>
-        <Tooltip
-          label={`Add a new ${location}`}
-          placement="left"
-          aria-label={`tooltip for adding a new ${location}`}
-        >
+        <Link to={`/adda${location}`}>
+          <Tooltip
+            label={`Add a new ${location}`}
+            placement="left"
+            aria-label={`tooltip for adding a new ${location}`}
+          >
             <IconButton
               icon={<AddIcon />}
               isRound="true"
@@ -34,8 +34,7 @@ const FloatingAdd = (props) => {
               bottom={24}
               right={12}
             />
-
-        </Tooltip>
+          </Tooltip>
         </Link>
       </Flex>
     </Container>

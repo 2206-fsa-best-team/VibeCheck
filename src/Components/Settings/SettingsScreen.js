@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -7,13 +7,13 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Flex,
-  Box,
   Text,
   HStack,
   Spinner,
+  Skeleton,
 } from "@chakra-ui/react";
 import LightDarkButton from "../LightDarkButton";
+import { supabase } from "../../server/supabaseClient";
 
 const SettingsScreen = (props) => {
   const { colorMode } = useColorMode();
@@ -21,72 +21,127 @@ const SettingsScreen = (props) => {
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-  const [loading, setLoading] = useState(false);
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
 
-  const handleUpdate = (email, password) => {
-    setLoading(true);
-    
+  async function updateEmail() {
+    try {
+      setEmailLoading(true);
 
+      const { data, error } = await supabase.auth.update({
+        email: email,
+        updated_at: new Date(),
+      });
 
-    alert("Your information has been updated");
-    setLoading(false);
-  };
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setEmailLoading(false);
+    }
+    alert('You have updated your email')
+  }
+  async function updatePassword() {
+    try {
+      setPasswordLoading(true);
+
+      const { data, error } = await supabase.auth.update({
+        password: password,
+        updated_at: new Date(),
+      });
+
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setPasswordLoading(false);
+    }
+    alert('You have updated your password')
+  }
+
+  useEffect(() => {
+    setPageLoading(true);
+    const user = supabase.auth.user();
+    setEmail(user.email);
+    setPageLoading(false);
+  }, []);
 
   return (
     <Container>
       <VStack alignItems="stretch" p="5" pt="10">
-        <InputGroup size="md">
-          <Text alignContent="flex-start" pr="3">
-            Update your Email
-          </Text>
-          <Input
-            type="email"
-            placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </InputGroup>
-        <InputGroup size="md">
-          <Text alignContent="flex-start" pr="3">
-            Update your Password
-          </Text>
-          <Input
-            pr="4.5rem"
-            type={show ? "text" : "password"}
-            placeholder="Your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <InputRightElement w="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
-              {show ? "Hide" : "Show"}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-        {loading ? (
-          <Spinner size="md" alignSelf={"center"} />
+        {pageLoading ? (
+          <>
+            <Skeleton h="20px" />
+            <Skeleton h="20px" />
+          </>
         ) : (
-          <Button
-            size="md"
-            w="12rem"
-            alignSelf={"center"}
-            onClick={handleUpdate}
-          >
-            Confirm Update
-          </Button>
+          <>
+            <HStack align={"center"} flexDirection="row">
+              <Text alignContent="flex-start" pr="3">
+                Edit Email
+              </Text>
+              <Input
+                type="email"
+                placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {emailLoading ? (
+                <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+              ) : (
+                <Button size="md" w="10rem" onClick={updateEmail}>
+                  Update
+                </Button>
+              )}
+            </HStack>
+            <HStack align={"center"} flexDirection="row">
+              <InputGroup size="md" alignItems={"center"}>
+                <Text alignContent="flex-start" pr="3">
+                  Edit Password
+                </Text>
+                <Input
+                  pr="4.5rem"
+                  type={show ? "text" : "password"}
+                  placeholder="Your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <InputRightElement w="4.5rem" pt="8px">
+                  <Button h="1.75rem" size="sm" onClick={handleClick}>
+                    {show ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              {passwordLoading ? (
+                <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+              ) : (
+                <>
+                  <Button size="md" w="8rem" onClick={updatePassword}>
+                    Update
+                  </Button>
+                </>
+              )}
+            </HStack>
+            <HStack
+              display="flex"
+              width="100%"
+              alignItems="center"
+              pr="4.5rem"
+              pt="10"
+              flexDirection="row"
+            >
+              <Text alignContent="flex-start" w={"6rem"}>
+                {`Disable ${colorMode} mode`}
+              </Text>
+              <LightDarkButton justifyContent="flex-end" />
+            </HStack>
+          </>
         )}
-        <HStack
-          display="flex"
-          width="100%"
-          alignItems="center"
-          pr="4.5rem"
-          pt="10"
-        >
-          <Text alignContent="flex-start" w={"6rem"}>
-            {`Disable ${colorMode} mode`}
-          </Text>
-          <LightDarkButton />
-        </HStack>
       </VStack>
     </Container>
   );

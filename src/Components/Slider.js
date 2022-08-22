@@ -24,7 +24,6 @@ function MoodSlider() {
     textAlign: "center",
   };
 
-  console.log(SliderValue);
   return (
     <Box pl={5} pr={5} pt={5}>
       <Highlight

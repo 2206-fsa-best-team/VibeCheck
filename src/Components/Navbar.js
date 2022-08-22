@@ -14,7 +14,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { supabase } from "../server/supabaseClient";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LightDarkButton from "./LightDarkButton";
 
 export default function Navbar(props) {

@@ -5,18 +5,25 @@ import {
   SliderThumb,
   SliderMark,
 } from "@chakra-ui/slider";
-import { Box, Highlight } from "@chakra-ui/react";
+import { Box, Highlight, Show } from "@chakra-ui/react";
 import { TbFaceId } from "react-icons/tb";
 import { useState } from "react";
 
 function MoodSlider() {
   const [SliderValue, setSliderValue] = useState(50);
-  const labelStyles = {
+  const smallLabelStyles = {
     mt: "2",
-    ml: "-12",
+    ml: "-5",
     fontSize: "1em",
     textAlign: "center",
   };
+  const largeLabelStyles = {
+    mt: "2",
+    ml: "-10",
+    fontSize: "1em",
+    textAlign: "center",
+  };
+
   console.log(SliderValue);
   return (
     <Box pl={5} pr={5} pt={5}>
@@ -39,15 +46,28 @@ function MoodSlider() {
         name="vibe"
         defaultValue={50}
       >
-        <SliderMark value={25} {...labelStyles}>
-          pretty bad
-        </SliderMark>
-        <SliderMark value={50} {...labelStyles}>
-          pretty average
-        </SliderMark>
-        <SliderMark value={75} {...labelStyles}>
-          pretty good
-        </SliderMark>
+        <Show above="769px">
+          <SliderMark value={25} {...largeLabelStyles}>
+            pretty bad
+          </SliderMark>
+          <SliderMark value={50} {...largeLabelStyles}>
+            pretty avg
+          </SliderMark>
+          <SliderMark value={75} {...largeLabelStyles}>
+            pretty good
+          </SliderMark>
+        </Show>
+        <Show below="768px">
+          <SliderMark value={25} {...smallLabelStyles}>
+            p bad
+          </SliderMark>
+          <SliderMark value={50} {...smallLabelStyles}>
+            p avg
+          </SliderMark>
+          <SliderMark value={75} {...smallLabelStyles}>
+            p good
+          </SliderMark>
+        </Show>
         <SliderTrack bg="tomato">
           <SliderFilledTrack bg="teal.300" />
         </SliderTrack>

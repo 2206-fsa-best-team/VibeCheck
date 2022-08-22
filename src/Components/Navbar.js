@@ -9,17 +9,15 @@ import {
   MenuItem,
   MenuDivider,
   useDisclosure,
-  useColorMode,
   useColorModeValue,
   Stack,
   Center,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { supabase } from "../server/supabaseClient";
 import { Link, useNavigate } from "react-router-dom";
+import LightDarkButton from "./LightDarkButton";
 
 export default function Navbar(props) {
-  const { colorMode, toggleColorMode } = useColorMode();
   const { onOpen, onClose } = useDisclosure();
   const { isLoggedIn } = props;
 
@@ -29,9 +27,7 @@ export default function Navbar(props) {
         <Box fontSize={["36px", "48px"]}>Moments</Box>
         <Flex alignItems={"center"}>
           <Stack direction={"row"} spacing={7}>
-            <Button onClick={toggleColorMode}>
-              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-            </Button>
+            <LightDarkButton />
             <Box>
               <Menu>
                 <MenuButton

@@ -14,7 +14,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { supabase } from "../server/supabaseClient";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LightDarkButton from "./LightDarkButton";
 
 export default function Navbar(props) {
@@ -22,7 +22,13 @@ export default function Navbar(props) {
   const { isLoggedIn } = props;
 
   return (
-    <Box bg={useColorModeValue("tomato", "black")} px={4}>
+    <Box
+      bg={useColorModeValue("tomato", "black")}
+      px={4}
+      pos={"fixed"}
+      w={"100%"}
+      top={0}
+    >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         <Box fontSize={["36px", "48px"]}>Moments</Box>
         <Flex alignItems={"center"}>

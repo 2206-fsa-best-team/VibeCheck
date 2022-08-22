@@ -16,7 +16,6 @@ import {
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState("");
   let { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
@@ -30,7 +29,7 @@ export default function Account({ session }) {
       setLoading(true);
       const user = supabase.auth.user();
 
-      let { data, error, status } = await supabase
+      let { error, status } = await supabase
         .from("profiles")
         .select(`email`)
         .eq("id", user.id)
@@ -38,10 +37,6 @@ export default function Account({ session }) {
 
       if (error && status !== 406) {
         throw error;
-      }
-
-      if (data) {
-        setEmail(data.email);
       }
 
       updateProfile();
@@ -56,7 +51,6 @@ export default function Account({ session }) {
     try {
       setLoading(true);
       const user = supabase.auth.user();
-      console.log("user-->", user);
 
       const updates = {
         id: user.id,

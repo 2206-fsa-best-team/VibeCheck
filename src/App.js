@@ -64,7 +64,6 @@ function App() {
             />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
-          <MoodSlider />
           <Show below="lg">
             <Footer />
           </Show>

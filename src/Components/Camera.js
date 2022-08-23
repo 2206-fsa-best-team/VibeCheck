@@ -9,16 +9,19 @@ const Cam = () => {
 
   return (
     <div>
-      <Box maxW={"500px"} mx={10}>
+      <Box maxW="450px" mx={10}>
+      <Text py="10px" ml="8px" fontSize="32px" fontStyle="italic">
+        snap a pic!
+      </Text>
         {image === null ? (
           <>
-            <Camera ref={camera} aspectRatio={8.5 / 11} zIndex={-1} />
+            <Camera ref={camera} aspectRatio={8.5 / 11} />
             <Button
               onClick={() => setImage(camera.current.takePhoto())}
-              colorScheme={"teal"}
+              colorScheme="teal"
             >
               <Text color="black">take photo</Text>
-            </Button>{" "}
+            </Button>
           </>
         ) : (
           <>

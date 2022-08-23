@@ -14,6 +14,7 @@ import WelcomeProfile from "./Components/WelcomeProfile";
 import SideMenu from "./Components/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
 import Journals from "./Components/Journals";
+import AddJournal from "./Components/AddJournal";
 
 function App() {
   const [session, setSession] = useState("");
@@ -47,6 +48,8 @@ function App() {
               <Route path="/moments" element={<Moments />} />
               <Route path="/journals" element={<Journals />} />
               <Route path="/addamoment" element={<AddMoment />} />
+              {/* <Route path="/journals" element={<Journals />} /> */}
+              <Route path="/addajournal" element={<AddJournal />} />
               <Route path="/settings" element={<SettingsScreen />} />
               <Route
                 path="/welcome"

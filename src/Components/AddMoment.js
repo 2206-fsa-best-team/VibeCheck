@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import { supabase } from "../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import MoodSlider from "./Slider";
-import { Container, VStack, Stack, Button, Skeleton, Textarea, Text } from "@chakra-ui/react";
+import { Stack, Button, Skeleton, Textarea, Text } from "@chakra-ui/react";
 
 export const sliderContext = createContext();
 
@@ -40,15 +40,17 @@ const AddMoment = () => {
 
   return (
     <>
-    <Stack spacing={8}>
-        {pageLoading ? (
-          <>
-            <Skeleton h="20px" />
-            <Skeleton h="20px" />
-          </>
-        ) : (
-          <VStack w="36rem" bg="red">
-            <Text mb='8px'>How is this moment?</Text>
+      {pageLoading ? (
+        <>
+          <Skeleton h="20px" />
+          <Skeleton h="20px" />
+        </>
+      ) : (
+        <>
+          <Stack spacing={10} ml='24px' mr='24px' display="flex" maxW='600px' >
+            <Text mt="32px" ml='8px' fontSize={"24px"}>
+              How's your moment?
+            </Text>
             <Textarea
               value={content || ""}
               onChange={(evt) =>
@@ -60,10 +62,12 @@ const AddMoment = () => {
               setSliderValue={setSliderValue}
               onChange={(evt) => setMoment({ ...moment, vibe: sliderValue })}
             />
-            <Button onClick={createMoment}>Submit</Button>
-          </VStack>
-        )}
-        </Stack>
+          <Button onClick={createMoment} >
+            Add your moment
+          </Button>
+          </Stack>
+        </>
+      )}
     </>
   );
 };

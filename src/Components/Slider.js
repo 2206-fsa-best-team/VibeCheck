@@ -37,7 +37,7 @@ function MoodSlider(props) {
           fontSize: "16",
         }}
       >
-        What's your vibe like?
+        what's your vibe like?
       </Highlight>
       <Slider
         aria-label="vibe-check-slider"

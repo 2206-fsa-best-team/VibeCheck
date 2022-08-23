@@ -14,6 +14,7 @@ import WelcomeProfile from "./Components/WelcomeProfile";
 import SideMenu from "./Components/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
 import AddJournal from "./Components/AddJournal";
+import Cam from "./Components/Camera";
 
 function App() {
   const [session, setSession] = useState("");
@@ -55,6 +56,7 @@ function App() {
                   <WelcomeProfile key={session.user.id} session={session} />
                 }
               />
+              <Route path="/camera" element={<Cam />} />
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </Box>

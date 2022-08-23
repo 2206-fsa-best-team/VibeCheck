@@ -28,6 +28,7 @@ export default function Navbar(props) {
       pos={"fixed"}
       w={"100%"}
       top={0}
+      z-index={999}
     >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         <Box fontSize={["36px", "48px"]}>Moments</Box>

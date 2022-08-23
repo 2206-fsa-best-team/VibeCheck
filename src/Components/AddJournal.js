@@ -6,21 +6,20 @@ import { Button, Input, Textarea } from "@chakra-ui/react";
 import MoodSlider from "./Slider";
 
 const AddJournal = () => {
+  const [sliderValue, setSliderValue] = useState(50);
   const [journal, setJournal] = useState({
     content: "",
-    vibe: 0,
     date: "",
   });
   const { content, vibe, date } = journal;
   let navigate = useNavigate();
   const user = supabase.auth.user();
-  const [sliderValue, setSliderValue] = useState(50);
-
+  
   async function createJournal() {
     try {
       await supabase
         .from("journals")
-        .insert({ content, vibe, date, user_id: user.id })
+        .insert({ content, vibe: sliderValue, date, user_id: user.id })
         .single();
       setJournal({ content: "", vibe: 0, date: new Date() });
       // navigate("/journals");
@@ -49,11 +48,13 @@ const AddJournal = () => {
         onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
       />
       {/* vibe input */}
-      <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
+      <MoodSlider
+        sliderValue={sliderValue}
+        setSliderValue={setSliderValue}
+      />
       <Button
         onClick={() => {
-          setJournal({ ...journal, vibe: sliderValue });
-          console.log(sliderValue);
+          console.log(journal);
           createJournal();
         }}
         colorScheme="teal"

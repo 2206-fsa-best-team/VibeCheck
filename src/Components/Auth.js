@@ -51,27 +51,86 @@ export default function Auth() {
   const handleSignUp = async (email, password) => {
     try {
       setLoading(true);
-      const { data, session, error } = await supabase.auth.signUp(
-        {
-          email,
-          password,
-        },
-        { redirectTo: "http://localhost:3000/welcome" }
-      );
-      if (error) throw error;
-      console.log("data-->", data);
-      console.log("session-->", session);
-      toast({
-        title: "email sent",
-        description:
-          "a verification email has been sent to the address provided",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-        position: "top",
-      });
+
+      const dbCheck = await supabase
+        .from("profiles")
+        .select()
+        .eq("email", email);
+      console.log("dbCheck", dbCheck);
+
+      if (dbCheck.data.length !== 0) {
+        toast({
+          title: "account already exists",
+          description:
+            "an account for this email address already exists. please log in to that account or request a password reset.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      } else {
+        const { data, session, error } = await supabase.auth.signUp(
+          {
+            email,
+            password,
+          },
+          { redirectTo: "http://localhost:3000/welcome" }
+        );
+
+        if (error) throw error;
+
+        console.log("data-->", data);
+        console.log("session-->", session);
+
+        toast({
+          title: "email sent",
+          description:
+            "a verification email has been sent to the address provided",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
+      }
     } catch (error) {
-      alert(error.error_description || error.message);
+      // alert(error.error_description || error.message);
+      console.error("error.message:", error.message);
+      console.error("error.error_description:", error.error_description);
+      const commonMsgs = [
+        "Unable to validate email address: invalid format",
+        "Password should be at least 6 characters",
+      ];
+      if (error.message === commonMsgs[0]) {
+        toast({
+          title: "invalid email",
+          description: "please enter a valid email and try again.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      } else if (error.message === commonMsgs[1]) {
+        toast({
+          title: "invalid password",
+          description: `${error.message.toLowerCase()}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+
+      if (!commonMsgs.includes(error.message)) {
+        toast({
+          title: "invalid credentials",
+          description:
+            "please use a valid email and password with at least 6 characters",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
     } finally {
       setLoading(false);
     }

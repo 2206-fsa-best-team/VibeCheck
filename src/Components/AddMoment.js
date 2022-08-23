@@ -2,7 +2,14 @@ import React, { useState, useEffect, createContext } from "react";
 import { supabase } from "../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import MoodSlider from "./Slider";
-import { Stack, Button, Skeleton, Textarea, Text } from "@chakra-ui/react";
+import {
+  Stack,
+  Button,
+  Skeleton,
+  Textarea,
+  Text,
+  Spinner,
+} from "@chakra-ui/react";
 
 export const sliderContext = createContext();
 
@@ -10,11 +17,13 @@ const AddMoment = () => {
   const [moment, setMoment] = useState({ content: "", vibe: 0 });
   const { content, vibe } = moment;
   const [pageLoading, setPageLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
   let navigate = useNavigate();
   const user = supabase.auth.user();
   const [sliderValue, setSliderValue] = useState(50);
 
   async function createMoment() {
+    setSubmitLoading(true);
     try {
       if (!content.length) {
         alert("Please write a short moment and choose a vibe!");
@@ -26,8 +35,10 @@ const AddMoment = () => {
         setMoment({ content: "", vibe: sliderValue });
         navigate("/moments");
       }
+      setSubmitLoading(false);
     } catch (error) {
       console.error(error);
+      setSubmitLoading(false);
       throw error;
     }
   }
@@ -47,11 +58,13 @@ const AddMoment = () => {
         </>
       ) : (
         <>
-          <Stack spacing={10} ml='24px' mr='24px' display="flex" maxW='600px' >
-            <Text mt="32px" ml='8px' fontSize={"24px"}>
+          <Stack spacing={10} ml="24px" mr="24px" display="flex" maxW="600px">
+            <Text mt="32px" ml="8px" fontSize={"24px"}>
               How's your moment?
             </Text>
-            <Textarea resize={'none'}
+            <Textarea
+              resize={"none"}
+              placeholder="Feeling some positive vibes"
               value={content || ""}
               onChange={(evt) =>
                 setMoment({ ...moment, content: evt.target.value })
@@ -62,9 +75,13 @@ const AddMoment = () => {
               setSliderValue={setSliderValue}
               onChange={(evt) => setMoment({ ...moment, vibe: sliderValue })}
             />
-          <Button onClick={createMoment} >
-            Add your moment
-          </Button>
+            {submitLoading ? (
+              <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+            ) : (
+              <>
+                <Button onClick={createMoment}>Add your moment</Button>
+              </>
+            )}
           </Stack>
         </>
       )}

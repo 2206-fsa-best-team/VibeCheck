@@ -4,7 +4,7 @@ import {
   VStack,
   HStack,
   Text,
-  StackDivider,
+  Box,
   Skeleton,
   Stack,
   Icon,
@@ -13,12 +13,13 @@ import FloatingAdd from "./FloatingAdd";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetchMoments();
   }, []);
 
   async function fetchMoments() {
+    setLoading(true);
     const { data } = await supabase.from("moments").select();
     setMoments(data);
     setLoading(false);
@@ -43,46 +44,86 @@ const Moments = () => {
     }
   };
 
-  if (loading)
-    return (
-      <Stack padding={4} spacing={1} maxW="700px">
-        <Skeleton height="60px" />
-        <Skeleton height="60px" />
-        <Skeleton height="60px" />
-        <Skeleton height="60px" />
-        <Skeleton height="60px" />
-        <Skeleton height="60px" />
-      </Stack>
-    );
-
   return (
-    <VStack
-      divider={<StackDivider />}
-      borderColor="gray.100"
-      p="5"
-      borderRadius="lg"
-      w="100%"
-      alignItems="stretch"
-      maxW="700px"
-    >
-      {moments.map((moment) => (
-        <HStack key={moment.id}>
-          <Icon viewBox="0 0 200 200" color={() => colorSelector(moment.vibe)}>
-            <path
-              fill="currentColor"
-              d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-            />
-          </Icon>
-          <Text w="100%" p="8px" borderRadius="lg">
-            {moment.content}
+    <>
+      {loading ? (
+        <Stack padding={4} spacing={4} maxW="700px">
+          <Skeleton height="60px" />
+          <Skeleton height="60px" />
+          <Skeleton height="60px" />
+          <Skeleton height="60px" />
+          <Skeleton height="60px" />
+          <Skeleton height="60px" />
+        </Stack>
+      ) : (
+        <>
+          <Text ml="24px" fontSize={"24"} pl="24px" pt="24px">
+            All Moments
           </Text>
-          <Text fontSize="10px" color="gray.400" w="100%" align="right">
-            {moment.created_at.slice(0, 9)}
-          </Text>
-        </HStack>
-      ))}
-      <FloatingAdd location={location} />
-    </VStack>
+          {!moments.length ? (
+            <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">
+              Add a moment using the plus button!
+            </Text>
+          ) : (
+            <VStack
+              p="5"
+              m="16px"
+              spacing={"16px"}
+              borderRadius="lg"
+              alignItems="stretch"
+              maxW="700px"
+            >
+              {moments.map((moment) => (
+                <Box
+                  maxW="sm"
+                  // display='flex'
+                  align="stretch"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  key={moment.id}
+                >
+                  <HStack h={["60px", "100px"]}>
+                    <Icon
+                      viewBox="0 0 200 200"
+                      color={() => colorSelector(moment.vibe)}
+                      ml="16px"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+                      />
+                    </Icon>
+                    <Text
+                      lineHeight={"tight"}
+                      noOfLines={[3, 4, 5]}
+                      minW="180px"
+                    >
+                      {moment.content.length < 140
+                        ? moment.content
+                        : `${moment.content.slice(0, 140)}...`}
+                    </Text>
+                    <Text
+                      fontSize="10px"
+                      color="gray"
+                      w="100%"
+                      align="right"
+                      p="16px"
+                    >
+                      Created: <br />
+                      {moment.created_at.slice(0, 10)}
+                    </Text>
+                  </HStack>
+                </Box>
+              ))}
+              <FloatingAdd location={location} />
+            </VStack>
+          )}
+        </>
+      )}
+      <br/>
+      <br/>
+      <br/>
+    </>
   );
 };
 

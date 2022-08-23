@@ -57,11 +57,11 @@ const Journals = () => {
         </Stack>
       ) : (
         <>
-          <Text ml="24px" fontSize={'24'} pl='24px' pt='24px' >
-            All journals
+          <Text ml="24px" fontSize={"24"} pl="24px" pt="24px">
+            All Journals
           </Text>
           {!journals.length ? (
-            <Text>No Journals to display</Text>
+            <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">Add a new Journal using the plus button!</Text>
           ) : (
             <VStack
               p="5"
@@ -75,24 +75,27 @@ const Journals = () => {
                 <Box
                   maxW="sm"
                   // display='flex'
-                  align='stretch'
+                  align="stretch"
                   borderWidth="1px"
                   borderRadius="lg"
                   key={journal.id}
-
                 >
-                  <HStack h={["100px", '140px']}>
+                  <HStack h={["100px", "140px"]}>
                     <Icon
                       viewBox="0 0 200 200"
                       color={() => colorSelector(journal.vibe)}
-                      ml='16px'
+                      ml="16px"
                     >
                       <path
                         fill="currentColor"
                         d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
                       />
                     </Icon>
-                    <Text lineHeight={"tight"} noOfLines={[3,4,5]} minW='180px' >
+                    <Text
+                      lineHeight={"tight"}
+                      noOfLines={[3, 4, 5]}
+                      minW="180px"
+                    >
                       {journal.content.length < 140
                         ? journal.content
                         : `${journal.content.slice(0, 140)}...`}
@@ -102,9 +105,9 @@ const Journals = () => {
                       color="gray"
                       w="100%"
                       align="right"
-                      p='16px'
+                      p="16px"
                     >
-                      Created: <br/>
+                      Created: <br />
                       {journal.created_at.slice(0, 10)}
                     </Text>
                   </HStack>
@@ -115,6 +118,9 @@ const Journals = () => {
           )}
         </>
       )}
+      <br/>
+      <br/>
+      <br/>
     </>
   );
 };

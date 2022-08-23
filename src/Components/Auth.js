@@ -10,6 +10,7 @@ import {
   Heading,
   InputRightElement,
   useToast,
+  Box,
 } from "@chakra-ui/react";
 
 export default function Auth() {
@@ -33,7 +34,6 @@ export default function Auth() {
         position: "top",
       });
     } catch (error) {
-      // alert(error.error_description || error.message);
       console.error(error.error_description || error.message);
       toast({
         title: "invalid credentials",
@@ -51,12 +51,12 @@ export default function Auth() {
   const handleSignUp = async (email, password) => {
     try {
       setLoading(true);
+      let lowercaseEmail = email.toLowerCase();
 
       const dbCheck = await supabase
         .from("profiles")
         .select()
-        .eq("email", email);
-      console.log("dbCheck", dbCheck);
+        .eq("email", lowercaseEmail);
 
       if (dbCheck.data.length !== 0) {
         toast({
@@ -69,7 +69,7 @@ export default function Auth() {
           position: "top",
         });
       } else {
-        const { data, session, error } = await supabase.auth.signUp(
+        const { error } = await supabase.auth.signUp(
           {
             email,
             password,
@@ -78,9 +78,6 @@ export default function Auth() {
         );
 
         if (error) throw error;
-
-        console.log("data-->", data);
-        console.log("session-->", session);
 
         toast({
           title: "email sent",
@@ -93,9 +90,7 @@ export default function Auth() {
         });
       }
     } catch (error) {
-      // alert(error.error_description || error.message);
-      console.error("error.message:", error.message);
-      console.error("error.error_description:", error.error_description);
+      console.error(error.error_description || error.message);
       const commonMsgs = [
         "Unable to validate email address: invalid format",
         "Password should be at least 6 characters",
@@ -139,14 +134,15 @@ export default function Auth() {
   const showPw = () => setShow(!show);
 
   return (
-    <Flex>
+    <Flex justifyContent="center" alignItems="center" height="50vh">
       <VStack>
-        <Heading size="md">Sign in or sign up with your email below</Heading>
+        <Box fontSize={["36px", "48px"]}>moments.</Box>
+        <Heading size="md">get started now</Heading>
         <VStack>
           {/**** email input ****/}
           <Input
             type="email"
-            placeholder="Your email"
+            placeholder="your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -155,13 +151,13 @@ export default function Auth() {
             <Input
               pr="4.5rem"
               type={show ? "text" : "password"}
-              placeholder="Your password"
+              placeholder="your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" onClick={showPw}>
-                {show ? "Hide" : "Show"}
+                {show ? "hide" : "show"}
               </Button>
             </InputRightElement>
           </InputGroup>
@@ -177,7 +173,7 @@ export default function Auth() {
             h="1.75rem"
             size="sm"
           >
-            {loading ? "Loading" : "Sign Up"}
+            {loading ? "loading" : "sign up"}
           </Button>
           {/**** login button ****/}
           <Button
@@ -189,7 +185,7 @@ export default function Auth() {
             h="1.75rem"
             size="sm"
           >
-            {loading ? "Loading" : "Login"}
+            {loading ? "loading" : "login"}
           </Button>
         </HStack>
       </VStack>

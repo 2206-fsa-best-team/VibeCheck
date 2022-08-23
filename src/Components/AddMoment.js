@@ -13,8 +13,8 @@ import {
 export const sliderContext = createContext();
 
 const AddMoment = () => {
-  const [moment, setMoment] = useState({ content: "", vibe: 0 });
-  const { content, vibe } = moment;
+  const [moment, setMoment] = useState({ content: "" });
+  const { content } = moment;
   const [submitLoading, setSubmitLoading] = useState(false);
   let navigate = useNavigate();
   const user = supabase.auth.user();
@@ -30,7 +30,7 @@ const AddMoment = () => {
           .from("moments")
           .insert({ content, vibe: sliderValue, user_id: user.id })
           .single();
-        setMoment({ content: "", vibe: sliderValue });
+        setMoment({ content: "" });
         navigate("/moments");
       }
       setSubmitLoading(false);
@@ -58,7 +58,6 @@ const AddMoment = () => {
         <MoodSlider
           sliderValue={sliderValue}
           setSliderValue={setSliderValue}
-          onChange={(evt) => setMoment({ ...moment, vibe: sliderValue })}
         />
         {submitLoading ? (
           <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />

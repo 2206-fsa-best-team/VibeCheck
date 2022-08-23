@@ -9,7 +9,7 @@ import { Box, Highlight, Show } from "@chakra-ui/react";
 import { TbFaceId } from "react-icons/tb";
 
 function MoodSlider(props) {
-  const {sliderValue, setSliderValue} = props
+  const { sliderValue, setSliderValue } = props;
 
   const smallLabelStyles = {
     mt: "2",
@@ -37,7 +37,7 @@ function MoodSlider(props) {
           fontSize: "16",
         }}
       >
-        What's your vibe like?
+        what's your vibe like?
       </Highlight>
       <Slider
         aria-label="vibe-check-slider"

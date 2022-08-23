@@ -34,7 +34,7 @@ const AddMoment = () => {
 
   useEffect(() => {
     setPageLoading(true);
-    console.log(moment);
+
     setPageLoading(false);
   }, [moment]);
 

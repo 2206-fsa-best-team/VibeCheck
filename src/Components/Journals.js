@@ -1,31 +1,31 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../server/supabaseClient";
 import {
   VStack,
   HStack,
-  Text,
   Box,
+  Text,
   Skeleton,
   Stack,
   Icon,
 } from "@chakra-ui/react";
 import FloatingAdd from "./FloatingAdd";
 
-const Moments = () => {
-  const [moments, setMoments] = useState([]);
+const Journals = () => {
+  const [journals, setJournals] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetchMoments();
+    fetchJournals();
   }, []);
 
-  async function fetchMoments() {
+  async function fetchJournals() {
     setLoading(true);
-    const { data } = await supabase.from("moments").select();
-    setMoments(data);
+    const { data } = await supabase.from("journals").select();
+    setJournals(data);
     setLoading(false);
   }
 
-  const location = "moment";
+  const location = "journal";
 
   const colorSelector = (vibe) => {
     switch (vibe) {
@@ -58,12 +58,10 @@ const Moments = () => {
       ) : (
         <>
           <Text ml="24px" fontSize={"24"} pl="24px" pt="24px">
-            All Moments
+            All Journals
           </Text>
-          {!moments.length ? (
-            <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">
-              Add a moment using the plus button!
-            </Text>
+          {!journals.length ? (
+            <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">Add a new Journal using the plus button!</Text>
           ) : (
             <VStack
               p="5"
@@ -73,19 +71,19 @@ const Moments = () => {
               alignItems="stretch"
               maxW="700px"
             >
-              {moments.map((moment) => (
+              {journals.map((journal) => (
                 <Box
                   maxW="sm"
                   // display='flex'
                   align="stretch"
                   borderWidth="1px"
                   borderRadius="lg"
-                  key={moment.id}
+                  key={journal.id}
                 >
-                  <HStack h={["60px", "100px"]}>
+                  <HStack h={["100px", "140px"]}>
                     <Icon
                       viewBox="0 0 200 200"
-                      color={() => colorSelector(moment.vibe)}
+                      color={() => colorSelector(journal.vibe)}
                       ml="16px"
                     >
                       <path
@@ -98,9 +96,9 @@ const Moments = () => {
                       noOfLines={[3, 4, 5]}
                       minW="180px"
                     >
-                      {moment.content.length < 140
-                        ? moment.content
-                        : `${moment.content.slice(0, 140)}...`}
+                      {journal.content.length < 140
+                        ? journal.content
+                        : `${journal.content.slice(0, 140)}...`}
                     </Text>
                     <Text
                       fontSize="10px"
@@ -110,7 +108,7 @@ const Moments = () => {
                       p="16px"
                     >
                       Created: <br />
-                      {moment.created_at.slice(0, 10)}
+                      {journal.created_at.slice(0, 10)}
                     </Text>
                   </HStack>
                 </Box>
@@ -127,4 +125,4 @@ const Moments = () => {
   );
 };
 
-export default Moments;
+export default Journals;

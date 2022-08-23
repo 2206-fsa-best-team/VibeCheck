@@ -13,6 +13,7 @@ import { Box, Show } from "@chakra-ui/react";
 import WelcomeProfile from "./Components/WelcomeProfile";
 import SideMenu from "./Components/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
+import Journals from "./Components/Journals";
 
 function App() {
   const [session, setSession] = useState("");
@@ -44,6 +45,7 @@ function App() {
               {/* to do: if logged in, take the user to home or display home component, if not, display auth and don't allow any other navigation*/}
               <Route path="/" element={<Navigate to="/moments" />} />
               <Route path="/moments" element={<Moments />} />
+              <Route path="/journals" element={<Journals />} />
               <Route path="/addamoment" element={<AddMoment />} />
               <Route path="/settings" element={<SettingsScreen />} />
               <Route

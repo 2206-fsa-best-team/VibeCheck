@@ -36,7 +36,7 @@ function Footer() {
         <Spacer />
         <Divider orientation={"vertical"} />
         <Spacer />
-        <Link to="/journal">
+        <Link to="/journals">
           <Icon
             variant="ghost"
             color={"tomato"}

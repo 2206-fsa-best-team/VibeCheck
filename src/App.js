@@ -13,6 +13,7 @@ import { Box, Show } from "@chakra-ui/react";
 import WelcomeProfile from "./Components/WelcomeProfile";
 import SideMenu from "./Components/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
+import AddJournal from "./Components/AddJournal";
 
 function App() {
   const [session, setSession] = useState("");
@@ -45,6 +46,8 @@ function App() {
               <Route path="/" element={<Navigate to="/moments" />} />
               <Route path="/moments" element={<Moments />} />
               <Route path="/addamoment" element={<AddMoment />} />
+              {/* <Route path="/journals" element={<Journals />} /> */}
+              <Route path="/addajournal" element={<AddJournal />} />
               <Route path="/settings" element={<SettingsScreen />} />
               <Route
                 path="/welcome"

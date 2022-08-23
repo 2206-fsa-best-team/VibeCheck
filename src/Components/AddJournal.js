@@ -9,7 +9,7 @@ const AddJournal = () => {
   const [journal, setJournal] = useState({
     content: "",
     vibe: 0,
-    date: new Date(),
+    date: "",
   });
   const { content, vibe, date } = journal;
   let navigate = useNavigate();
@@ -23,7 +23,8 @@ const AddJournal = () => {
         .insert({ content, vibe, date, user_id: user.id })
         .single();
       setJournal({ content: "", vibe: 0, date: new Date() });
-      navigate("/journals");
+      // navigate("/journals");
+      console.log(journal);
     } catch (error) {
       console.error(error);
       throw error;
@@ -43,17 +44,20 @@ const AddJournal = () => {
       />
       {/* date input */}
       <Input
-        type="datetime-local"
+        type="date"
         value={date}
         onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
       />
       {/* vibe input */}
-      <MoodSlider
-        sliderValue={sliderValue}
-        setSliderValue={setSliderValue}
-        onChange={(evt) => setJournal({ ...journal, vibe: sliderValue })}
-      />
-      <Button onClick={createJournal} colorScheme="teal">
+      <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
+      <Button
+        onClick={() => {
+          setJournal({ ...journal, vibe: sliderValue });
+          console.log(sliderValue);
+          createJournal();
+        }}
+        colorScheme="teal"
+      >
         submit
       </Button>
     </div>

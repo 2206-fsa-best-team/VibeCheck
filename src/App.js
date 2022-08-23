@@ -12,6 +12,7 @@ import AddMoment from "./Components/AddMoment";
 import { Box, Show } from "@chakra-ui/react";
 import WelcomeProfile from "./Components/WelcomeProfile";
 import SideMenu from "./Components/SideMenu";
+import SettingsScreen from "./Components/Settings/SettingsScreen";
 
 function App() {
   const [session, setSession] = useState("");
@@ -24,7 +25,7 @@ function App() {
     });
   }, []);
 
-  const isLoggedIn = true;
+  const isLoggedIn = !!session;
 
   return (
     <div className="App">
@@ -44,6 +45,7 @@ function App() {
               <Route path="/" element={<Navigate to="/moments" />} />
               <Route path="/moments" element={<Moments />} />
               <Route path="/addamoment" element={<AddMoment />} />
+              <Route path="/settings" element={<SettingsScreen />} />
               <Route
                 path="/welcome"
                 element={

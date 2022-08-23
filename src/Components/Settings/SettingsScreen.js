@@ -11,6 +11,7 @@ import {
   HStack,
   Spinner,
   Skeleton,
+  useToast,
 } from "@chakra-ui/react";
 import LightDarkButton from "../LightDarkButton";
 import { supabase } from "../../server/supabaseClient";
@@ -24,12 +25,13 @@ const SettingsScreen = (props) => {
   const [emailLoading, setEmailLoading] = useState(false);
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(false);
+  const toast = useToast();
 
   async function updateEmail() {
     try {
       setEmailLoading(true);
 
-      const { data, error } = await supabase.auth.update({
+      const { error } = await supabase.auth.update({
         email: email,
         updated_at: new Date(),
       });
@@ -42,13 +44,13 @@ const SettingsScreen = (props) => {
     } finally {
       setEmailLoading(false);
     }
-    alert('You have updated your email')
+    alert("You have updated your email");
   }
   async function updatePassword() {
     try {
       setPasswordLoading(true);
 
-      const { data, error } = await supabase.auth.update({
+      const { error } = await supabase.auth.update({
         password: password,
         updated_at: new Date(),
       });
@@ -56,12 +58,18 @@ const SettingsScreen = (props) => {
       if (error) {
         throw error;
       }
+      toast({
+        title: "you have updated your password",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
     } catch (error) {
       alert(error.message);
     } finally {
       setPasswordLoading(false);
     }
-    alert('You have updated your password')
   }
 
   useEffect(() => {

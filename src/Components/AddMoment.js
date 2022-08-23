@@ -5,7 +5,6 @@ import MoodSlider from "./Slider";
 import {
   Stack,
   Button,
-  Skeleton,
   Textarea,
   Text,
   Spinner,
@@ -16,7 +15,6 @@ export const sliderContext = createContext();
 const AddMoment = () => {
   const [moment, setMoment] = useState({ content: "", vibe: 0 });
   const { content, vibe } = moment;
-  const [pageLoading, setPageLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   let navigate = useNavigate();
   const user = supabase.auth.user();
@@ -43,48 +41,33 @@ const AddMoment = () => {
     }
   }
 
-  useEffect(() => {
-    setPageLoading(true);
-
-    setPageLoading(false);
-  }, [moment]);
-
   return (
     <>
-      {pageLoading ? (
-        <>
-          <Skeleton h="20px" />
-          <Skeleton h="20px" />
-        </>
-      ) : (
-        <>
-          <Stack spacing={10} ml="24px" mr="24px" display="flex" maxW="600px">
-            <Text mt="32px" ml="8px" fontSize={"24px"}>
-              How's your moment?
-            </Text>
-            <Textarea
-              resize={"none"}
-              placeholder="Feeling some positive vibes"
-              value={content || ""}
-              onChange={(evt) =>
-                setMoment({ ...moment, content: evt.target.value })
-              }
-            />
-            <MoodSlider
-              sliderValue={sliderValue}
-              setSliderValue={setSliderValue}
-              onChange={(evt) => setMoment({ ...moment, vibe: sliderValue })}
-            />
-            {submitLoading ? (
-              <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
-            ) : (
-              <>
-                <Button onClick={createMoment}>Add your moment</Button>
-              </>
-            )}
-          </Stack>
-        </>
-      )}
+      <Stack spacing={10} ml="24px" mr="24px" display="flex" maxW="600px">
+        <Text mt="32px" ml="8px" fontSize={"24px"}>
+          How's your moment?
+        </Text>
+        <Textarea
+          resize={"none"}
+          placeholder="Feeling some positive vibes"
+          value={content || ""}
+          onChange={(evt) =>
+            setMoment({ ...moment, content: evt.target.value })
+          }
+        />
+        <MoodSlider
+          sliderValue={sliderValue}
+          setSliderValue={setSliderValue}
+          onChange={(evt) => setMoment({ ...moment, vibe: sliderValue })}
+        />
+        {submitLoading ? (
+          <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+        ) : (
+          <>
+            <Button onClick={createMoment}>Add your moment</Button>
+          </>
+        )}
+      </Stack>
     </>
   );
 };

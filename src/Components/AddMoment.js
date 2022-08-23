@@ -51,7 +51,7 @@ const AddMoment = () => {
             <Text mt="32px" ml='8px' fontSize={"24px"}>
               How's your moment?
             </Text>
-            <Textarea
+            <Textarea resize={'none'}
               value={content || ""}
               onChange={(evt) =>
                 setMoment({ ...moment, content: evt.target.value })

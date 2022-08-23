@@ -11,7 +11,7 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Center,
+  Center, Portal
 } from "@chakra-ui/react";
 import { supabase } from "../server/supabaseClient";
 import { Link } from "react-router-dom";
@@ -34,8 +34,8 @@ export default function Navbar(props) {
         <Flex alignItems={"center"}>
           <Stack direction={"row"} spacing={7}>
             <LightDarkButton />
-            <Box>
-              <Menu>
+            <Box >
+              <Menu isLazy={true}  >
                 <MenuButton
                   as={Button}
                   rounded={"full"}
@@ -50,7 +50,8 @@ export default function Navbar(props) {
                     src={/*user profile pic could go here */ ""}
                   />
                 </MenuButton>
-                <MenuList alignItems={"center"} onClose={onClose} m={0}>
+                <Portal>
+                <MenuList alignItems={"center"} onClose={onClose} m={0} zIndex='popover'>
                   <br />
                   <Center>
                     <Avatar size={"2xl"} name={"Evan Barden"} src={""} />
@@ -79,6 +80,7 @@ export default function Navbar(props) {
                     <></>
                   )}
                 </MenuList>
+                </Portal>
               </Menu>
             </Box>
           </Stack>

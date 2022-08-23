@@ -9,7 +9,7 @@ import { Box, Highlight, Show } from "@chakra-ui/react";
 import { TbFaceId } from "react-icons/tb";
 
 function MoodSlider(props) {
-  const { sliderValue, setSliderValue } = props;
+  const {sliderValue, setSliderValue} = props
 
   const smallLabelStyles = {
     mt: "2",

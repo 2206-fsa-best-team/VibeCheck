@@ -9,9 +9,13 @@ import {
   Skeleton,
   Stack,
   Icon,
+  Container,
 } from "@chakra-ui/react";
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import DateObject from "react-date-object";
 import FloatingAdd from "./FloatingAdd";
+import FloatingEdit from "./FloatingEdit";
+import FloatingDelete from "./FloatingDelete";
 
 const SingleMoment = (props) => {
   const [moment, setMoment] = useState({
@@ -117,7 +121,6 @@ const SingleMoment = (props) => {
               borderTopWidth="4px"
               borderTopColor={() => colorSelector(moment.vibe)}
             >
-              {/* <HStack h={["60px", "100px"]}> */}
               <Text w="100%" align="left" p="16px">
                 {moment.content}
               </Text>
@@ -130,21 +133,23 @@ const SingleMoment = (props) => {
               >
                 you were {vibeSelector(moment.vibe)}
               </Text>
-              {/* </HStack> */}
-              <Text
-                fontSize="0.75rem"
-                color="gray"
-                w="100%"
-                align="left"
-                p="16px"
-              >
-                {dateFormatted.toLowerCase()}
-              </Text>
+              <HStack>
+                <Text
+                  fontSize="0.75rem"
+                  color="gray"
+                  w="100%"
+                  align="left"
+                  p="16px"
+                >
+                  {dateFormatted.toLowerCase()}
+                </Text>
+              </HStack>
             </Box>
           </VStack>
         </>
       )}
-      <FloatingAdd location={location} />
+      <FloatingEdit location={location} />
+      <FloatingDelete location={location} />
 
       <br />
       <br />

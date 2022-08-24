@@ -76,3 +76,23 @@ export const invalidCredentialsSignup = () => {
     position: "top",
   };
 };
+
+export const passwordUpdated = () => {
+  return {
+    title: "you have updated your password",
+    status: "success",
+    duration: 2000,
+    isClosable: true,
+    position: "top",
+  };
+};
+
+export const emailUpdated = () => {
+  return {
+    title: "a change request has been sent to the address provided",
+    status: "success",
+    duration: 2000,
+    isClosable: true,
+    position: "top",
+  };
+};

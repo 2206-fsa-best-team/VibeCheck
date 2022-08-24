@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import LightDarkButton from "../LightDarkButton";
 import { supabase } from "../../server/supabaseClient";
+import { passwordUpdated, emailUpdated } from "../ToastAlerts/AuthFormAlerts";
 
 const SettingsScreen = (props) => {
   const { colorMode } = useColorMode();
@@ -39,12 +40,12 @@ const SettingsScreen = (props) => {
       if (error) {
         throw error;
       }
+      toast(emailUpdated());
     } catch (error) {
       alert(error.message);
     } finally {
       setEmailLoading(false);
     }
-    alert("You have updated your email");
   }
   async function updatePassword() {
     try {
@@ -58,13 +59,7 @@ const SettingsScreen = (props) => {
       if (error) {
         throw error;
       }
-      toast({
-        title: "you have updated your password",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-        position: "top",
-      });
+      toast(passwordUpdated());
     } catch (error) {
       alert(error.message);
     } finally {
@@ -80,8 +75,8 @@ const SettingsScreen = (props) => {
   }, []);
 
   return (
-    <Container zIndex='hide' >
-      <VStack alignItems="stretch" p="5" pt="10" >
+    <Container zIndex="hide">
+      <VStack alignItems="stretch" p="5" pt="10">
         {pageLoading ? (
           <>
             <Skeleton h="20px" />

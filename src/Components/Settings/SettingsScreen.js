@@ -80,8 +80,8 @@ const SettingsScreen = (props) => {
   }, []);
 
   return (
-    <Container>
-      <VStack alignItems="stretch" p="5" pt="10">
+    <Container zIndex='hide' >
+      <VStack alignItems="stretch" p="5" pt="10" >
         {pageLoading ? (
           <>
             <Skeleton h="20px" />

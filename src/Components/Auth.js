@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import {
-  ivalidCredentialsLogin,
+  invalidCredentialsLogin,
   loginSuccess,
   userExists,
   verifyEmailSent,
@@ -45,7 +45,7 @@ export default function Auth() {
       toast(loginSuccess());
     } catch (error) {
       console.error(error.error_description || error.message);
-      toast(ivalidCredentialsLogin());
+      toast(invalidCredentialsLogin());
     } finally {
       setEmail("");
       setPassword("");

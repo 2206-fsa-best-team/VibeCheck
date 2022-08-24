@@ -1,4 +1,4 @@
-export const ivalidCredentialsLogin = () => {
+export const invalidCredentialsLogin = () => {
   return {
     title: "invalid credentials",
     description: "please check your email and password and try again",

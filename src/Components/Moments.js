@@ -115,14 +115,14 @@ const Moments = () => {
                   </HStack>
                 </Box>
               ))}
-              <FloatingAdd location={location} />
             </VStack>
           )}
+          <FloatingAdd location={location} />
         </>
       )}
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
     </>
   );
 };

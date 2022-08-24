@@ -40,7 +40,6 @@ export default function Auth() {
     try {
       setLoadingLogin(true);
       const { error } = await supabase.auth.signIn({ email, password });
-      console.log("error", error);
       if (error) throw error;
       toast(loginSuccess());
     } catch (error) {

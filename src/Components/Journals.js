@@ -61,7 +61,9 @@ const Journals = () => {
             All Journals
           </Text>
           {!journals.length ? (
-            <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">Add a new Journal using the plus button!</Text>
+            <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">
+              Add a new Journal using the plus button!
+            </Text>
           ) : (
             <VStack
               p="5"
@@ -113,14 +115,14 @@ const Journals = () => {
                   </HStack>
                 </Box>
               ))}
-              <FloatingAdd location={location} />
             </VStack>
           )}
+          <FloatingAdd location={location} />
         </>
       )}
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
     </>
   );
 };

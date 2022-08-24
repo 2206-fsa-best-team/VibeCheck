@@ -49,7 +49,6 @@ function App() {
               <Route path="/moments" element={<Moments />} />
               <Route path="/journals" element={<Journals />} />
               <Route path="/addamoment" element={<AddMoment />} />
-              {/* <Route path="/journals" element={<Journals />} /> */}
               <Route path="/addajournal" element={<AddJournal />} />
               <Route path="/settings" element={<SettingsScreen />} />
               <Route

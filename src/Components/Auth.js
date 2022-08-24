@@ -1,126 +1,62 @@
 import { useState } from "react";
 import { supabase } from "../server/supabaseClient";
+import LightDarkButton from "./LightDarkButton";
 import {
   Input,
   InputGroup,
   Button,
   ButtonGroup,
-  FormControl,
   Flex,
-  VStack,
-  HStack,
   Heading,
   InputRightElement,
   useToast,
   Box,
+  FormControl,
+  CircularProgress,
 } from "@chakra-ui/react";
+import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
+import {
+  ivalidCredentialsLogin,
+  loginSuccess,
+  userExists,
+  verifyEmailSent,
+  invalidEmailSignup,
+  invalidPasswordSignup,
+  invalidCredentialsSignup,
+} from "./ToastAlerts/AuthFormAlerts";
 
 export default function Auth() {
-  const [loading, setLoading] = useState(false);
+  const [loadingLogin, setLoadingLogin] = useState(false);
+  const [loadingSignUp, setLoadingSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const toast = useToast();
 
-  // toast alerts for login & signup
-  const ivalidLoginCredentials = () => {
-    toast({
-      title: "invalid credentials",
-      description: "please check your email and password and try again",
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-      position: "top",
-    });
-  };
-
-  const loginSuccess = () => {
-    toast({
-      title: "logged in",
-      description: "enjoy the moment",
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-      position: "top",
-    });
-  };
-
-  const userExists = () => {
-    toast({
-      title: "account already exists",
-      description:
-        "an account for this email address already exists. please log in to that account or request a password reset.",
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-      position: "top",
-    });
-  };
-
-  const verifyEmailSent = () => {
-    toast({
-      title: "email sent",
-      description: "a verification email has been sent to the address provided",
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-      position: "top",
-    });
-  };
-
-  const invalidEmailSignup = () => {
-    toast({
-      title: "invalid email",
-      description: "please enter a valid email and try again.",
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-      position: "top",
-    });
-  };
-
-  const invalidPasswordSignup = (error) => {
-    toast({
-      title: "invalid password",
-      description: `${error.message.toLowerCase()}`,
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-      position: "top",
-    });
-  };
-
-  const invalidCredentialsSignup = () => {
-    toast({
-      title: "invalid credentials",
-      description:
-        "please use a valid email and password with at least 6 characters",
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-      position: "top",
-    });
-  };
+  const credsInvalid = password.length < 6 || email.length === 0; // very rudimentary validation check
 
   // click handlers for login & signup
   const handleLogin = async (email, password) => {
     try {
-      setLoading(true);
+      setLoadingLogin(true);
       const { error } = await supabase.auth.signIn({ email, password });
       console.log("error", error);
       if (error) throw error;
-      loginSuccess();
+      toast(loginSuccess());
     } catch (error) {
       console.error(error.error_description || error.message);
-      ivalidLoginCredentials();
+      toast(ivalidCredentialsLogin());
     } finally {
-      setLoading(false);
+      setEmail("");
+      setPassword("");
+      setShow(false);
+      setLoadingLogin(false);
     }
   };
 
   const handleSignUp = async (email, password) => {
     try {
-      setLoading(true);
+      setLoadingSignUp(true);
       let lowercaseEmail = email.toLowerCase();
 
       const dbCheck = await supabase
@@ -129,7 +65,7 @@ export default function Auth() {
         .eq("email", lowercaseEmail);
 
       if (dbCheck.data.length !== 0) {
-        userExists();
+        toast(userExists());
       } else {
         const { error } = await supabase.auth.signUp(
           {
@@ -141,7 +77,7 @@ export default function Auth() {
 
         if (error) throw error;
 
-        verifyEmailSent();
+        toast(verifyEmailSent());
       }
     } catch (error) {
       console.error(error.error_description || error.message);
@@ -150,79 +86,108 @@ export default function Auth() {
         "Password should be at least 6 characters",
       ];
       if (error.message === commonMsgs[0]) {
-        invalidEmailSignup();
+        toast(invalidEmailSignup());
       } else if (error.message === commonMsgs[1]) {
-        invalidPasswordSignup(error);
+        toast(invalidPasswordSignup(error));
       }
 
       if (!commonMsgs.includes(error.message)) {
-        invalidCredentialsSignup();
+        toast(invalidCredentialsSignup());
       }
     } finally {
-      setLoading(false);
+      setEmail("");
+      setPassword("");
+      setShow(false);
+      setLoadingSignUp(false);
     }
   };
 
-  const showPw = () => setShow(!show);
-
   return (
-    <Flex justifyContent="center" alignItems="center" height="50vh">
-      <VStack>
-        <Box fontSize={["36px", "48px"]}>vibe☑ </Box>
-        <Heading size="md">time to check in</Heading>
-        <FormControl isRequired>
-          <VStack>
-            {/**** email input ****/}
-            <Input
-              type="email"
-              placeholder="your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            {/**** password input w/ show/hide ****/}
-            <InputGroup size="md">
-              <Input
-                pr="4.5rem"
-                type={show ? "text" : "password"}
-                placeholder="your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={showPw}>
-                  {show ? "hide" : "show"}
+    <Box>
+      <Box textAlign="right" py={4} mr="2%">
+        <LightDarkButton />
+      </Box>
+      <Flex justifyContent="center" width="full" align="center">
+        <Box
+          p={8}
+          maxWidth="500px"
+          borderWidth={1}
+          borderRadius={8}
+          boxShadow="md"
+        >
+          <Box textAlign="center">
+            <Box fontSize={["36px", "48px"]}>vibe☑</Box>
+            <Heading size="md">time to check in</Heading>
+          </Box>
+          <Box my={4} textAlign="left">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleLogin(email, password);
+              }}
+            >
+              <FormControl isRequired>
+                <Input
+                  type="email"
+                  placeholder="your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormControl>
+              <FormControl mt={6} isRequired>
+                <InputGroup size="md">
+                  <Input
+                    type={show ? "text" : "password"}
+                    placeholder="your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button
+                      h="1.75rem"
+                      size="sm"
+                      onClick={() => setShow(!show)}
+                    >
+                      {show ? <ViewOffIcon /> : <ViewIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+              <ButtonGroup size="md" mt={4}>
+                <Button type="submit" disabled={credsInvalid}>
+                  {loadingLogin ? (
+                    <CircularProgress
+                      isIndeterminate
+                      size="1.75rem"
+                      color="tomato"
+                    />
+                  ) : (
+                    "login"
+                  )}
                 </Button>
-              </InputRightElement>
-            </InputGroup>
-          </VStack>
-        </FormControl>
-        <ButtonGroup disabled={loading} h="1.75rem" size="sm">
-          {/**** signup button ****/}
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              handleSignUp(email, password);
-            }}
-            // disabled={loading}
-            // h="1.75rem"
-            // size="sm"
-          >
-            {loading ? "loading" : "sign up"}
-          </Button>
-          {/**** login button ****/}
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              handleLogin(email, password);
-            }}
-            // disabled={loading}
-            // h="1.75rem"
-            // size="sm"
-          >
-            {loading ? "loading" : "login"}
-          </Button>
-        </ButtonGroup>
-      </VStack>
-    </Flex>
+                <Button
+                  variant="outline"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSignUp(email, password);
+                  }}
+                  disabled={credsInvalid}
+                >
+                  {loadingSignUp ? (
+                    <CircularProgress
+                      isIndeterminate
+                      size="1.75rem"
+                      color="tomato"
+                    />
+                  ) : (
+                    "sign up"
+                  )}
+                </Button>
+              </ButtonGroup>
+            </form>
+          </Box>
+        </Box>
+      </Flex>
+    </Box>
   );
 }

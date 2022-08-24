@@ -11,9 +11,11 @@ import {
   HStack,
   Spinner,
   Skeleton,
+  useToast,
 } from "@chakra-ui/react";
 import LightDarkButton from "../LightDarkButton";
 import { supabase } from "../../server/supabaseClient";
+import { passwordUpdated, emailUpdated } from "../ToastAlerts/AuthFormAlerts";
 
 const SettingsScreen = (props) => {
   const { colorMode } = useColorMode();
@@ -24,12 +26,13 @@ const SettingsScreen = (props) => {
   const [emailLoading, setEmailLoading] = useState(false);
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(false);
+  const toast = useToast();
 
   async function updateEmail() {
     try {
       setEmailLoading(true);
 
-      const { data, error } = await supabase.auth.update({
+      const { error } = await supabase.auth.update({
         email: email,
         updated_at: new Date(),
       });
@@ -37,18 +40,18 @@ const SettingsScreen = (props) => {
       if (error) {
         throw error;
       }
+      toast(emailUpdated());
     } catch (error) {
       alert(error.message);
     } finally {
       setEmailLoading(false);
     }
-    alert('You have updated your email')
   }
   async function updatePassword() {
     try {
       setPasswordLoading(true);
 
-      const { data, error } = await supabase.auth.update({
+      const { error } = await supabase.auth.update({
         password: password,
         updated_at: new Date(),
       });
@@ -56,12 +59,12 @@ const SettingsScreen = (props) => {
       if (error) {
         throw error;
       }
+      toast(passwordUpdated());
     } catch (error) {
       alert(error.message);
     } finally {
       setPasswordLoading(false);
     }
-    alert('You have updated your password')
   }
 
   useEffect(() => {
@@ -72,8 +75,8 @@ const SettingsScreen = (props) => {
   }, []);
 
   return (
-    <Container zIndex='hide' >
-      <VStack alignItems="stretch" p="5" pt="10" >
+    <Container zIndex="hide">
+      <VStack alignItems="stretch" p="5" pt="10">
         {pageLoading ? (
           <>
             <Skeleton h="20px" />

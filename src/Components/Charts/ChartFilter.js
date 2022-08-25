@@ -1,9 +1,11 @@
 import { ButtonGroup, Button, Container } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const ChartFilter = (props) => {
   const { filter, setFilter } = props;
-  console.log(filter);
+  const handleClick = (val) => {
+    setFilter(val);
+  };
 
   return (
     <>
@@ -17,28 +19,40 @@ const ChartFilter = (props) => {
           <Button
             height={"32px"}
             isActive={filter === "all" ? true : false}
-            onClick={() => setFilter("all")}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("all");
+            }}
           >
             all
           </Button>
           <Button
             height={"32px"}
             isActive={filter === "lastSeven" ? true : false}
-            onClick={() => setFilter("lastSeven")}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("lastSeven");
+            }}
           >
             last 7 days
           </Button>
           <Button
             height={"32px"}
             isActive={filter === "lastThirty" ? true : false}
-            onClick={() => setFilter("lastThirty")}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("lastThirty");
+            }}
           >
-            last 30d
+            last 30 days
           </Button>
           <Button
             height={"32px"}
             isActive={filter === "lastYear" ? true : false}
-            onClick={() => setFilter("lastYear")}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("lastYear");
+            }}
           >
             last year
           </Button>

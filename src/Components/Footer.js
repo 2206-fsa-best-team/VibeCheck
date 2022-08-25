@@ -7,7 +7,8 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
-import { MdFormatListBulleted } from "react-icons/md";
+import { MdFormatListBulleted} from "react-icons/md";
+import {BiLineChart} from 'react-icons/bi'
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -44,6 +45,19 @@ function Footer() {
             w={10}
             h={10}
             as={BsFillJournalBookmarkFill}
+          />
+        </Link>
+        <Spacer />
+        <Divider orientation={"vertical"} />
+        <Spacer />
+        <Link to="/vibes">
+          <Icon
+            variant="ghost"
+            color={"tomato"}
+            aria-label="Vibe graphs"
+            w={10}
+            h={10}
+            as={BiLineChart}
           />
         </Link>
         <Spacer />

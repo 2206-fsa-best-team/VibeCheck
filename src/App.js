@@ -45,7 +45,6 @@ function App() {
           </Show>
           <Box mt={16} ml={{ base: "0", lg: "20%" }}>
             <Routes>
-              {/* to do: if logged in, take the user to home or display home component, if not, display auth and don't allow any other navigation*/}
               <Route path="/" element={<Navigate to="/moments" />} />
               <Route path="/moments/:momentId" element={<SingleMoment />} />
               <Route path="/moments" element={<Moments />} />
@@ -57,7 +56,6 @@ function App() {
                 }
               />
               <Route path="/addamoment" element={<AddMoment />} />
-              {/* <Route path="/journals" element={<Journals />} /> */}
               <Route path="/addajournal" element={<AddJournal />} />
               <Route path="/settings" element={<SettingsScreen />} />
 
@@ -80,24 +78,3 @@ function App() {
 }
 
 export default App;
-
-/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-
-    </div>
-  );
-}
-
-export default App;*/

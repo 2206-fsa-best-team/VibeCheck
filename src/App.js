@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
-import Navbar from "./Components/Navbar";
+import Navbar from "./Components/Navigation/Navbar";
 import { supabase } from "./server/supabaseClient";
-import Auth from "./Components/Auth";
-import Moments from "./Components/Moments";
-import Footer from "./Components/Footer";
+import Auth from "./Components/Login/Auth";
+import Moments from "./Components/Moments/Moments";
+import Footer from "./Components/Navigation/Footer";
 import { Routes, Route, Navigate } from "react-router-dom";
-import ErrorPage from "./Components/ErrorPage";
-import AddMoment from "./Components/AddMoment";
+import ErrorPage from "./Components/ErrorPages/ErrorPage";
+import AddMoment from "./Components/Moments/AddMoment";
 import { Box, Show } from "@chakra-ui/react";
-import WelcomeProfile from "./Components/WelcomeProfile";
-import SideMenu from "./Components/SideMenu";
+import WelcomeProfile from "./Components/Login/WelcomeProfile"
+import SideMenu from "./Components/Navigation/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
-import Journals from "./Components/Journals";
-import AddJournal from "./Components/AddJournal";
-import VibeCharts from '../src/Components/VibeCharts.js'
-import SingleMoment from "./Components/SingleMoment";
+import Journals from "./Components/Journals/Journals";
+import AddJournal from "./Components/Journals/AddJournal";
+import VibeCharts from './Components/Charts/VibeCharts.js'
+import SingleMoment from "./Components/Moments/SingleMoment";
 
 function App() {
   const [session, setSession] = useState("");

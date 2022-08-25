@@ -13,7 +13,7 @@ import {
   Skeleton,
   useToast,
 } from "@chakra-ui/react";
-import LightDarkButton from "../LightDarkButton";
+import LightDarkButton from '../../Components/Buttons/LightDarkButton'
 import { supabase } from "../../server/supabaseClient";
 import { passwordUpdated, emailUpdated } from "../ToastAlerts/AuthFormAlerts";
 

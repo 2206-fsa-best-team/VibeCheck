@@ -1,26 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../server/supabaseClient";
-import {
-  VStack,
-  HStack,
-  Text,
-  Box,
-  Skeleton,
-  Stack,
-  Icon,
-  Container,
-} from "@chakra-ui/react";
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { VStack, HStack, Text, Box, Skeleton, Stack } from "@chakra-ui/react";
 import DateObject from "react-date-object";
-import FloatingAdd from "./FloatingAdd";
 import FloatingEdit from "./FloatingEdit";
 import FloatingDelete from "./FloatingDelete";
 
 const SingleMoment = (props) => {
   const [moment, setMoment] = useState({
     content: "",
-    vibe: 0,
+    vibe: null,
     created_at: Date(),
   });
   const [loading, setLoading] = useState(true);
@@ -31,14 +20,20 @@ const SingleMoment = (props) => {
   }, []);
 
   async function fetchMoment() {
-    // setLoading(true);
-    const { data } = await supabase
-      .from("moments")
-      .select()
-      .eq("id", momentId)
-      .single();
-    setMoment(data);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase
+        .from("moments")
+        .select()
+        .eq("id", momentId)
+        .single();
+
+      if (error) throw error;
+      setMoment(data);
+    } catch (error) {
+      console.error(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const location = "moment";
@@ -60,7 +55,7 @@ const SingleMoment = (props) => {
     }
   };
 
-  const vibeSelector = (vibe) => {
+  const vibeMsgSelector = (vibe) => {
     switch (true) {
       case vibe <= 20:
         return "having a tough time";
@@ -77,20 +72,17 @@ const SingleMoment = (props) => {
     }
   };
 
-  let date = new DateObject();
-  // console.log("moment.created_at", moment.created_at);
-  // console.log(typeof moment.created_at);
-  date._format = "YYYY-MM-DDTHH:mm";
-  date.parse(moment.created_at);
-  const dateFormatted = date.format("MMMM DD, YYYY - hh:mm a");
-  // console.log("dateFormatted", dateFormatted);
+  // format date from the db for how we want it displayed
+  let modifiedDate = `${moment.created_at.slice(
+    0,
+    10
+  )} ${moment.created_at.slice(11, 16)}`;
+  let date = new DateObject(modifiedDate);
+  date._format = "MMM D, YYYY - h:mm a";
+  const dateFormatted = date.format();
 
   return (
     <>
-      {/* <Text ml="24px" fontSize={"24"} pl="24px" pt="24px">
-        your moment
-      </Text> */}
-
       {loading ? (
         <Stack
           p="5"
@@ -114,7 +106,6 @@ const SingleMoment = (props) => {
           >
             <Box
               maxW="sm"
-              // display='flex'
               align="stretch"
               borderWidth="1px"
               borderRadius="lg"
@@ -131,7 +122,7 @@ const SingleMoment = (props) => {
                 align="left"
                 px="16px"
               >
-                you were {vibeSelector(moment.vibe)}
+                you were {vibeMsgSelector(moment.vibe)}
               </Text>
               <HStack>
                 <Text
@@ -150,7 +141,6 @@ const SingleMoment = (props) => {
       )}
       <FloatingEdit location={location} />
       <FloatingDelete location={location} />
-
       <br />
       <br />
       <br />

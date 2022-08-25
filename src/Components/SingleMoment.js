@@ -140,7 +140,7 @@ const SingleMoment = (props) => {
         </>
       )}
       <FloatingEdit location={location} />
-      <FloatingDelete location={location} />
+      <FloatingDelete location={location} momentId={moment.id} />
       <br />
       <br />
       <br />

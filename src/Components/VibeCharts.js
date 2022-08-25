@@ -43,8 +43,8 @@ const VibeCharts = (props) => {
       ) : (
         <>
           <br />
-          <ChartFilter setFilter={setFilter} filter={filter} />
-          <br />
+          {/* <ChartFilter setFilter={setFilter} filter={filter} /> */}
+          {/* <br /> */}
           <Container
             w={"100%"}
             height={"100%"}

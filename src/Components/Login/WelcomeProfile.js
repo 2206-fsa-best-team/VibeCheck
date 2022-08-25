@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../server/supabaseClient";
-import Moments from "./Moments/Moments";
+import { supabase } from "../../server/supabaseClient";
+import Moments from "../Moments/Moments";
 import {
   Button,
   Modal,

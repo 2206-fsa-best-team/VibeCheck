@@ -1,10 +1,10 @@
 import { Container, Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../server/supabaseClient";
-import VibesLineGraph from "./Charts/VibesLineGraph";
+import { supabase } from "../../server/supabaseClient";
+import VibesLineGraph from "./VibesLineGraph";
 import { Text } from "@chakra-ui/react";
-import NoDataGraph from "./Charts/NoDataGraph";
-import ChartFilter from "./Charts/ChartFilter";
+import NoDataGraph from "./NoDataGraph";
+import ChartFilter from "./ChartFilter";
 import DateObject from "react-date-object";
 
 const VibeCharts = (props) => {

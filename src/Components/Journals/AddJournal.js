@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { supabase } from "../server/supabaseClient";
+import { supabase } from "../../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -10,7 +10,7 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import MoodSlider from "./Slider";
+import MoodSlider from "../Buttons/Slider";
 
 const AddJournal = () => {
   let todayUtc = new Date();

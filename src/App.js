@@ -15,6 +15,7 @@ import SideMenu from "./Components/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
 import Journals from "./Components/Journals";
 import AddJournal from "./Components/AddJournal";
+import SingleMoment from "./Components/SingleMoment";
 
 function App() {
   const [session, setSession] = useState("");
@@ -45,6 +46,7 @@ function App() {
             <Routes>
               {/* to do: if logged in, take the user to home or display home component, if not, display auth and don't allow any other navigation*/}
               <Route path="/" element={<Navigate to="/moments" />} />
+              <Route path="/moments/:momentId" element={<SingleMoment />} />
               <Route path="/moments" element={<Moments />} />
               <Route path="/journals" element={<Journals />} />
               <Route path="/addamoment" element={<AddMoment />} />

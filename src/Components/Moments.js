@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../server/supabaseClient";
 import {
   VStack,
@@ -14,6 +15,8 @@ import FloatingAdd from "./FloatingAdd";
 const Moments = () => {
   const [moments, setMoments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchMoments();
   }, []);
@@ -42,6 +45,10 @@ const Moments = () => {
       default:
         return "green.600";
     }
+  };
+
+  const navToMoment = (id) => {
+    navigate(`/moments/${id}`);
   };
 
   return (
@@ -81,6 +88,7 @@ const Moments = () => {
                   borderWidth="1px"
                   borderRadius="lg"
                   key={moment.id}
+                  onClick={() => navToMoment(moment.id)}
                 >
                   <HStack h={["60px", "100px"]}>
                     <Icon

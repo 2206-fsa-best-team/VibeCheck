@@ -66,7 +66,7 @@ const VibeCharts = (props) => {
       const { data } = await supabase
         .from("journals")
         .select()
-        // .gt("created_at", `${filterDate}`)
+        .gt("created_at", `${filterDate}`)
         .lt("created_at", "2030-08-23 00:00:00")
         .order("created_at");
       setJournals(data);

@@ -80,7 +80,9 @@ const AddJournal = () => {
         <CircularProgress isIndeterminate size="1.75rem" color="tomato" />
       ) : (
         <>
-          <Button onClick={createJournal} colorScheme='teal'>add this moment</Button>
+          <Button onClick={createJournal} colorScheme="teal">
+            add this moment
+          </Button>
         </>
       )}
     </Stack>

@@ -7,7 +7,7 @@ import {
   Button,
   Textarea,
   Text,
-  CircularProgress
+  CircularProgress,
 } from "@chakra-ui/react";
 
 const AddMoment = () => {
@@ -41,7 +41,7 @@ const AddMoment = () => {
 
   return (
     <>
-      <Stack spacing={10} px="24px" display="flex" >
+      <Stack spacing={10} px="24px" display="flex">
         <Text mt="32px" ml="8px" fontSize={"24px"}>
           how's your moment?
         </Text>
@@ -63,7 +63,9 @@ const AddMoment = () => {
           />
         ) : (
           <>
-            <Button onClick={createMoment} colorScheme='teal'>add this moment</Button>
+            <Button onClick={createMoment} colorScheme="teal">
+              add this moment
+            </Button>
           </>
         )}
       </Stack>

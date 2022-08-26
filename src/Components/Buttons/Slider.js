@@ -3,9 +3,8 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  SliderMark,
 } from "@chakra-ui/slider";
-import { Box, Highlight, Show, useColorModeValue } from "@chakra-ui/react";
+import { Box, Highlight } from "@chakra-ui/react";
 import { TbFaceId } from "react-icons/tb";
 import { colorSelector } from "../Helpers/colorChanger";
 

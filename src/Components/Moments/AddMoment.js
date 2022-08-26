@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import { supabase } from "../../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import MoodSlider from "../Buttons/Slider";

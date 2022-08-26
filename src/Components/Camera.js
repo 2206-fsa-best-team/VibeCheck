@@ -2,33 +2,41 @@ import React from "react";
 import { useState, useRef } from "react";
 import { Camera } from "react-camera-pro";
 import { Box, Button, Text } from "@chakra-ui/react";
-import {
-  TextractClient,
-  AnalyzeDocumentCommand,
-} from "@aws-sdk/client-textract";
-import { Buffer } from "buffer";
+import axios from "axios";
 
 const Cam = () => {
   const camera = useRef(null);
   const [image, setImage] = useState(null);
-  const creds = {
-    accessKeyID: "AKIAQEHCWNEEAFNDWAGG",
-    secretAccessKey: "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",
-  };
-  const client = new TextractClient({
-    region: "us-east-1",
-    credentials: creds,
-  });
 
-  const handleSubmit = async (img) => {
-    const bytes = img.split(",")[1];
-    console.log(bytes.length);
-    const buffer = Buffer.from(bytes, "base64");
-    // console.log(buffer);
-    const command = new AnalyzeDocumentCommand({ Document: { Bytes: bytes } });
-    const response = await client.send(command);
-    console.log(response);
-  };
+  async function handleSubmit(img) {
+    try {
+      const { data } = await axios.post(
+        "https://vision.googleapis.com/v1/projects/tough-racer-360515/location/us/images:annotate",
+        {
+          requests: [
+            {
+              image: {
+                content: img,
+              },
+              features: [
+                {
+                  type: "TEXT_DETECTION",
+                },
+              ],
+              imageContext: {
+                textDetectionParams: {
+                  enableTextDetectionConfidenceScore: true,
+                },
+              },
+            },
+          ],
+        }
+      );
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return (
     <div>
@@ -53,7 +61,7 @@ const Cam = () => {
               <Text color="black">take another photo</Text>
             </Button>
             <Button onClick={() => handleSubmit(image)} colorScheme={"teal"}>
-              <Text color="black">turn into text</Text>
+              <Text color="black">convert to text</Text>
             </Button>
           </>
         )}

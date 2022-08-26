@@ -9,12 +9,17 @@
     "@chakra-ui/slider": "1.5.9",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@google-cloud/vision": "^2.4.2",
     "@supabase/supabase-js": "^1.35.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
     "buffer": "^6.0.3",
+    "express": "^4.18.1",
     "framer-motion": "^6.5.1",
+    "lz-string": "^1.4.4",
+    "morgan": "^1.10.0",
     "react": "^18.2.0",
     "react-camera-pro": "^1.1.1",
     "react-dom": "^18.2.0",
@@ -37,7 +42,7 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "BROWSER=none react-scripts start",
+    "start": "BROWSER=none react-scripts start node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -59,5 +64,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://vision.googleapis.com/v1/projects/tough-racer-360515/location/us/images:annotate"
 }

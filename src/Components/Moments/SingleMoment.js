@@ -61,9 +61,6 @@ const SingleMoment = (props) => {
     ) : (
       <FloatingEdit location={location} {...getEditButtonProps()} />
     );
-    // <Flex justifyContent="center">
-    //   <IconButton size="sm" icon={<EditIcon />} {...getEditButtonProps()} />
-    // </Flex>
   }
 
   const editBackgroundColor = useColorModeValue("gray.100", "gray.700");
@@ -145,8 +142,7 @@ const SingleMoment = (props) => {
   };
 
   // format date from the db for how we want it displayed
-  console.log("created_at", moment.created_at);
-  // debugger;
+  // console.log("created_at", moment.created_at);
   let modifiedDate = `${moment.created_at.slice(
     0,
     10
@@ -156,7 +152,8 @@ const SingleMoment = (props) => {
   const dateFormatted = date.format();
 
   const handleEdit = (e) => {
-    console.log("event -->", e);
+    // console.log("event -->", e);
+    // TODO: rename 'e' to something like 'content'?
     setMoment({ ...moment, content: e });
     startingContent = e;
     editMomentContent(e);
@@ -213,23 +210,25 @@ const SingleMoment = (props) => {
                 }
                 isPreviewFocusable={false}
                 selectAllOnFocus={false}
+                maxLength={260}
                 onSubmit={(e) => handleEdit(e)}
               >
                 {/* <Tooltip label="Click to edit"> */}
                 <EditablePreview
                   py={2}
                   px={4}
-                  _hover={{
-                    background: { editBackgroundColor },
-                  }}
+                  // _hover={{
+                  //   background: { editBackgroundColor },
+                  // }}
                 />
                 {/* </Tooltip> */}
-                <Textarea
+                <EditableInput
                   w="100%"
                   py={2}
                   px={4}
                   resize="none"
-                  as={EditableInput}
+                  overflowWrap="break-word"
+                  as={Textarea}
                 />
                 {/* <EditableResizeTextarea
                   py={2}

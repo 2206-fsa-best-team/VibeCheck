@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
 app.post("/", async (req, res, next) => {
   const filepath = base64Img.imgSync(
     req.body.img,
-    "/Users/nickangelopoulos/VSCode stuff/Fullstack Academy/Senior-Phase/moments/server/imgFiles",
+    "moments/server/imgFiles",
     "test"
   );
   const [result] = await client.documentTextDetection(filepath);
@@ -52,15 +52,11 @@ app.post("/", async (req, res, next) => {
           const wordText = word.symbols.map((s) => s.text).join("");
           console.log(`Word text: ${wordText}`);
           console.log(`Word confidence: ${word.confidence}`);
-          word.symbols.forEach((symbol) => {
-            console.log(`Symbol text: ${symbol.text}`);
-            console.log(`Symbol confidence: ${symbol.confidence}`);
-          });
         });
       });
     });
   });
-    res.send(result);
+  res.send(result);
 });
 
 const init = async () => {
@@ -73,4 +69,3 @@ const init = async () => {
 };
 
 init();
-

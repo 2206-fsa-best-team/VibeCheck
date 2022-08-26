@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { supabase } from "../../server/supabaseClient";
 import { Link } from "react-router-dom";
-import LightDarkButton from '../Buttons/LightDarkButton'
+import LightDarkButton from "../Buttons/LightDarkButton";
 
 export default function Navbar(props) {
   const { onOpen, onClose } = useDisclosure();

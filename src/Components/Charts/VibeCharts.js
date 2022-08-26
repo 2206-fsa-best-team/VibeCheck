@@ -25,7 +25,6 @@ const VibeCharts = (props) => {
     fetchMoments();
     fetchJournals();
     setLoading(false);
-    console.log(entryId)
   }, [filter, filterDate, entryId]);
 
   const dateFilter = async (val) => {

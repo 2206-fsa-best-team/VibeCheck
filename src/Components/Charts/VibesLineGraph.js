@@ -25,7 +25,7 @@ const VibesLineGraph = (props) => {
   const CustomTooltip = (data) => {
     const { payload, label, active, color, content } = data
     if (active) {
-      // console.log(content.props.setEntryId)
+
       content.props.setEntryId(payload[0].payload.id)
       return (
         <Box

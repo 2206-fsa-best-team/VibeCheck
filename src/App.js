@@ -15,12 +15,9 @@ import SideMenu from "./Components/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
 import Journals from "./Components/Journals";
 import AddJournal from "./Components/AddJournal";
-<<<<<<< HEAD
 import Cam from "./Components/Camera";
-=======
 import VibeCharts from '../src/Components/VibeCharts.js'
 import SingleMoment from "./Components/SingleMoment";
->>>>>>> main
 
 function App() {
   const [session, setSession] = useState("");

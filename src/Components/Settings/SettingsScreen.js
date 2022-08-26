@@ -9,7 +9,7 @@ import {
   InputRightElement,
   Text,
   HStack,
-  Spinner,
+  CircularProgress,
   Skeleton,
   useToast,
 } from "@chakra-ui/react";
@@ -84,10 +84,10 @@ const SettingsScreen = (props) => {
           </>
         ) : (
           <>
+            <Text alignContent="flex-start" pr="3">
+              Edit Email
+            </Text>
             <HStack align={"center"} flexDirection="row">
-              <Text alignContent="flex-start" pr="3">
-                Edit Email
-              </Text>
               <Input
                 type="email"
                 placeholder="Your email"
@@ -95,18 +95,24 @@ const SettingsScreen = (props) => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               {emailLoading ? (
-                <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+                <CircularProgress
+                  isIndeterminate
+                  size="1.75rem"
+                  color="tomato"
+                  align="center"
+                />
               ) : (
                 <Button size="md" w="10rem" onClick={updateEmail}>
                   Update
                 </Button>
               )}
             </HStack>
+            <br />
+            <Text alignContent="flex-start" pr="3">
+              Edit Password
+            </Text>
             <HStack align={"center"} flexDirection="row">
               <InputGroup size="md" alignItems={"center"}>
-                <Text alignContent="flex-start" pr="3">
-                  Edit Password
-                </Text>
                 <Input
                   pr="4.5rem"
                   type={show ? "text" : "password"}
@@ -114,14 +120,19 @@ const SettingsScreen = (props) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <InputRightElement w="4.5rem" pt="8px">
+                <InputRightElement w="4.5rem">
                   <Button h="1.75rem" size="sm" onClick={handleClick}>
                     {show ? "Hide" : "Show"}
                   </Button>
                 </InputRightElement>
               </InputGroup>
               {passwordLoading ? (
-                <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+                <CircularProgress
+                  isIndeterminate
+                  size="1.75rem"
+                  color="tomato"
+                  align="center"
+                />
               ) : (
                 <>
                   <Button size="md" w="8rem" onClick={updatePassword}>

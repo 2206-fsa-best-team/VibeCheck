@@ -7,10 +7,8 @@ import {
   Button,
   Textarea,
   Text,
-  Spinner,
+  CircularProgress
 } from "@chakra-ui/react";
-
-export const sliderContext = createContext();
 
 const AddMoment = () => {
   const [moment, setMoment] = useState({ content: "" });
@@ -20,8 +18,6 @@ const AddMoment = () => {
   const user = supabase.auth.user();
   const [sliderValue, setSliderValue] = useState(50);
 
-
-console.log(sliderValue)
   async function createMoment() {
     setSubmitLoading(true);
     try {
@@ -45,27 +41,29 @@ console.log(sliderValue)
 
   return (
     <>
-      <Stack spacing={10} ml="24px" mr="24px" display="flex" maxW="600px">
+      <Stack spacing={10} px="24px" display="flex" >
         <Text mt="32px" ml="8px" fontSize={"24px"}>
-          How's your moment?
+          how's your moment?
         </Text>
         <Textarea
           resize={"none"}
-          placeholder="Feeling some positive vibes"
-          value={content || ""}
+          placeholder="write about your moment here"
+          value={content}
           onChange={(evt) =>
             setMoment({ ...moment, content: evt.target.value })
           }
         />
-        <MoodSlider
-          sliderValue={sliderValue}
-          setSliderValue={setSliderValue}
-        />
+        <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
         {submitLoading ? (
-          <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+          <CircularProgress
+            isIndeterminate
+            size="1.75rem"
+            color="tomato"
+            align="center"
+          />
         ) : (
           <>
-            <Button onClick={createMoment}>Add your moment</Button>
+            <Button onClick={createMoment} colorScheme='teal'>add this moment</Button>
           </>
         )}
       </Stack>

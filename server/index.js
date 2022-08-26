@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
 app.post("/", async (req, res, next) => {
   const filepath = base64Img.imgSync(
     req.body.img,
-    "/Users/nickangelopoulos/VSCode stuff/Fullstack Academy/Senior-Phase/moments/server/imgFiles",
+    "moments/server/imgFiles",
     "test"
   );
   const [result] = await client.documentTextDetection(filepath);

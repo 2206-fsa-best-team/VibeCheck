@@ -2,23 +2,20 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
-  useColorMode,
   VStack,
   Input,
   InputGroup,
   InputRightElement,
   Text,
   HStack,
-  Spinner,
+  CircularProgress,
   Skeleton,
   useToast,
 } from "@chakra-ui/react";
-import LightDarkButton from "../../Components/Buttons/LightDarkButton";
 import { supabase } from "../../server/supabaseClient";
 import { passwordUpdated, emailUpdated } from "../ToastAlerts/AuthFormAlerts";
 
 const SettingsScreen = (props) => {
-  const { colorMode } = useColorMode();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
@@ -84,65 +81,64 @@ const SettingsScreen = (props) => {
           </>
         ) : (
           <>
+            <Text alignContent="flex-start" pr="3" fontSize={"24px"}>
+              edit email
+            </Text>
             <HStack align={"center"} flexDirection="row">
-              <Text alignContent="flex-start" pr="3">
-                Edit Email
-              </Text>
               <Input
                 type="email"
-                placeholder="Your email"
+                placeholder="your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               {emailLoading ? (
-                <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+                <CircularProgress
+                  isIndeterminate
+                  size="1.75rem"
+                  color="tomato"
+                  align="center"
+                />
               ) : (
                 <Button size="md" w="10rem" onClick={updateEmail}>
-                  Update
+                  update
                 </Button>
               )}
             </HStack>
+            <br />
+            <Text alignContent="flex-start" pr="3" fontSize={"24px"}>
+              edit password
+            </Text>
             <HStack align={"center"} flexDirection="row">
               <InputGroup size="md" alignItems={"center"}>
-                <Text alignContent="flex-start" pr="3">
-                  Edit Password
-                </Text>
                 <Input
                   pr="4.5rem"
                   type={show ? "text" : "password"}
-                  placeholder="Your password"
+                  placeholder="your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <InputRightElement w="4.5rem" pt="8px">
+                <InputRightElement w="4.5rem">
                   <Button h="1.75rem" size="sm" onClick={handleClick}>
                     {show ? "Hide" : "Show"}
                   </Button>
                 </InputRightElement>
               </InputGroup>
               {passwordLoading ? (
-                <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+                <CircularProgress
+                  isIndeterminate
+                  size="1.75rem"
+                  color="tomato"
+                  align="center"
+                />
               ) : (
                 <>
                   <Button size="md" w="8rem" onClick={updatePassword}>
-                    Update
+                    update
                   </Button>
                 </>
               )}
             </HStack>
-            <HStack
-              display="flex"
-              width="100%"
-              alignItems="center"
-              pr="4.5rem"
-              pt="10"
-              flexDirection="row"
-            >
-              <Text alignContent="flex-start" w={"6rem"}>
-                {`Disable ${colorMode} mode`}
-              </Text>
-              <LightDarkButton justifyContent="flex-end" />
-            </HStack>
+
           </>
         )}
       </VStack>

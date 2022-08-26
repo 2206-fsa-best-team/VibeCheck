@@ -40,7 +40,7 @@ app.post("/", async (req, res, next) => {
     "/Users/nickangelopoulos/VSCode stuff/Fullstack Academy/Senior-Phase/moments/server/imgFiles",
     "test"
   );
-  const [result] = await client.textDetection(filepath);
+  const [result] = await client.documentTextDetection(filepath);
   const fullTextAnnotation = result.fullTextAnnotation;
   console.log(`Full text: ${fullTextAnnotation.text}`);
   fullTextAnnotation.pages.forEach((page) => {
@@ -60,7 +60,7 @@ app.post("/", async (req, res, next) => {
       });
     });
   });
-  res.send(result);
+    res.send(result);
 });
 
 const init = async () => {
@@ -73,3 +73,4 @@ const init = async () => {
 };
 
 init();
+

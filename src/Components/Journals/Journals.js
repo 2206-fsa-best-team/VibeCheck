@@ -10,6 +10,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import FloatingAdd from "../Buttons/FloatingAdd";
+import { colorSelector } from "../Helpers/colorChanger";
 
 const Journals = () => {
   const [journals, setJournals] = useState([]);
@@ -27,22 +28,7 @@ const Journals = () => {
 
   const location = "journal";
 
-  const colorSelector = (vibe) => {
-    switch (vibe) {
-      case 1:
-        return "blue.500";
-      case 2:
-        return "blue.100";
-      case 3:
-        return "purple.100";
-      case 4:
-        return "red.300";
-      case 5:
-        return "red.600";
-      default:
-        return "red.600";
-    }
-  };
+
 
   return (
     <>

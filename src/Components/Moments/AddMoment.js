@@ -24,7 +24,7 @@ const AddMoment = () => {
     setSubmitLoading(true);
     try {
       if (!content.length) {
-        alert("Please write a short moment and choose a vibe!");
+        alert("write about your moment");
       } else {
         await supabase
           .from("moments")

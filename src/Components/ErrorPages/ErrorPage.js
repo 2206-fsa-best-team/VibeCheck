@@ -18,8 +18,7 @@ const ErrorPage = () => {
       >
         <Heading mb={6}>404 Not Found</Heading>
         <Text fontSize="lg" fontWeight="bold">
-          Looks like we can't find what you're looking for. Please click the
-          Pikachu to head home.
+          Looks like we can't find what you're looking for.
         </Text>
         <Link to="/moments">
           <Image src="https://www.pngfind.com/pngs/m/299-2991041_memes-para-stickers-png-png-download-surprised-pikachu.png" />

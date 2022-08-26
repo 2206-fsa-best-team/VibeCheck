@@ -29,8 +29,9 @@ const FloatingEdit = (props) => {
             pos="fixed"
             px={4}
             py={4}
-            bottom={24}
+            bottom={40}
             right={12}
+            {...props}
           />
         </Tooltip>
       </Flex>

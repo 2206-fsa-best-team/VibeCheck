@@ -20,6 +20,8 @@ const AddMoment = () => {
   const user = supabase.auth.user();
   const [sliderValue, setSliderValue] = useState(50);
 
+
+console.log(sliderValue)
   async function createMoment() {
     setSubmitLoading(true);
     try {

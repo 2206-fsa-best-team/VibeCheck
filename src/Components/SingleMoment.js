@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../server/supabaseClient";
 import {
@@ -20,11 +20,14 @@ import {
   Tooltip,
   EditableInput,
   Flex,
+  Textarea,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
 import FloatingEdit from "./FloatingEdit";
 import FloatingDelete from "./FloatingDelete";
 import { CheckIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
+import ResizeTextarea from "react-textarea-autosize";
+import { EditableResizeTextarea } from "./EditableResizeTextarea";
 
 const SingleMoment = (props) => {
   const [moment, setMoment] = useState({
@@ -55,8 +58,9 @@ const SingleMoment = (props) => {
           {...getCancelButtonProps()}
         />
       </ButtonGroup>
-    ) : null;
-    // <FloatingEdit location={location} {...getEditButtonProps()} />
+    ) : (
+      <FloatingEdit location={location} {...getEditButtonProps()} />
+    );
     // <Flex justifyContent="center">
     //   <IconButton size="sm" icon={<EditIcon />} {...getEditButtonProps()} />
     // </Flex>
@@ -189,29 +193,53 @@ const SingleMoment = (props) => {
               borderTopWidth="4px"
               borderTopColor={() => colorSelector(moment.vibe)}
             >
-              <Text w="100%" align="left" p="16px">
+              {/* <Text
+                borderColor="white"
+                borderWidth={1}
+                w="100%"
+                align="left"
+                p="16px"
+              >
                 {moment.content}
-              </Text>
+              </Text> */}
               <Editable
+                // borderColor="white"
+                // borderWidth={1}
+                w="100%"
+                align="left"
+                // p="16px"
                 defaultValue={
                   startingContent ? startingContent : "moment is empty"
                 }
-                isPreviewFocusable={true}
+                isPreviewFocusable={false}
                 selectAllOnFocus={false}
                 onSubmit={(e) => handleEdit(e)}
               >
-                <Tooltip label="Click to edit">
-                  <EditablePreview
-                    py={2}
-                    px={4}
-                    _hover={{
-                      background: { editBackgroundColor },
-                    }}
-                  />
-                </Tooltip>
-                <Input py={2} px={4} as={EditableInput} />
+                {/* <Tooltip label="Click to edit"> */}
+                <EditablePreview
+                  py={2}
+                  px={4}
+                  _hover={{
+                    background: { editBackgroundColor },
+                  }}
+                />
+                {/* </Tooltip> */}
+                <Textarea
+                  w="100%"
+                  py={2}
+                  px={4}
+                  resize="none"
+                  as={EditableInput}
+                />
+                {/* <EditableResizeTextarea
+                  py={2}
+                  px={4}
+                  resize="none"
+                  as={EditableInput}
+                /> */}
                 <EditableControls />
               </Editable>
+              {/* <EditableResizeTextarea py={2} px={4} resize="none" /> */}
               <Text
                 fontSize="0.75rem"
                 fontStyle="italic"

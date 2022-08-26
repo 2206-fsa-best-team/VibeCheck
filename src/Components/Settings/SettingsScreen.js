@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
-  useColorMode,
   VStack,
   Input,
   InputGroup,
@@ -13,12 +12,10 @@ import {
   Skeleton,
   useToast,
 } from "@chakra-ui/react";
-import LightDarkButton from "../../Components/Buttons/LightDarkButton";
 import { supabase } from "../../server/supabaseClient";
 import { passwordUpdated, emailUpdated } from "../ToastAlerts/AuthFormAlerts";
 
 const SettingsScreen = (props) => {
-  const { colorMode } = useColorMode();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
@@ -141,7 +138,7 @@ const SettingsScreen = (props) => {
                 </>
               )}
             </HStack>
-            
+
           </>
         )}
       </VStack>

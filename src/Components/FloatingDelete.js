@@ -1,10 +1,4 @@
-import {
-  IconButton,
-  Flex,
-  Container,
-  useColorModeValue,
-  Tooltip,
-} from "@chakra-ui/react";
+import { IconButton, Flex, Container, Tooltip } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +10,7 @@ const FloatingDelete = (props) => {
 
   async function handleDelete() {
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("moments")
         .delete()
         .match({ id: momentId });

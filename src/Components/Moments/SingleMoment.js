@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { supabase } from "../server/supabaseClient";
+import { supabase } from "../../server/supabaseClient";
 import {
   VStack,
   HStack,
@@ -23,11 +23,11 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
-import FloatingEdit from "./FloatingEdit";
-import FloatingDelete from "./FloatingDelete";
+import FloatingEdit from "../Buttons/FloatingEdit";
+import FloatingDelete from "../Buttons/FloatingDelete";
 import { CheckIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
 import ResizeTextarea from "react-textarea-autosize";
-import { EditableResizeTextarea } from "./EditableResizeTextarea";
+import { EditableResizeTextarea } from "../EditableResizeTextarea";
 
 const SingleMoment = (props) => {
   const [moment, setMoment] = useState({

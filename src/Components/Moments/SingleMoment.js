@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { supabase } from "../server/supabaseClient";
+import { supabase } from "../../server/supabaseClient";
 import { VStack, HStack, Text, Box, Skeleton, Stack } from "@chakra-ui/react";
 import DateObject from "react-date-object";
-import FloatingEdit from "./FloatingEdit";
-import FloatingDelete from "./FloatingDelete";
+import FloatingEdit from "../Buttons/FloatingEdit";
+import FloatingDelete from "../Buttons/FloatingDelete";
 
 const SingleMoment = (props) => {
   const [moment, setMoment] = useState({

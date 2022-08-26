@@ -1,54 +1,47 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "../server/supabaseClient";
+import React, { useState, useEffect } from "react";
+import { supabase } from "../../server/supabaseClient";
 import {
   VStack,
   HStack,
-  Text,
   Box,
+  Text,
   Skeleton,
   Stack,
   Icon,
 } from "@chakra-ui/react";
-import FloatingAdd from "./FloatingAdd";
+import FloatingAdd from "../Buttons/FloatingAdd";
 
-const Moments = () => {
-  const [moments, setMoments] = useState([]);
+const Journals = () => {
+  const [journals, setJournals] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
   useEffect(() => {
-    fetchMoments();
+    fetchJournals();
   }, []);
 
-  async function fetchMoments() {
+  async function fetchJournals() {
     setLoading(true);
-    const { data } = await supabase.from("moments").select();
-    setMoments(data);
+    const { data } = await supabase.from("journals").select();
+    setJournals(data);
     setLoading(false);
   }
 
-  const location = "moment";
+  const location = "journal";
 
   const colorSelector = (vibe) => {
-    switch (true) {
-      case vibe <= 20:
+    switch (vibe) {
+      case 1:
         return "blue.500";
-      case vibe <= 40 && vibe > 20:
+      case 2:
         return "blue.100";
-      case vibe <= 60 && vibe > 40:
+      case 3:
         return "purple.100";
-      case vibe <= 80 && vibe > 60:
+      case 4:
         return "red.300";
-      case vibe <= 100 && vibe > 80:
+      case 5:
         return "red.600";
       default:
-        return "green.600";
+        return "red.600";
     }
-  };
-
-  const navToMoment = (id) => {
-    navigate(`/moments/${id}`);
   };
 
   return (
@@ -65,11 +58,11 @@ const Moments = () => {
       ) : (
         <>
           <Text ml="24px" fontSize={"24"} pl="24px" pt="24px">
-            All Moments
+            All Journals
           </Text>
-          {!moments.length ? (
+          {!journals.length ? (
             <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">
-              Add a moment using the plus button!
+              Add a new Journal using the plus button!
             </Text>
           ) : (
             <VStack
@@ -80,20 +73,19 @@ const Moments = () => {
               alignItems="stretch"
               maxW="700px"
             >
-              {moments.map((moment) => (
+              {journals.map((journal) => (
                 <Box
                   maxW="sm"
                   // display='flex'
                   align="stretch"
                   borderWidth="1px"
                   borderRadius="lg"
-                  key={moment.id}
-                  onClick={() => navToMoment(moment.id)}
+                  key={journal.id}
                 >
-                  <HStack h={["60px", "100px"]}>
+                  <HStack h={["100px", "140px"]}>
                     <Icon
                       viewBox="0 0 200 200"
-                      color={() => colorSelector(moment.vibe)}
+                      color={() => colorSelector(journal.vibe)}
                       ml="16px"
                     >
                       <path
@@ -106,9 +98,9 @@ const Moments = () => {
                       noOfLines={[3, 4, 5]}
                       minW="180px"
                     >
-                      {moment.content.length < 140
-                        ? moment.content
-                        : `${moment.content.slice(0, 140)}...`}
+                      {journal.content.length < 140
+                        ? journal.content
+                        : `${journal.content.slice(0, 140)}...`}
                     </Text>
                     <Text
                       fontSize="10px"
@@ -118,7 +110,7 @@ const Moments = () => {
                       p="16px"
                     >
                       Created: <br />
-                      {moment.created_at.slice(0, 10)}
+                      {journal.created_at.slice(0, 10)}
                     </Text>
                   </HStack>
                 </Box>
@@ -135,4 +127,4 @@ const Moments = () => {
   );
 };
 
-export default Moments;
+export default Journals;

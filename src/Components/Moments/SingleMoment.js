@@ -1,10 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { VStack, HStack, Text, Box, Skeleton, Stack } from "@chakra-ui/react";
+import {
+  VStack,
+  HStack,
+  Text,
+  Box,
+  Skeleton,
+  Stack,
+  EditablePreview,
+  useColorModeValue,
+  IconButton,
+  Input,
+  useDisclosure,
+  useEditableControls,
+  ButtonGroup,
+  SlideFade,
+  Editable,
+  Tooltip,
+  EditableInput,
+  Flex,
+  Textarea,
+} from "@chakra-ui/react";
 import DateObject from "react-date-object";
 import FloatingEdit from "../Buttons/FloatingEdit";
 import FloatingDelete from "../Buttons/FloatingDelete";
+import { CheckIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
+import ResizeTextarea from "react-textarea-autosize";
+import { EditableResizeTextarea } from "../EditableResizeTextarea";
 
 const SingleMoment = (props) => {
   const [moment, setMoment] = useState({
@@ -19,6 +42,33 @@ const SingleMoment = (props) => {
     fetchMoment();
   }, []);
 
+  function EditableControls() {
+    const {
+      isEditing,
+      getSubmitButtonProps,
+      getCancelButtonProps,
+      getEditButtonProps,
+    } = useEditableControls();
+
+    return isEditing ? (
+      <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
+        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
+        <IconButton
+          icon={<CloseIcon boxSize={3} />}
+          {...getCancelButtonProps()}
+        />
+      </ButtonGroup>
+    ) : (
+      <FloatingEdit location={location} {...getEditButtonProps()} />
+    );
+    // <Flex justifyContent="center">
+    //   <IconButton size="sm" icon={<EditIcon />} {...getEditButtonProps()} />
+    // </Flex>
+  }
+
+  const editBackgroundColor = useColorModeValue("gray.100", "gray.700");
+  let startingContent = moment.content;
+
   async function fetchMoment() {
     try {
       const { data, error } = await supabase
@@ -28,7 +78,29 @@ const SingleMoment = (props) => {
         .single();
 
       if (error) throw error;
-      setMoment(data);
+      console.log("data:", data);
+      setMoment({
+        content: data.content,
+        vibe: data.vibe,
+        created_at: data.created_at,
+      });
+      startingContent = data.content;
+    } catch (error) {
+      console.error(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function editMomentContent(e) {
+    try {
+      const { error } = await supabase
+        .from("moments")
+        .update({ content: e })
+        .eq("id", momentId);
+
+      if (error) throw error;
+      // setMoment(data);
     } catch (error) {
       console.error(error.error_description || error.message);
     } finally {
@@ -73,6 +145,8 @@ const SingleMoment = (props) => {
   };
 
   // format date from the db for how we want it displayed
+  console.log("created_at", moment.created_at);
+  // debugger;
   let modifiedDate = `${moment.created_at.slice(
     0,
     10
@@ -80,6 +154,13 @@ const SingleMoment = (props) => {
   let date = new DateObject(modifiedDate);
   date._format = "MMM D, YYYY - h:mm a";
   const dateFormatted = date.format();
+
+  const handleEdit = (e) => {
+    console.log("event -->", e);
+    setMoment({ ...moment, content: e });
+    startingContent = e;
+    editMomentContent(e);
+  };
 
   return (
     <>
@@ -112,9 +193,53 @@ const SingleMoment = (props) => {
               borderTopWidth="4px"
               borderTopColor={() => colorSelector(moment.vibe)}
             >
-              <Text w="100%" align="left" p="16px">
+              {/* <Text
+                borderColor="white"
+                borderWidth={1}
+                w="100%"
+                align="left"
+                p="16px"
+              >
                 {moment.content}
-              </Text>
+              </Text> */}
+              <Editable
+                // borderColor="white"
+                // borderWidth={1}
+                w="100%"
+                align="left"
+                // p="16px"
+                defaultValue={
+                  startingContent ? startingContent : "moment is empty"
+                }
+                isPreviewFocusable={false}
+                selectAllOnFocus={false}
+                onSubmit={(e) => handleEdit(e)}
+              >
+                {/* <Tooltip label="Click to edit"> */}
+                <EditablePreview
+                  py={2}
+                  px={4}
+                  _hover={{
+                    background: { editBackgroundColor },
+                  }}
+                />
+                {/* </Tooltip> */}
+                <Textarea
+                  w="100%"
+                  py={2}
+                  px={4}
+                  resize="none"
+                  as={EditableInput}
+                />
+                {/* <EditableResizeTextarea
+                  py={2}
+                  px={4}
+                  resize="none"
+                  as={EditableInput}
+                /> */}
+                <EditableControls />
+              </Editable>
+              {/* <EditableResizeTextarea py={2} px={4} resize="none" /> */}
               <Text
                 fontSize="0.75rem"
                 fontStyle="italic"
@@ -139,7 +264,7 @@ const SingleMoment = (props) => {
           </VStack>
         </>
       )}
-      <FloatingEdit location={location} />
+      {/* <FloatingEdit location={location}/> */}
       <FloatingDelete location={location} momentId={moment.id} />
       <br />
       <br />

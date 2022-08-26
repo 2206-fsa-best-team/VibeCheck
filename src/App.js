@@ -15,7 +15,7 @@ import SideMenu from "./Components/Navigation/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
 import Journals from "./Components/Journals/Journals";
 import AddJournal from "./Components/Journals/AddJournal";
-import VibeCharts from './Components/Charts/VibeCharts.js'
+import VibeCharts from "./Components/Charts/VibeCharts.js";
 import SingleMoment from "./Components/Moments/SingleMoment";
 
 function App() {

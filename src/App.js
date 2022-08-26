@@ -13,6 +13,7 @@ import { Box, Show } from "@chakra-ui/react";
 import WelcomeProfile from "./Components/Login/WelcomeProfile"
 import SideMenu from "./Components/Navigation/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
+import Cam from "./Components/Camera";
 import Journals from "./Components/Journals/Journals";
 import AddJournal from "./Components/Journals/AddJournal";
 import VibeCharts from "./Components/Charts/VibeCharts.js";
@@ -65,6 +66,7 @@ function App() {
                   <WelcomeProfile key={session.user.id} session={session} />
                 }
               />
+              <Route path="/camera" element={<Cam />} />
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </Box>

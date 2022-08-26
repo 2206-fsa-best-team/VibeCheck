@@ -20,7 +20,7 @@ const Journals = () => {
 
   async function fetchJournals() {
     setLoading(true);
-    const { data } = await supabase.from("journals").select();
+    const { data } = await supabase.from("journals").select().order("date", { ascending: false });
     setJournals(data);
     setLoading(false);
   }

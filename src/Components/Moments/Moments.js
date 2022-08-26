@@ -23,7 +23,10 @@ const Moments = () => {
 
   async function fetchMoments() {
     setLoading(true);
-    const { data } = await supabase.from("moments").select();
+    const { data } = await supabase
+      .from("moments")
+      .select()
+      .order("created_at", { ascending: false });
     setMoments(data);
     setLoading(false);
   }

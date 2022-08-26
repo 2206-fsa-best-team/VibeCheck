@@ -8,7 +8,7 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../server/supabaseClient";
+import { supabase } from "../../server/supabaseClient";
 
 const FloatingDelete = (props) => {
   const { location, momentId } = props;

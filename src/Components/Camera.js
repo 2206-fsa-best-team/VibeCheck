@@ -10,29 +10,31 @@ const Cam = () => {
 
   async function handleSubmit(img) {
     try {
-      const { data } = await axios.post(
-        "https://vision.googleapis.com/v1/projects/tough-racer-360515/location/us/images:annotate",
-        {
-          requests: [
-            {
-              image: {
-                content: img,
-              },
-              features: [
-                {
-                  type: "TEXT_DETECTION",
-                },
-              ],
-              imageContext: {
-                textDetectionParams: {
-                  enableTextDetectionConfidenceScore: true,
-                },
-              },
-            },
-          ],
-        }
-      );
-      console.log(data);
+      const body = { img };
+      const { data } = await axios.post("/", body);
+      // const { data } = await axios.post(
+      //   "https://vision.googleapis.com/v1/projects/tough-racer-360515/location/us/images:annotate",
+      //   {
+      //     requests: [
+      //       {
+      //         image: {
+      //           content: img,
+      //         },
+      //         features: [
+      //           {
+      //             type: "TEXT_DETECTION",
+      //           },
+      //         ],
+      //         imageContext: {
+      //           textDetectionParams: {
+      //             enableTextDetectionConfidenceScore: true,
+      //           },
+      //         },
+      //       },
+      //     ],
+      //   }
+      // );
+      console.log(data.fullTextAnnotation.text);
     } catch (e) {
       console.error(e);
     }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../server/supabaseClient";
-import LightDarkButton from '../Buttons/LightDarkButton'
+import LightDarkButton from "../Buttons/LightDarkButton";
 import {
   Input,
   InputGroup,

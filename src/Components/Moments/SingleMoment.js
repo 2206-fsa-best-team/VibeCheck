@@ -37,7 +37,7 @@ const SingleMoment = (props) => {
   });
   const [loading, setLoading] = useState(true);
   const { momentId } = useParams();
-
+  console.log(momentId)
   useEffect(() => {
     fetchMoment();
   }, []);

@@ -40,7 +40,7 @@ const FloatingDelete = (props) => {
             px={4}
             py={4}
             bottom={24}
-            right={28}
+            right={12}
             onClick={handleDelete}
           />
         </Tooltip>

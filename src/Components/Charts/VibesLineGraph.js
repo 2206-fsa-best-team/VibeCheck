@@ -57,9 +57,9 @@ const VibesLineGraph = (props) => {
             <Line
               type="monotone"
               dataKey={"vibe"}
-              stroke={useColorModeValue("grey", "tomato")}
+              stroke={'tomato'}
               dot={true}
-              fill={useColorModeValue("grey", "tomato")}
+              fill={"tomato"}
               activeDot={{ r: 6 }}
             />
             <Tooltip

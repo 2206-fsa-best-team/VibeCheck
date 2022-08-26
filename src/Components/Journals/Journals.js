@@ -110,7 +110,7 @@ const Journals = () => {
                       p="16px"
                     >
                       Created: <br />
-                      {journal.created_at.slice(0, 10)}
+                      {journal.date.slice(0, 10)}
                     </Text>
                   </HStack>
                 </Box>
@@ -120,6 +120,9 @@ const Journals = () => {
           <FloatingAdd location={location} />
         </>
       )}
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />

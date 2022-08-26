@@ -6,6 +6,7 @@ import {
   VStack,
   StackDivider,
 } from "@chakra-ui/react";
+import { BiLineChart } from "react-icons/bi";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdFormatListBulleted } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -41,7 +42,7 @@ function SideMenu() {
               All Moments
             </Box>
           </Link>
-          <Link to="/journal">
+          <Link to="/journals">
             <Icon
               variant="ghost"
               color={"tomato"}
@@ -52,6 +53,19 @@ function SideMenu() {
             />
             <Box display={"inline"} px={5} pt={2} pos={"absolute"}>
               All Journals
+            </Box>
+          </Link>
+          <Link to="/vibes">
+            <Icon
+              variant="ghost"
+              color={"tomato"}
+              aria-label="Vibe graphs"
+              w={10}
+              h={10}
+              as={BiLineChart}
+            />
+            <Box display={"inline"} px={5} pt={2} pos={"absolute"}>
+              Vibes
             </Box>
           </Link>
         </VStack>

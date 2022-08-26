@@ -11,7 +11,8 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Center, Portal
+  Center,
+  Portal,
 } from "@chakra-ui/react";
 import { supabase } from "../server/supabaseClient";
 import { Link } from "react-router-dom";
@@ -31,12 +32,12 @@ export default function Navbar(props) {
       z-index={999}
     >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-        <Box fontSize={["36px", "48px"]}>Moments</Box>
+        <Box fontSize={["36px", "48px"]}>vibe☑</Box>
         <Flex alignItems={"center"}>
           <Stack direction={"row"} spacing={7}>
             <LightDarkButton />
-            <Box >
-              <Menu isLazy={true}  >
+            <Box>
+              <Menu isLazy={true}>
                 <MenuButton
                   as={Button}
                   rounded={"full"}
@@ -52,35 +53,40 @@ export default function Navbar(props) {
                   />
                 </MenuButton>
                 <Portal>
-                <MenuList alignItems={"center"} onClose={onClose} m={0} zIndex='popover'>
-                  <br />
-                  <Center>
-                    <Avatar size={"2xl"} name={"Evan Barden"} src={""} />
-                  </Center>
-                  <br />
-                  <Center>
-                    <p>"this.state.username"</p>
-                  </Center>
-                  <br />
-                  <MenuDivider />
-                  <MenuItem>testing</MenuItem>
-                  <Link to="/settings">
-                    <MenuItem>Settings</MenuItem>
-                  </Link>
-                  {isLoggedIn ? (
-                    <Link to="/">
-                      <MenuItem
-                        onClick={() => {
-                          supabase.auth.signOut();
-                        }}
-                      >
-                        Logout
-                      </MenuItem>
+                  <MenuList
+                    alignItems={"center"}
+                    onClose={onClose}
+                    m={0}
+                    zIndex="popover"
+                  >
+                    <br />
+                    <Center>
+                      <Avatar size={"2xl"} name={"Evan Barden"} src={""} />
+                    </Center>
+                    <br />
+                    <Center>
+                      <p>"this.state.username"</p>
+                    </Center>
+                    <br />
+                    <MenuDivider />
+                    <MenuItem>testing</MenuItem>
+                    <Link to="/settings">
+                      <MenuItem>Settings</MenuItem>
                     </Link>
-                  ) : (
-                    <></>
-                  )}
-                </MenuList>
+                    {isLoggedIn ? (
+                      <Link to="/">
+                        <MenuItem
+                          onClick={() => {
+                            supabase.auth.signOut();
+                          }}
+                        >
+                          Logout
+                        </MenuItem>
+                      </Link>
+                    ) : (
+                      <></>
+                    )}
+                  </MenuList>
                 </Portal>
               </Menu>
             </Box>

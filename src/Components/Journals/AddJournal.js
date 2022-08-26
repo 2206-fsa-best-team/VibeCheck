@@ -81,7 +81,7 @@ const AddJournal = () => {
       ) : (
         <>
           <Button onClick={createJournal} colorScheme="teal">
-            add this moment
+            add this journal
           </Button>
         </>
       )}

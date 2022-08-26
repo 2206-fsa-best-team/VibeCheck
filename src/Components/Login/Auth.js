@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { supabase } from "../server/supabaseClient";
-import LightDarkButton from "./LightDarkButton";
+import { supabase } from "../../server/supabaseClient";
+import LightDarkButton from "../Buttons/LightDarkButton";
 import {
   Input,
   InputGroup,
@@ -23,7 +23,7 @@ import {
   invalidEmailSignup,
   invalidPasswordSignup,
   invalidCredentialsSignup,
-} from "./ToastAlerts/AuthFormAlerts";
+} from "../ToastAlerts/AuthFormAlerts";
 
 export default function Auth() {
   const [loadingLogin, setLoadingLogin] = useState(false);

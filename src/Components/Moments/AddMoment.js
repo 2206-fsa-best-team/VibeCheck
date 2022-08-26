@@ -1,7 +1,7 @@
-import React, { useState, useEffect, createContext } from "react";
-import { supabase } from "../server/supabaseClient";
+import React, { useState, createContext } from "react";
+import { supabase } from "../../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
-import MoodSlider from "./Slider";
+import MoodSlider from "../Buttons/Slider";
 import {
   Stack,
   Button,

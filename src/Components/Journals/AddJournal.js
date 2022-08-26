@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   Button,
   Input,
-  Spinner,
+  CircularProgress,
   Stack,
   Text,
   Textarea,
@@ -31,7 +31,7 @@ const AddJournal = () => {
     setSubmitLoading(true);
     try {
       if (!content.length) {
-        alert("Please write a journal and choose a vibe!");
+        alert("write your journal entry");
       } else {
         await supabase
           .from("journals")
@@ -49,10 +49,10 @@ const AddJournal = () => {
   }
 
   return (
-    <Stack spacing={5} ml="24px" mr="24px" display="flex">
+    <Stack spacing={5} px="24px" display="flex">
       {/* content input */}
       <Text mt="32px" ml="8px" fontSize={"24px"}>
-        journalin' time!
+        what's going on?
       </Text>
       <Textarea
         value={content}
@@ -60,7 +60,7 @@ const AddJournal = () => {
           setJournal({ ...journal, content: evt.target.value })
         }
         resize="vertical"
-        placeholder="write your journal here!"
+        placeholder="write your journal here"
         size="lg"
       />
       {/* date input */}
@@ -77,11 +77,11 @@ const AddJournal = () => {
       <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
       <div>{/* spacing div */}</div>
       {submitLoading ? (
-        <Spinner size="md" alignSelf={"center"} colorScheme="tomato" />
+        <CircularProgress isIndeterminate size="1.75rem" color="tomato" />
       ) : (
         <>
-          <Button onClick={() => createJournal()} colorScheme="teal">
-            <Text color="black">submit</Text>
+          <Button onClick={createJournal} colorScheme="teal">
+            add this journal
           </Button>
         </>
       )}

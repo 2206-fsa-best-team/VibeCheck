@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { Camera } from "react-camera-pro";
+import Webcam from "react-webcam";
 import { Box, Button, Text } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -26,9 +26,9 @@ const Cam = () => {
         </Text>
         {image === null ? (
           <>
-            <Camera ref={camera} aspectRatio={8.5 / 11} />
+            <Webcam ref={camera} screenshotQuality={1} />
             <Button
-              onClick={() => setImage(camera.current.takePhoto())}
+              onClick={() => setImage(camera.current.getScreenshot())}
               colorScheme="teal"
             >
               <Text color="black">take photo</Text>

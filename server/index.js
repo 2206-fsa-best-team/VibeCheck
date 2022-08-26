@@ -52,15 +52,11 @@ app.post("/", async (req, res, next) => {
           const wordText = word.symbols.map((s) => s.text).join("");
           console.log(`Word text: ${wordText}`);
           console.log(`Word confidence: ${word.confidence}`);
-          word.symbols.forEach((symbol) => {
-            console.log(`Symbol text: ${symbol.text}`);
-            console.log(`Symbol confidence: ${symbol.confidence}`);
-          });
         });
       });
     });
   });
-    res.send(result);
+  res.send(result);
 });
 
 const init = async () => {
@@ -73,4 +69,3 @@ const init = async () => {
 };
 
 init();
-

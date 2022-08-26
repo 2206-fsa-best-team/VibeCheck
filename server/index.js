@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8080;
 const vision = require("@google-cloud/vision");
 // Creates a client
 const client = new vision.ImageAnnotatorClient();
-const fs = require("fs");
+const base64Img = require("base64-img");
 
 module.exports = app;
 
@@ -35,14 +35,12 @@ app.use((err, req, res, next) => {
 });
 
 app.post("/", async (req, res, next) => {
-  // const image = new Image();
-  // image.src = req.body.img;
-  // const file = fs.writeFile("ocr.jpeg", image, function () {
-  //   console.log("success");
-  // });
-  const [result] = await client.textDetection({
-    image: { source: req.body.img },
-  });
+  const filepath = base64Img.imgSync(
+    req.body.img,
+    "/Users/nickangelopoulos/VSCode stuff/Fullstack Academy/Senior-Phase/moments/server/imgFiles",
+    "test"
+  );
+  const [result] = await client.textDetection(filepath);
   const fullTextAnnotation = result.fullTextAnnotation;
   console.log(`Full text: ${fullTextAnnotation.text}`);
   fullTextAnnotation.pages.forEach((page) => {

@@ -35,11 +35,7 @@ app.use((err, req, res, next) => {
 });
 
 app.post("/", async (req, res, next) => {
-  const filepath = base64Img.imgSync(
-    req.body.img,
-    "moments/server/imgFiles",
-    "test"
-  );
+  const filepath = base64Img.imgSync(req.body.img, "server/imgFiles", "test");
   const [result] = await client.documentTextDetection(filepath);
   const fullTextAnnotation = result.fullTextAnnotation;
   console.log(`Full text: ${fullTextAnnotation.text}`);

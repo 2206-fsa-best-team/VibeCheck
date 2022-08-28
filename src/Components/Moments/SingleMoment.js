@@ -14,6 +14,7 @@ import {
   useEditableControls,
   Editable,
   EditableInput,
+  EditableTextarea,
   Textarea,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
@@ -148,6 +149,14 @@ const SingleMoment = (props) => {
     editMomentContent(e);
   };
 
+  // const onEnterPress = (e) => {
+  //   if (e.keyCode === 13 && e.shiftKey === false) {
+  //     e.preventDefault();
+  //     console.log("we are here");
+  //     handleEdit(e);
+  //   }
+  // };
+
   return (
     <>
       {loading ? (
@@ -192,13 +201,17 @@ const SingleMoment = (props) => {
                 onSubmit={(e) => handleEdit(e)}
               >
                 <EditablePreview py={2} px={4} />
-                <EditableInput
+                <EditableTextarea
                   w="100%"
                   py={2}
                   px={4}
                   resize="none"
-                  overflowWrap="break-word"
-                  as={Textarea}
+                  rows={8}
+                  maxLength={260}
+                  isInvalid
+                  // onKeyDown={onEnterPress}
+                  // overflowWrap="break-word"
+                  // as={Textarea}
                 />
                 <EditableControls />
               </Editable>

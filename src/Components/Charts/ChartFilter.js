@@ -2,8 +2,9 @@ import { ButtonGroup, Button, Container } from "@chakra-ui/react";
 import React from "react";
 
 const ChartFilter = (props) => {
-  const { filter, setFilter } = props;
+  const { filter, setFilter, setEntryId } = props;
   const handleClick = (val) => {
+    setEntryId(0)
     setFilter(val);
   };
 

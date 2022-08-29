@@ -16,6 +16,7 @@ import {
   EditableInput,
   EditableTextarea,
   Textarea,
+  Flex,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
 import FloatingEdit from "../Buttons/FloatingEdit";
@@ -28,6 +29,7 @@ const SingleMoment = (props) => {
     vibe: null,
     created_at: Date(),
   });
+  let [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const { momentId } = useParams();
 
@@ -73,6 +75,7 @@ const SingleMoment = (props) => {
         vibe: data.vibe,
         created_at: data.created_at,
       });
+      setCount(data.content.length);
       startingContent = data.content;
     } catch (error) {
       console.error(error.error_description || error.message);
@@ -189,8 +192,6 @@ const SingleMoment = (props) => {
               borderTopColor={() => colorSelector(moment.vibe)}
             >
               <Editable
-                // borderColor="white"
-                // borderWidth={1}
                 w="100%"
                 align="left"
                 defaultValue={
@@ -202,16 +203,14 @@ const SingleMoment = (props) => {
               >
                 <EditablePreview py={2} px={4} />
                 <EditableTextarea
+                  // style this so the border isn't so huge
                   w="100%"
                   py={2}
                   px={4}
                   resize="none"
                   rows={8}
                   maxLength={260}
-                  isInvalid
-                  // onKeyDown={onEnterPress}
-                  // overflowWrap="break-word"
-                  // as={Textarea}
+                  onChange={(e) => setCount(e.target.value.length)}
                 />
                 <EditableControls />
               </Editable>
@@ -224,16 +223,29 @@ const SingleMoment = (props) => {
               >
                 you were {vibeMsgSelector(moment.vibe)}
               </Text>
-              <HStack>
-                <Text
-                  fontSize="0.75rem"
-                  color="gray"
-                  w="100%"
-                  align="left"
-                  p="16px"
-                >
-                  {dateFormatted.toLowerCase()}
-                </Text>
+              <HStack justifyContent="space-between">
+                <Flex flexGrow={2}>
+                  <Text
+                    fontSize="0.75rem"
+                    color="gray"
+                    w="100%"
+                    align="left"
+                    p="16px"
+                  >
+                    {dateFormatted.toLowerCase()}
+                  </Text>
+                </Flex>
+                <Flex flexGrow={1}>
+                  <Text
+                    fontSize="0.75rem"
+                    color="gray"
+                    w="100%"
+                    align="right"
+                    p="16px"
+                  >
+                    {count}/260
+                  </Text>
+                </Flex>
               </HStack>
             </Box>
           </VStack>

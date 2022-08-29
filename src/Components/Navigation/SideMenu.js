@@ -15,7 +15,7 @@ function SideMenu() {
   return (
     <Container >
       <Box
-        bg={useColorModeValue("gray.300", "black")}
+        bg={useColorModeValue("gray.300", "#0a0f1c")}
         px={4}
         py={2}
         pb={5}

@@ -4,15 +4,17 @@ import Webcam from "react-webcam";
 import { Box, Button, Text } from "@chakra-ui/react";
 import axios from "axios";
 
-const Cam = () => {
+const Cam = (props) => {
   const camera = useRef(null);
   const [image, setImage] = useState(null);
-
+  const { setJournal, today } = props;
   async function handleSubmit(img) {
     try {
       const body = { img };
       const { data } = await axios.post("/", body);
       console.log(data.fullTextAnnotation.text);
+      console.log(props)
+      setJournal({content: data.fullTextAnnotation.text, date: today})
     } catch (e) {
       console.error(e);
     }

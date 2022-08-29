@@ -18,6 +18,8 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
+app.use(express.static(path.join(__dirname, "build")));
+
 app.use((req, res, next) => {
   if (path.extname(req.path).length) {
     const err = new Error("Not found");
@@ -34,8 +36,12 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || "Internal server error.");
 });
 
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 app.post("/", async (req, res, next) => {
-  const filepath = base64Img.imgSync(req.body.img, "server/imgFiles", "test");
+  const filepath = base64Img.imgSync(req.body.img, "./imgFiles", "test");
   const [result] = await client.documentTextDetection(filepath);
   const fullTextAnnotation = result.fullTextAnnotation;
   console.log(`Full text: ${fullTextAnnotation.text}`);

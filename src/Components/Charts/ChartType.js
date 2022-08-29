@@ -9,19 +9,12 @@ import {
 } from "@chakra-ui/react";
 
 const ChartType = (props) => {
-  const { type, setType } = props;
+  const { type, setType, setEntryId } = props;
   const [active, setActive] = useState("moments");
-
-  const handleChange = (type) => {
-    if (type === "moments") {
-      setType("journals");
-    } else {
-      setType("moments");
-    }
-  };
 
   const handleClick = (e, val) => {
     // e.preventDefault();
+    setEntryId(0)
     if (val === "moments") {
       setType("moments");
       setActive("moments");

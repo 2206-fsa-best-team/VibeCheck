@@ -10,19 +10,24 @@ import {
 import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
 
 const VibesLineGraph = (props) => {
+  const {setEntryId} = props
+
   const dataType = (props) => {
     if (props.type === "moments") {
       const { moments } = props;
       return moments;
     } else if (props.type === "journals") {
-      const { journals } = props;
+      const { journals } = props
       return journals;
     }
   };
 
-  const CustomTooltip = ({ payload, label, active, color }) => {
-    // console.log('payload',payload[0])
+  const CustomTooltip = (data) => {
+    const { payload, label, active, color, content } = data
+    console.log(content)
     if (active) {
+      console.log('expected',payload[0].payload.id)
+      content.props.setEntryId(payload[0].payload.id)
       return (
         <Box
           h={"28px"}
@@ -31,6 +36,7 @@ const VibesLineGraph = (props) => {
           borderRadius={"xl"}
           bg={color}
           borderColor={"black"}
+
         >
           <Text>{`vibe: ${payload[0].value}`}</Text>
         </Box>
@@ -64,8 +70,9 @@ const VibesLineGraph = (props) => {
             />
             <Tooltip
               content={
-                <CustomTooltip color={useColorModeValue("white", "tomato")} />
+                <CustomTooltip color={useColorModeValue("white", "tomato")} setEntryId={setEntryId}/>
               }
+
             />
             <XAxis
               label={

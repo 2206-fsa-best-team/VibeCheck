@@ -24,7 +24,7 @@ export default function Navbar(props) {
 
   return (
     <Box
-      bg={useColorModeValue("tomato", "black")}
+      bg={useColorModeValue("tomato", "#0a0f1c")}
       px={4}
       pos={"fixed"}
       w={"100%"}

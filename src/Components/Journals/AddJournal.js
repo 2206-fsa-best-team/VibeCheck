@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { supabase } from "../../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
-import Cam from "../Camera"
+import Cam from "../Camera";
 import {
   Button,
   Input,
@@ -10,6 +10,15 @@ import {
   Stack,
   Text,
   Textarea,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Highlight,
 } from "@chakra-ui/react";
 import MoodSlider from "../Buttons/Slider";
 
@@ -20,6 +29,7 @@ const AddJournal = () => {
   const today = todayUtc.toISOString().split("T")[0];
   const [sliderValue, setSliderValue] = useState(50);
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [value, setValue] = React.useState("");
   const [journal, setJournal] = useState({
     content: "",
     date: today,
@@ -27,6 +37,7 @@ const AddJournal = () => {
   const { content, date } = journal;
   let navigate = useNavigate();
   const user = supabase.auth.user();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   async function createJournal() {
     setSubmitLoading(true);
@@ -48,6 +59,61 @@ const AddJournal = () => {
       throw error;
     }
   }
+
+  let handleInputChange = (e) => {
+    let inputValue = e.target.value;
+    setValue(inputValue);
+  };
+
+  const CheckConf = (all) => {
+    let lowConf = [];
+    all.pages.forEach((page) => {
+      page.blocks.forEach((block) => {
+        block.paragraphs.forEach((paragraph) => {
+          paragraph.words.forEach((word) => {
+            const wordText = word.symbols.map((s) => s.text).join("");
+            if (word.confidence < 0.75) {
+              lowConf.push(wordText);
+            }
+            // console.log(`Word text: ${wordText}`);
+            // console.log(`Word confidence: ${word.confidence}`);
+          });
+        });
+      });
+    });
+    let text = all.text;
+    onOpen();
+    console.log("running");
+    return (
+      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            please review the highlighted sections below to confirm accurate
+            input
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Textarea value={value} onChange={handleInputChange} size="lg">
+              {/* <Highlight
+                query={lowConf}
+                styles={{ px: "2", py: "1", bg: "tomato.100" }}
+              > */}
+              {text}
+              {/* </Highlight> */}
+            </Textarea>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={setJournal(value)}>
+              Save
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    );
+  };
 
   return (
     <Stack spacing={5} px="24px" display="flex">
@@ -86,7 +152,7 @@ const AddJournal = () => {
           </Button>
         </>
       )}
-      <Cam setJournal={setJournal} today={today}/>
+      <Cam setJournal={setJournal} CheckConf={CheckConf} today={today} />
     </Stack>
   );
 };

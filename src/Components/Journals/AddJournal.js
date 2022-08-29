@@ -20,6 +20,7 @@ import {
   useDisclosure,
   Highlight,
 } from "@chakra-ui/react";
+import { HighlightWithinTextarea } from "react-highlight-within-textarea";
 import MoodSlider from "../Buttons/Slider";
 
 const AddJournal = () => {
@@ -60,12 +61,8 @@ const AddJournal = () => {
     }
   }
 
-  let handleInputChange = (e) => {
-    let inputValue = e.target.value;
-    setValue(inputValue);
-  };
-
   const CheckConf = (all) => {
+    const onChange = (value) => setValue(value);
     let lowConf = [];
     all.pages.forEach((page) => {
       page.blocks.forEach((block) => {
@@ -81,11 +78,15 @@ const AddJournal = () => {
         });
       });
     });
-    let text = all.text;
     onOpen();
     console.log("running");
     return (
-      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        closeOnOverlayClick={false}
+        isOpen={isOpen}
+        onClose={onClose}
+        size={"xl"}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
@@ -94,14 +95,11 @@ const AddJournal = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Textarea value={value} onChange={handleInputChange} size="lg">
-              {/* <Highlight
-                query={lowConf}
-                styles={{ px: "2", py: "1", bg: "tomato.100" }}
-              > */}
-              {text}
-              {/* </Highlight> */}
-            </Textarea>
+            <HighlightWithinTextarea
+              value={value}
+              highlight={lowConf}
+              onChange={onChange}
+            />
           </ModalBody>
 
           <ModalFooter>
@@ -152,7 +150,12 @@ const AddJournal = () => {
           </Button>
         </>
       )}
-      <Cam setJournal={setJournal} CheckConf={CheckConf} today={today} />
+      <Cam
+        setJournal={setJournal}
+        CheckConf={CheckConf}
+        setValue={setValue}
+        today={today}
+      />
     </Stack>
   );
 };

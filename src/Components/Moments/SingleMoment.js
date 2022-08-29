@@ -32,7 +32,7 @@ const SingleMoment = (props) => {
   let [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const { momentId } = useParams();
-  console.log(momentId)
+  console.log(momentId);
   useEffect(() => {
     fetchMoment();
   }, []);
@@ -210,6 +210,7 @@ const SingleMoment = (props) => {
                   resize="none"
                   rows={8}
                   maxLength={260}
+                  overflowWrap="word-break"
                   onChange={(e) => setCount(e.target.value.length)}
                 />
                 <EditableControls />

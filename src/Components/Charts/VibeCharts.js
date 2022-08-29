@@ -7,6 +7,7 @@ import NoDataGraph from "./NoDataGraph";
 import ChartFilter from "./ChartFilter";
 import DateObject from "react-date-object";
 import ChartType from "./ChartType";
+import SingleMoment from "../Moments/SingleMoment";
 
 const VibeCharts = (props) => {
   const [moments, setMoments] = useState([]);
@@ -16,6 +17,7 @@ const VibeCharts = (props) => {
   const todaysDate = new DateObject();
   const [filterDate, setFilterDate] = useState("2010-08-05 00:00:00");
   const [type, setType] = useState("moments");
+  const [entryId, setEntryId] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -23,7 +25,8 @@ const VibeCharts = (props) => {
     fetchMoments();
     fetchJournals();
     setLoading(false);
-  }, [filter, filterDate]);
+    console.log(entryId)
+  }, [filter, filterDate, entryId]);
 
   const dateFilter = async (val) => {
     let day = todaysDate.day;
@@ -92,7 +95,7 @@ const VibeCharts = (props) => {
       ) : (
         <>
           <br />
-          <ChartFilter setFilter={setFilter} filter={filter} />
+          <ChartFilter setFilter={setFilter} filter={filter} setEntryId={setEntryId} />
           <br />
           {type === "moments" ? (
             <Container
@@ -106,7 +109,11 @@ const VibeCharts = (props) => {
               {moments.length < 2 ? (
                 <NoDataGraph location={"moment"} />
               ) : (
-                <VibesLineGraph moments={moments} type={"moments"} />
+                <VibesLineGraph
+                  moments={moments}
+                  type={"moments"}
+                  setEntryId={setEntryId}
+                />
               )}
             </Container>
           ) : (
@@ -123,14 +130,29 @@ const VibeCharts = (props) => {
                   <NoDataGraph location={"journal"} />
                 </>
               ) : (
-                <VibesLineGraph journals={journals} type={"journals"} />
+                <VibesLineGraph
+                  journals={journals}
+                  type={"journals"}
+                  setEntryId={setEntryId}
+                />
               )}
             </Container>
           )}
         </>
       )}
-      <br/>
-      <ChartType type={type} setType={setType} />
+      <br />
+      <ChartType type={type} setType={setType} setEntryId={setEntryId} />
+
+      {type === "moments" && entryId !== 0 ? (
+        <SingleMoment momentId={entryId} />
+      ) : (
+        <></>
+      )}
+      {type === "journals" && entryId !== 0 ? (
+        <>{/*SingleJournal journalId={entryId} */}</>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

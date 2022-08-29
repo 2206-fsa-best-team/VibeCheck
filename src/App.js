@@ -10,7 +10,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import ErrorPage from "./Components/ErrorPages/ErrorPage";
 import AddMoment from "./Components/Moments/AddMoment";
 import { Box, Show } from "@chakra-ui/react";
-import WelcomeProfile from "./Components/Login/WelcomeProfile"
+import WelcomeProfile from "./Components/Login/WelcomeProfile";
 import SideMenu from "./Components/Navigation/SideMenu";
 import SettingsScreen from "./Components/Settings/SettingsScreen";
 import Cam from "./Components/Camera";
@@ -44,18 +44,13 @@ function App() {
           <Show above="lg">
             <SideMenu />
           </Show>
-          <Box mt={16} ml={{ base: "0", lg: "20%" }}>
+          <Box mt={16} ml={{ base: "0", lg: "20%" }} mb={20} zIndex={-1}>
             <Routes>
               <Route path="/" element={<Navigate to="/moments" />} />
               <Route path="/moments/:momentId" element={<SingleMoment />} />
               <Route path="/moments" element={<Moments />} />
               <Route path="/journals" element={<Journals />} />
-              <Route
-                path="/vibes"
-                element={
-                  <VibeCharts />
-                }
-              />
+              <Route path="/vibes" element={<VibeCharts />} />
               <Route path="/addamoment" element={<AddMoment />} />
               <Route path="/addajournal" element={<AddJournal />} />
               <Route path="/settings" element={<SettingsScreen />} />

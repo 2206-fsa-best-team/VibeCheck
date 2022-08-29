@@ -51,6 +51,16 @@ const AddJournal = () => {
 
   return (
     <Stack spacing={5} px="24px" display="flex">
+      {/* date input */}
+      <Text mt="32px" ml="8px" fontSize={"24px"}>
+        date:
+      </Text>
+      <Input
+        type="date"
+        value={date}
+        max={today}
+        onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
+      />
       {/* content input */}
       <Text mt="32px" ml="8px" fontSize={"24px"}>
         what's going on?
@@ -63,16 +73,6 @@ const AddJournal = () => {
         resize="vertical"
         placeholder="write your journal here"
         size="lg"
-      />
-      {/* date input */}
-      <Text mt="32px" ml="8px" fontSize={"24px"}>
-        date:
-      </Text>
-      <Input
-        type="date"
-        value={date}
-        max={today}
-        onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
       />
       {/* vibe input */}
       <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />

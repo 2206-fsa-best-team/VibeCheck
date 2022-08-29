@@ -28,7 +28,7 @@ function MoodSlider(props) {
       </Highlight>
       <Slider
         aria-label="vibe-check-slider"
-        onChangeEnd={(val) => setSliderValue(val)}
+        onChange={(val) => setSliderValue(val)}
         name="vibe"
         defaultValue={50}
       >

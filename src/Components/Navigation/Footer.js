@@ -7,8 +7,8 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
-import { MdFormatListBulleted} from "react-icons/md";
-import {BiLineChart} from 'react-icons/bi'
+import { MdFormatListBulleted } from "react-icons/md";
+import { BiLineChart } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -21,6 +21,7 @@ function Footer() {
       pos={"fixed"}
       bottom={0}
       w={"100%"}
+      zIndex={999}
     >
       <Flex align={"space-between"} h={10}>
         <Spacer />

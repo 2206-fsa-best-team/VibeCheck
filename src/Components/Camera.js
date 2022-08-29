@@ -7,13 +7,13 @@ import axios from "axios";
 const Cam = (props) => {
   const camera = useRef(null);
   const [image, setImage] = useState(null);
-  const { setJournal, CheckConf, today, setValue } = props;
+  const { /* setJournal, today, */ setAllText } = props;
   async function handleSubmit(img) {
     try {
       const body = { img };
       const { data } = await axios.post("/", body);
-      setValue(data.fullTextAnnotation.text);
-      CheckConf(data.fullTextAnnotation);
+      setAllText(data.fullTextAnnotation);
+
       //setJournal({ content: data.fullTextAnnotation.text, date: today });
     } catch (e) {
       console.error(e);

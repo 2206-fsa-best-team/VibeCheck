@@ -10,18 +10,9 @@ import {
   Stack,
   Text,
   Textarea,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Highlight,
 } from "@chakra-ui/react";
-import { HighlightWithinTextarea } from "react-highlight-within-textarea";
 import MoodSlider from "../Buttons/Slider";
+import CheckConf from "./CheckConf";
 
 const AddJournal = () => {
   let todayUtc = new Date();
@@ -30,15 +21,14 @@ const AddJournal = () => {
   const today = todayUtc.toISOString().split("T")[0];
   const [sliderValue, setSliderValue] = useState(50);
   const [submitLoading, setSubmitLoading] = useState(false);
-  const [value, setValue] = React.useState("");
   const [journal, setJournal] = useState({
     content: "",
     date: today,
   });
+  const [allText, setAllText] = useState({});
   const { content, date } = journal;
   let navigate = useNavigate();
   const user = supabase.auth.user();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   async function createJournal() {
     setSubmitLoading(true);
@@ -61,58 +51,6 @@ const AddJournal = () => {
     }
   }
 
-  const CheckConf = (all) => {
-    const onChange = (value) => setValue(value);
-    let lowConf = [];
-    all.pages.forEach((page) => {
-      page.blocks.forEach((block) => {
-        block.paragraphs.forEach((paragraph) => {
-          paragraph.words.forEach((word) => {
-            const wordText = word.symbols.map((s) => s.text).join("");
-            if (word.confidence < 0.75) {
-              lowConf.push(wordText);
-            }
-            // console.log(`Word text: ${wordText}`);
-            // console.log(`Word confidence: ${word.confidence}`);
-          });
-        });
-      });
-    });
-    onOpen();
-    console.log("running");
-    return (
-      <Modal
-        closeOnOverlayClick={false}
-        isOpen={isOpen}
-        onClose={onClose}
-        size={"xl"}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            please review the highlighted sections below to confirm accurate
-            input
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <HighlightWithinTextarea
-              value={value}
-              highlight={lowConf}
-              onChange={onChange}
-            />
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={setJournal(value)}>
-              Save
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    );
-  };
-
   return (
     <Stack spacing={5} px="24px" display="flex">
       {/* date input */}
@@ -125,6 +63,7 @@ const AddJournal = () => {
         max={today}
         onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
       />
+
       {/* content input */}
       <Text mt="32px" ml="8px" fontSize={"24px"}>
         what's going on?
@@ -138,6 +77,18 @@ const AddJournal = () => {
         placeholder="write your journal here"
         size="lg"
       />
+
+      {/* modal popup */}
+      {allText.text ? (
+        <CheckConf
+          allText={allText}
+          setJournal={setJournal}
+          setAllText={setAllText}
+        />
+      ) : (
+        <></>
+      )}
+
       {/* vibe input */}
       <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
       <div>{/* spacing div */}</div>
@@ -150,12 +101,7 @@ const AddJournal = () => {
           </Button>
         </>
       )}
-      <Cam
-        setJournal={setJournal}
-        CheckConf={CheckConf}
-        setValue={setValue}
-        today={today}
-      />
+      <Cam setJournal={setJournal} setAllText={setAllText} today={today} />
     </Stack>
   );
 };

@@ -44,7 +44,7 @@ function App() {
           <Show above="lg">
             <SideMenu />
           </Show>
-          <Box mt={16} ml={{ base: "0", lg: "20%" }} mb={20}>
+          <Box mt={16} ml={{ base: "0", lg: "20%" }} mb={20} zIndex={-1}>
             <Routes>
               <Route path="/" element={<Navigate to="/moments" />} />
               <Route path="/moments/:momentId" element={<SingleMoment />} />

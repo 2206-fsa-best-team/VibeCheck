@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import Cam from "../Camera";
@@ -21,6 +21,7 @@ const AddJournal = () => {
   const today = todayUtc.toISOString().split("T")[0];
   const [sliderValue, setSliderValue] = useState(50);
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
   const [journal, setJournal] = useState({
     content: "",
     date: today,
@@ -85,6 +86,7 @@ const AddJournal = () => {
           allText={allText}
           setJournal={setJournal}
           setAllText={setAllText}
+          setModalLoading={setModalLoading}
         />
       ) : (
         <></>
@@ -94,7 +96,11 @@ const AddJournal = () => {
       <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
       {showCamera ? (
         <>
-          <Cam setJournal={setJournal} setAllText={setAllText} today={today} />
+          <Cam
+            setAllText={setAllText}
+            setModalLoading={setModalLoading}
+            modalLoading={modalLoading}
+          />
           <Text mt="32px" ml="8px" fontSize={"24px"}>
             change your mind?
           </Text>

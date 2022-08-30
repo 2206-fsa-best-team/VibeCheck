@@ -39,16 +39,16 @@ app.post("/", async (req, res, next) => {
     const filepath = base64Img.imgSync(req.body.img, "server/imgFiles", "test");
     const [result] = await client.documentTextDetection(filepath);
     const fullTextAnnotation = result.fullTextAnnotation;
-    console.log(`Full text: ${fullTextAnnotation.text}`);
+    // console.log(`Full text: ${fullTextAnnotation.text}`);
     fullTextAnnotation.pages.forEach((page) => {
       page.blocks.forEach((block) => {
-        console.log(`Block confidence: ${block.confidence}`);
+        // console.log(`Block confidence: ${block.confidence}`);
         block.paragraphs.forEach((paragraph) => {
-          console.log(`Paragraph confidence: ${paragraph.confidence}`);
+          // console.log(`Paragraph confidence: ${paragraph.confidence}`);
           paragraph.words.forEach((word) => {
             const wordText = word.symbols.map((s) => s.text).join("");
-            console.log(`Word text: ${wordText}`);
-            console.log(`Word confidence: ${word.confidence}`);
+            // console.log(`Word text: ${wordText}`);
+            // console.log(`Word confidence: ${word.confidence}`);
           });
         });
       });

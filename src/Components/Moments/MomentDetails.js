@@ -17,13 +17,17 @@ import FloatingEdit from "../Buttons/FloatingEdit";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { vibeMsgSelector } from "../Helpers/vibeMsgSelector";
 
+let startingContent = "";
+
 const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
-  let startingContent = moment.content;
+  // console.log("startingContent TOP:", startingContent);
   const [count, setCount] = useState(moment.content.length);
   const { momentId } = useParams();
 
   useEffect(() => {
+    // console.log("moment", moment);
     startingContent = moment.content;
+    // console.log("startingContent useEffect:", startingContent);
   }, []);
 
   async function editMomentContent(e) {
@@ -52,15 +56,21 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
   date._format = "MMM D, YYYY - h:mm a";
   const dateFormatted = date.format();
 
-  const handleEdit = (e) => {
-    // may want to rename 'e' to 'newContent' or something
-    setMoment({ ...moment, content: e });
-    startingContent = e;
-    editMomentContent(e);
+  const handleEdit = (newValue) => {
+    setMoment({ ...moment, content: newValue });
+    startingContent = newValue;
+    // console.log("startingContent SUBMIT:", startingContent);
+    editMomentContent(newValue);
   };
 
   const handleCancel = () => {
     setCount(startingContent.length);
+    // console.log("startingContent CANCEL:", startingContent);
+  };
+
+  const handleChange = (e) => {
+    setCount(e.target.value.length);
+    setMoment({ ...moment, content: e.target.value });
   };
 
   //// additional elements for editing
@@ -92,10 +102,11 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
       <Editable
         w="100%"
         align="left"
-        defaultValue={startingContent ? startingContent : "moment is empty"}
+        defaultValue={moment.content}
+        placeholder="moment is empty"
         isPreviewFocusable={false}
         selectAllOnFocus={false}
-        onSubmit={(e) => handleEdit(e)}
+        onSubmit={(newvalue) => handleEdit(newvalue)}
         onCancel={() => handleCancel()}
       >
         <EditablePreview py={2} px={4} overflowWrap="anywhere" />
@@ -107,7 +118,9 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
           resize="none"
           rows={8}
           maxLength={260}
-          onChange={(e) => setCount(e.target.value.length)}
+          value={moment.content}
+          onChange={(e) => handleChange(e)}
+          // onChange={(e) => setMoment(e)}
         />
         <EditableControls />
       </Editable>

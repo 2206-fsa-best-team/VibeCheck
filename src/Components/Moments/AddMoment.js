@@ -18,8 +18,8 @@ const AddMoment = () => {
   let navigate = useNavigate();
   const user = supabase.auth.user();
   const [sliderValue, setSliderValue] = useState(50);
-  const handleChange = () => {
-    setCount(moment.content.length);
+  const handleChange = (evt) => {
+    setCount(evt.target.value.length);
   };
 
   async function createMoment() {
@@ -46,7 +46,7 @@ const AddMoment = () => {
   return (
     <>
       <Stack px="24px" display="flex">
-        <Text pb='16px' mt="32px" ml="8px" fontSize={"24px"}>
+        <Text pb="16px" mt="32px" ml="8px" fontSize={"24px"}>
           how's your moment?
         </Text>
         <Textarea
@@ -55,8 +55,9 @@ const AddMoment = () => {
           value={content}
           onChange={(evt) => {
             setMoment({ ...moment, content: evt.target.value });
-            setCount(moment.content.length);
+            handleChange(evt);
           }}
+          maxLength={260}
         />
         <Text fontSize="0.75rem" color="gray" w="100%" align="right" pr="16px">
           {count}/260
@@ -68,7 +69,6 @@ const AddMoment = () => {
             size="1.75rem"
             color="tomato"
             align="center"
-
           />
         ) : (
           <>

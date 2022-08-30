@@ -25,6 +25,13 @@ const VibeCharts = (props) => {
     vibe: 0,
     created_at: Date(),
   });
+  const [journal, setJournal] = useState({
+    id: null,
+    content: "",
+    vibe: 0,
+    created_at: Date(),
+    date: Date(),
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -139,7 +146,7 @@ const VibeCharts = (props) => {
               align={"center"}
               px={"20px"}
             >
-              <Text fontSize={"2xl"}>journal-to-journal vibes</Text>
+              <Text fontSize={"2xl"}>entry-to-entry vibes</Text>
               {journals.length < 2 ? (
                 <>
                   <NoDataGraph location={"journal"} />
@@ -149,6 +156,7 @@ const VibeCharts = (props) => {
                   journals={journals}
                   type={"journals"}
                   setEntryId={setEntryId}
+                  setJournal={setJournal}
                 />
               )}
             </Container>
@@ -160,16 +168,21 @@ const VibeCharts = (props) => {
 
       {type === "moments" && entryId !== 0 ? (
         <>
-        <br/>
-        <Box align='center' px="16px" onClick={() => navToMoment(moment.id)}>
-          <MomentCard moment={moment} />
+          <br />
+          <Box align="center" px="16px" onClick={() => navToMoment(moment.id)}>
+            <MomentCard moment={moment} />
           </Box>
         </>
       ) : (
         <></>
       )}
       {type === "journals" && entryId !== 0 ? (
-        <>{/*SingleJournal journalId={entryId} */}</>
+        <>
+          <br />
+          <Box align="center" px="16px" onClick={() => navToMoment(journal.id)}>
+            {/* <JournalEntryCard journal={journal} /> */}
+          </Box>
+        </>
       ) : (
         <></>
       )}

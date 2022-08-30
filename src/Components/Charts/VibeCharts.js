@@ -68,6 +68,9 @@ const VibeCharts = (props) => {
   const navToMoment = (id) => {
     navigate(`/moments/${id}`);
   };
+  const navToJournal = (id) => {
+    navigate(`/journals/${id}`);
+  };
 
   async function fetchMoments() {
     try {
@@ -179,7 +182,7 @@ const VibeCharts = (props) => {
       {type === "journals" && entryId !== 0 ? (
         <>
           <br />
-          <Box align="center" px="16px" onClick={() => navToMoment(journal.id)}>
+          <Box align="center" px="16px" onClick={() => navToJournal(journal.id)}>
             {/* <JournalEntryCard journal={journal} /> */}
           </Box>
         </>

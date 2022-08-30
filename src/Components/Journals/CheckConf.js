@@ -14,7 +14,7 @@ import {
 import { HighlightWithinTextarea } from "react-highlight-within-textarea";
 
 const CheckConf = (props) => {
-  const { allText, setJournal, setAllText } = props;
+  const { allText, setJournal, setAllText, setModalLoading } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState("");
   const onChange = (value) => {
@@ -35,7 +35,7 @@ const CheckConf = (props) => {
       });
     });
   });
-  console.log(textStr);
+  setModalLoading(false)
   useEffect(() => {
     setValue(textStr);
     onOpen();

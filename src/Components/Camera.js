@@ -1,20 +1,19 @@
 import React from "react";
 import { useState, useRef } from "react";
 import Webcam from "react-webcam";
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, CircularProgress, Text } from "@chakra-ui/react";
 import axios from "axios";
 
 const Cam = (props) => {
   const camera = useRef(null);
   const [image, setImage] = useState(null);
-  const { /* setJournal, today, */ setAllText } = props;
+  const { setAllText, modalLoading, setModalLoading } = props;
   async function handleSubmit(img) {
     try {
+      setModalLoading(true);
       const body = { img };
       const { data } = await axios.post("/", body);
       setAllText(data.fullTextAnnotation);
-
-      //setJournal({ content: data.fullTextAnnotation.text, date: today });
     } catch (e) {
       console.error(e);
     }
@@ -48,9 +47,13 @@ const Cam = (props) => {
             >
               <Text color="black">retake photo</Text>
             </Button>
-            <Button onClick={() => handleSubmit(image)} colorScheme={"teal"}>
-              <Text color="black">convert to text</Text>
-            </Button>
+            {modalLoading ? (
+              <CircularProgress isIndeterminate size="1.75rem" color="tomato" />
+            ) : (
+              <Button onClick={() => handleSubmit(image)} colorScheme={"teal"}>
+                <Text color="black">convert to text</Text>{" "}
+              </Button>
+            )}
           </>
         )}
       </Box>

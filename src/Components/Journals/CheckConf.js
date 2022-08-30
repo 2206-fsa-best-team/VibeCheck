@@ -41,7 +41,6 @@ const CheckConf = (props) => {
     onOpen();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
-  console.log("running");
   return (
     <Modal
       closeOnOverlayClick={false}
@@ -72,7 +71,6 @@ const CheckConf = (props) => {
             colorScheme="teal"
             mr={3}
             onClick={() => {
-              console.log("value: ", value);
               setJournal({ content: value });
               setAllText({});
               onClose();

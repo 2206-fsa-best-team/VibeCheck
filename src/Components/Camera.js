@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import { Box, Button, Text } from "@chakra-ui/react";
 import axios from "axios";

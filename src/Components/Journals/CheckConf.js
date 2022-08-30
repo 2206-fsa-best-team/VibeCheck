@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import {
   Button,
+  Box,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HighlightWithinTextarea } from "react-highlight-within-textarea";
@@ -20,31 +20,24 @@ const CheckConf = (props) => {
   const onChange = (value) => {
     setValue(value);
   };
-  let lowConf = [];
+  let textStr = "";
   allText.pages.forEach((page) => {
     page.blocks.forEach((block) => {
       block.paragraphs.forEach((paragraph) => {
         paragraph.words.forEach((word) => {
-          const wordText = word.symbols.map((s) => s.text).join("");
-          if (word.confidence < 0.75) {
-            lowConf.push("*" + wordText + "*");
-            // TO BE IMPLEMENTED
-            // instead of push all the low conf words to an array, wrap them in *s
-            // and make the highlighter look for *s that way the user can delete the stars
-            // and the highlighting will go away
-
-            // probably need to do some fancier stuff in the forEach loops above
-            // see line 28 for inspo
+          if (word.confidence < 0.75 && word.symbols[0].text !== "*") {
+            word.symbols.unshift({ text: "*" });
+            word.symbols.push({ text: "*" });
           }
-          // console.log(`Word text: ${wordText}`);
-          // console.log(`Word confidence: ${word.confidence}`);
+          const wordText = word.symbols.map((s) => s.text).join("");
+          textStr += wordText + " ";
         });
       });
     });
   });
-
+  console.log(textStr);
   useEffect(() => {
-    setValue(allText.text);
+    setValue(textStr);
     onOpen();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
@@ -62,11 +55,16 @@ const CheckConf = (props) => {
           please review the highlighted sections below to confirm accurate input
         </ModalHeader>
         <ModalBody pb={6}>
-          <HighlightWithinTextarea
-            value={value}
-            highlight={"*"}
-            onChange={onChange}
-          />
+          words wrapped in *s are the most likely inaccuracies, correct any
+          mistakes (or leave it be if it is right) and delete the *s so they
+          don't show up in your journal!
+          <Box borderWidth='1px' borderRadius='lg' p={2} mt={2}>
+            <HighlightWithinTextarea
+              value={value}
+              highlight={"*"}
+              onChange={onChange}
+            />
+          </Box>
         </ModalBody>
 
         <ModalFooter>
@@ -75,7 +73,7 @@ const CheckConf = (props) => {
             mr={3}
             onClick={() => {
               console.log("value: ", value);
-              setJournal(value);
+              setJournal({ content: value });
               setAllText({});
               onClose();
             }}

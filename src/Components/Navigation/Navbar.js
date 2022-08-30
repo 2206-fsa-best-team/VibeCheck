@@ -81,7 +81,9 @@ export default function Navbar(props) {
                     </Center>
                     <br />
                     <MenuDivider />
-                    <MenuItem>testing</MenuItem>
+                    <Link to="/about">
+                      <MenuItem>About Us</MenuItem>
+                    </Link>
                     <Link to="/settings">
                       <MenuItem>Settings</MenuItem>
                     </Link>

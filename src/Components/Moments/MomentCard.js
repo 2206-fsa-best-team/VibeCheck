@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { VStack, Box, Skeleton } from "@chakra-ui/react";
 import MomentDetails from "./MomentDetails";
 import { colorSelector } from "../Helpers/colorChanger";

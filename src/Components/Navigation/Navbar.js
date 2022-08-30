@@ -17,10 +17,26 @@ import {
 import { supabase } from "../../server/supabaseClient";
 import { Link } from "react-router-dom";
 import LightDarkButton from "../Buttons/LightDarkButton";
+import { useEffect, useState } from "react";
 
 export default function Navbar(props) {
   const { onOpen, onClose } = useDisclosure();
+  const [user, setUser] = useState({});
   const { isLoggedIn } = props;
+  const name = user.email || "";
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  async function fetchUser() {
+    try {
+      const person = supabase.auth.user();
+      setUser(person);
+    } catch (error) {
+      console.error(error.error_description || error.message);
+    }
+  }
 
   return (
     <Box
@@ -46,11 +62,7 @@ export default function Navbar(props) {
                   minW={0}
                   onClick={onOpen}
                 >
-                  <Avatar
-                    size={"sm"}
-                    name={/*username goes here */ "Evan Barden"}
-                    src={/*user profile pic could go here */ ""}
-                  />
+                  <Avatar size={"sm"} name={name} src="" />
                 </MenuButton>
                 <Portal>
                   <MenuList
@@ -61,11 +73,11 @@ export default function Navbar(props) {
                   >
                     <br />
                     <Center>
-                      <Avatar size={"2xl"} name={"Evan Barden"} src={""} />
+                      <Avatar size={"2xl"} name={name} src={""} />
                     </Center>
                     <br />
                     <Center>
-                      <p>"this.state.username"</p>
+                      <p>{name}</p>
                     </Center>
                     <br />
                     <MenuDivider />

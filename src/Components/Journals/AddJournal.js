@@ -26,6 +26,7 @@ const AddJournal = () => {
     date: today,
   });
   const [allText, setAllText] = useState({});
+  const [showCamera, setShowCamera] = useState(false);
   const { content, date } = journal;
   let navigate = useNavigate();
   const user = supabase.auth.user();
@@ -91,17 +92,38 @@ const AddJournal = () => {
 
       {/* vibe input */}
       <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
-      <div>{/* spacing div */}</div>
+      {showCamera ? (
+        <>
+          <Cam setJournal={setJournal} setAllText={setAllText} today={today} />
+          <Text mt="32px" ml="8px" fontSize={"24px"}>
+            change your mind?
+          </Text>
+          <Button onClick={() => setShowCamera(false)} bg="tomato">
+            close camera
+          </Button>
+        </>
+      ) : (
+        <>
+          <Text mt="32px" ml="8px" fontSize={"24px"}>
+            have a hand-written journal you want to add?
+          </Text>
+          <Button onClick={() => setShowCamera(true)} bg="tomato">
+            open camera
+          </Button>
+        </>
+      )}
       {submitLoading ? (
         <CircularProgress isIndeterminate size="1.75rem" color="tomato" />
       ) : (
         <>
+          <Text mt="32px" ml="8px" fontSize={"24px"}>
+            all set?
+          </Text>
           <Button onClick={createJournal} colorScheme="teal">
-            add this journal
+            add this journal!
           </Button>
         </>
       )}
-      <Cam setJournal={setJournal} setAllText={setAllText} today={today} />
     </Stack>
   );
 };

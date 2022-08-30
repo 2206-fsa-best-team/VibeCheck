@@ -1,64 +1,39 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import {
-  VStack,
-  HStack,
-  Text,
-  Box,
-  Skeleton,
-  Stack,
-  EditablePreview,
-  IconButton,
-  ButtonGroup,
-  useEditableControls,
-  Editable,
-  EditableInput,
-  EditableTextarea,
-  Textarea,
-  Flex,
-} from "@chakra-ui/react";
-import DateObject from "react-date-object";
-import FloatingEdit from "../Buttons/FloatingEdit";
+import { VStack } from "@chakra-ui/react";
 import FloatingDelete from "../Buttons/FloatingDelete";
-import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import MomentCard from "./MomentCard";
 
 const SingleMoment = (props) => {
+  const { momentId } = useParams();
   const [moment, setMoment] = useState({
+    id: momentId,
     content: "",
     vibe: null,
     created_at: Date(),
   });
-  let [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
-  const { momentId } = useParams();
-  console.log(momentId);
+  const location = "moment";
+
   useEffect(() => {
-    fetchMoment();
+    // i don't know if there will ever be props?
+    if (props.moment) {
+      let { content, vibe, created_at } = props.moment;
+      initializeMoment(content, vibe, created_at);
+    } else {
+      fetchMoment();
+    }
   }, []);
 
-  function EditableControls() {
-    const {
-      isEditing,
-      getSubmitButtonProps,
-      getCancelButtonProps,
-      getEditButtonProps,
-    } = useEditableControls();
-
-    return isEditing ? (
-      <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
-        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
-        <IconButton
-          icon={<CloseIcon boxSize={3} />}
-          {...getCancelButtonProps()}
-        />
-      </ButtonGroup>
-    ) : (
-      <FloatingEdit location={location} {...getEditButtonProps()} />
-    );
+  function initializeMoment(content, vibe, created_at) {
+    setMoment({
+      ...moment,
+      content,
+      vibe,
+      created_at,
+    });
   }
-
-  let startingContent = moment.content;
 
   async function fetchMoment() {
     try {
@@ -67,196 +42,37 @@ const SingleMoment = (props) => {
         .select()
         .eq("id", momentId)
         .single();
-
       if (error) throw error;
-      console.log("data:", data);
-      setMoment({
-        content: data.content,
-        vibe: data.vibe,
-        created_at: data.created_at,
-      });
-      setCount(data.content.length);
-      startingContent = data.content;
+      let { content, vibe, created_at } = data;
+      initializeMoment(content, vibe, created_at);
     } catch (error) {
       console.error(error.error_description || error.message);
     } finally {
       setLoading(false);
     }
   }
-
-  async function editMomentContent(e) {
-    try {
-      const { error } = await supabase
-        .from("moments")
-        .update({ content: e })
-        .eq("id", momentId);
-
-      if (error) throw error;
-    } catch (error) {
-      console.error(error.error_description || error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  const location = "moment";
-
-  const colorSelector = (vibe) => {
-    switch (true) {
-      case vibe <= 20:
-        return "blue.500";
-      case vibe <= 40 && vibe > 20:
-        return "blue.100";
-      case vibe <= 60 && vibe > 40:
-        return "purple.100";
-      case vibe <= 80 && vibe > 60:
-        return "red.300";
-      case vibe <= 100 && vibe > 80:
-        return "red.600";
-      default:
-        return "green.600";
-    }
-  };
-
-  const vibeMsgSelector = (vibe) => {
-    switch (true) {
-      case vibe <= 20:
-        return "having a tough time";
-      case vibe <= 40 && vibe > 20:
-        return "not at your best";
-      case vibe <= 60 && vibe > 40:
-        return "floating in the middle";
-      case vibe <= 80 && vibe > 60:
-        return "feeling pretty good";
-      case vibe <= 100 && vibe > 80:
-        return "absolutely vibin'";
-      default:
-        return "inconclusive";
-    }
-  };
-
-  // format date from the db for how we want it displayed
-  // console.log("created_at", moment.created_at);
-  let modifiedDate = `${moment.created_at.slice(
-    0,
-    10
-  )} ${moment.created_at.slice(11, 16)}`;
-  let date = new DateObject(modifiedDate);
-  date._format = "MMM D, YYYY - h:mm a";
-  const dateFormatted = date.format();
-
-  const handleEdit = (e) => {
-    // may want to rename 'e' to 'newContent' or something
-    setMoment({ ...moment, content: e });
-    startingContent = e;
-    editMomentContent(e);
-  };
-
-  // const onEnterPress = (e) => {
-  //   if (e.keyCode === 13 && e.shiftKey === false) {
-  //     e.preventDefault();
-  //     console.log("we are here");
-  //     handleEdit(e);
-  //   }
-  // };
 
   return (
-    <>
-      {loading ? (
-        <Stack
-          p="5"
-          m="16px"
-          spacing={"16px"}
-          borderRadius="lg"
-          alignItems="stretch"
-          maxW="700px"
-        >
-          <Skeleton height="60px" />
-        </Stack>
-      ) : (
-        <>
-          <VStack
-            p="5"
-            m="16px"
-            spacing={"16px"}
-            borderRadius="lg"
-            alignItems="stretch"
-            maxW="700px"
-          >
-            <Box
-              maxW="sm"
-              align="stretch"
-              borderWidth="1px"
-              borderRadius="lg"
-              borderTopWidth="4px"
-              borderTopColor={() => colorSelector(moment.vibe)}
-            >
-              <Editable
-                w="100%"
-                align="left"
-                defaultValue={
-                  startingContent ? startingContent : "moment is empty"
-                }
-                isPreviewFocusable={false}
-                selectAllOnFocus={false}
-                onSubmit={(e) => handleEdit(e)}
-              >
-                <EditablePreview py={2} px={4} />
-                <EditableTextarea
-                  // style this so the border isn't so huge
-                  w="100%"
-                  py={2}
-                  px={4}
-                  resize="none"
-                  rows={8}
-                  maxLength={260}
-                  overflowWrap="word-break"
-                  onChange={(e) => setCount(e.target.value.length)}
-                />
-                <EditableControls />
-              </Editable>
-              <Text
-                fontSize="0.75rem"
-                fontStyle="italic"
-                w="100%"
-                align="left"
-                px="16px"
-              >
-                you were {vibeMsgSelector(moment.vibe)}
-              </Text>
-              <HStack justifyContent="space-between">
-                <Flex flexGrow={2}>
-                  <Text
-                    fontSize="0.75rem"
-                    color="gray"
-                    w="100%"
-                    align="left"
-                    p="16px"
-                  >
-                    {dateFormatted.toLowerCase()}
-                  </Text>
-                </Flex>
-                <Flex flexGrow={1}>
-                  <Text
-                    fontSize="0.75rem"
-                    color="gray"
-                    w="100%"
-                    align="right"
-                    p="16px"
-                  >
-                    {count}/260
-                  </Text>
-                </Flex>
-              </HStack>
-            </Box>
-          </VStack>
-        </>
-      )}
+    <VStack
+      p="5"
+      m="16px"
+      spacing={"16px"}
+      borderRadius="lg"
+      alignItems="stretch"
+      maxW="700px"
+    >
+      <MomentCard
+        loading={loading}
+        moment={moment}
+        setMoment={setMoment}
+        setLoading={setLoading}
+        location={location}
+      />
       <FloatingDelete location={location} momentId={moment.id} />
       <br />
       <br />
       <br />
-    </>
+    </VStack>
   );
 };
 

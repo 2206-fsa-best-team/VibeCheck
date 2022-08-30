@@ -46,7 +46,7 @@ app.post("/", async (req, res, next) => {
         block.paragraphs.forEach((paragraph) => {
           // console.log(`Paragraph confidence: ${paragraph.confidence}`);
           paragraph.words.forEach((word) => {
-            const wordText = word.symbols.map((s) => s.text).join("");
+            // const wordText = word.symbols.map((s) => s.text).join("");
             // console.log(`Word text: ${wordText}`);
             // console.log(`Word confidence: ${word.confidence}`);
           });

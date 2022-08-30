@@ -1,4 +1,4 @@
-import { Container, Skeleton } from "@chakra-ui/react";
+import { Box, Container, Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../server/supabaseClient";
 import VibesLineGraph from "./VibesLineGraph";
@@ -7,7 +7,8 @@ import NoDataGraph from "./NoDataGraph";
 import ChartFilter from "./ChartFilter";
 import DateObject from "react-date-object";
 import ChartType from "./ChartType";
-import SingleMoment from "../Moments/SingleMoment";
+import { useNavigate } from "react-router-dom";
+import MomentCard from "../Moments/MomentCard";
 
 const VibeCharts = (props) => {
   const [moments, setMoments] = useState([]);
@@ -18,6 +19,13 @@ const VibeCharts = (props) => {
   const [filterDate, setFilterDate] = useState("2010-08-05 00:00:00");
   const [type, setType] = useState("moments");
   const [entryId, setEntryId] = useState(0);
+  const [moment, setMoment] = useState({
+    id: null,
+    content: "",
+    vibe: 0,
+    created_at: Date(),
+  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -25,8 +33,7 @@ const VibeCharts = (props) => {
     fetchMoments();
     fetchJournals();
     setLoading(false);
-    console.log(entryId)
-  }, [filter, filterDate, entryId]);
+  }, [filter, filterDate, entryId, type]);
 
   const dateFilter = async (val) => {
     let day = todaysDate.day;
@@ -50,6 +57,9 @@ const VibeCharts = (props) => {
         setFilterDate(`${year}-${month}-${day} 00:00:00`);
         break;
     }
+  };
+  const navToMoment = (id) => {
+    navigate(`/moments/${id}`);
   };
 
   async function fetchMoments() {
@@ -95,7 +105,11 @@ const VibeCharts = (props) => {
       ) : (
         <>
           <br />
-          <ChartFilter setFilter={setFilter} filter={filter} setEntryId={setEntryId} />
+          <ChartFilter
+            setFilter={setFilter}
+            filter={filter}
+            setEntryId={setEntryId}
+          />
           <br />
           {type === "moments" ? (
             <Container
@@ -113,6 +127,7 @@ const VibeCharts = (props) => {
                   moments={moments}
                   type={"moments"}
                   setEntryId={setEntryId}
+                  setMoment={setMoment}
                 />
               )}
             </Container>
@@ -144,7 +159,12 @@ const VibeCharts = (props) => {
       <ChartType type={type} setType={setType} setEntryId={setEntryId} />
 
       {type === "moments" && entryId !== 0 ? (
-        <SingleMoment momentId={entryId} />
+        <>
+        <br/>
+        <Box align='center' px="16px" onClick={() => navToMoment(moment.id)}>
+          <MomentCard moment={moment} />
+          </Box>
+        </>
       ) : (
         <></>
       )}

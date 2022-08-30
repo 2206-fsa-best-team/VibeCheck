@@ -14,7 +14,7 @@ const SingleJournal = (props) => {
     created_at: Date(),
   });
   const [loading, setLoading] = useState(true);
-  const location = "journalEntry";
+  const location = "journals";
 
   useEffect(() => {
     // i don't know if there will ever be props?
@@ -68,7 +68,7 @@ const SingleJournal = (props) => {
         setLoading={setLoading}
         location={location}
       />
-      <FloatingDelete location={location} journalEntryId={journalEntry.id} />
+      <FloatingDelete location={location} id={journalEntry.id} />
       <br />
       <br />
       <br />

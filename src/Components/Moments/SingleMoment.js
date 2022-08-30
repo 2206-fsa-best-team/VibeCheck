@@ -68,7 +68,7 @@ const SingleMoment = (props) => {
         setLoading={setLoading}
         location={location}
       />
-      <FloatingDelete location={location} momentId={moment.id} />
+      <FloatingDelete location={location} id={moment.id} />
       <br />
       <br />
       <br />

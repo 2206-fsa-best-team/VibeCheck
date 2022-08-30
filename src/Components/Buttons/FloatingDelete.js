@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
 
 const FloatingDelete = (props) => {
-  const { location, momentId } = props;
+  const { location, id } = props;
   const navigate = useNavigate();
 
   async function handleDelete() {
@@ -13,7 +13,7 @@ const FloatingDelete = (props) => {
       const { error } = await supabase
         .from("moments")
         .delete()
-        .match({ id: momentId });
+        .match({ id: id });
       if (error) throw error;
       navigate("/moments");
     } catch (error) {

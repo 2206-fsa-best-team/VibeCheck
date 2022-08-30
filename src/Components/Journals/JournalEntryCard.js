@@ -20,7 +20,7 @@ const JournalEntryCard = (props) => {
   ) : (
     <Box
       onClick={onClick}
-      maxW="sm"
+      maxW="xl"
       align="stretch"
       borderWidth="1px"
       borderRadius="lg"

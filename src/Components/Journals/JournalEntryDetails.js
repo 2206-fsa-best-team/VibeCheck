@@ -4,6 +4,7 @@ import { supabase } from "../../server/supabaseClient";
 import {
   HStack,
   Text,
+  Heading,
   EditablePreview,
   IconButton,
   ButtonGroup,
@@ -16,6 +17,7 @@ import DateObject from "react-date-object";
 import FloatingEdit from "../Buttons/FloatingEdit";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { vibeMsgSelector } from "../Helpers/vibeMsgSelector";
+import wordsCount from "words-count";
 
 let startingContent = "";
 
@@ -100,6 +102,9 @@ const JournalEntryDetails = ({
 
   return (
     <>
+      <Heading fontSize="1rem" w="100%" align="left" p="16px">
+        {dateFormatted.toLowerCase()}
+      </Heading>
       <Editable
         w="100%"
         align="left"
@@ -111,37 +116,38 @@ const JournalEntryDetails = ({
         onSubmit={(newvalue) => handleEdit(newvalue)}
         onCancel={() => handleCancel()}
       >
-        <EditablePreview py={2} px={4} overflowWrap="anywhere" />
+        <EditablePreview
+          pt={2}
+          px={4}
+          overflowWrap="anywhere"
+          noOfLines={[8]}
+        />
         <EditableTextarea
           // style this so the border isn't so huge
           w="100%"
           py={2}
           px={4}
           resize="none"
-          rows={8}
-          maxLength={260}
           onChange={(e) => handleChange(e)}
         />
         <EditableControls />
       </Editable>
-      <Text
-        fontSize="0.75rem"
-        fontStyle="italic"
-        w="100%"
-        align="left"
-        px="16px"
-      >
-        you were {vibeMsgSelector(journalEntry.vibe)}
-      </Text>
+
       <HStack justifyContent="space-between">
         <Flex flexGrow={2}>
-          <Text fontSize="0.75rem" color="gray" w="100%" align="left" p="16px">
-            {dateFormatted.toLowerCase()}
+          <Text
+            fontSize="0.75rem"
+            fontStyle="italic"
+            w="100%"
+            align="left"
+            px="16px"
+          >
+            you were {vibeMsgSelector(journalEntry.vibe)}
           </Text>
         </Flex>
         <Flex flexGrow={1}>
           <Text fontSize="0.75rem" color="gray" w="100%" align="right" p="16px">
-            {count}/260
+            word count: {wordsCount(journalEntry.content)}
           </Text>
         </Flex>
       </HStack>

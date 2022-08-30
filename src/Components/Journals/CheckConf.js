@@ -14,7 +14,7 @@ import {
 import { HighlightWithinTextarea } from "react-highlight-within-textarea";
 
 const CheckConf = (props) => {
-  const { allText, setJournal, setAllText, setModalLoading } = props;
+  const { allText, setJournal, setAllText, setModalLoading, journal } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState("");
   const onChange = (value) => {
@@ -71,7 +71,7 @@ const CheckConf = (props) => {
             colorScheme="teal"
             mr={3}
             onClick={() => {
-              setJournal({ content: value });
+              setJournal({ ...journal, content: value });
               setAllText({});
               onClose();
             }}

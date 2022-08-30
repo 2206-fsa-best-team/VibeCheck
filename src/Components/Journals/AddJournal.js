@@ -87,6 +87,7 @@ const AddJournal = () => {
           setJournal={setJournal}
           setAllText={setAllText}
           setModalLoading={setModalLoading}
+          journal={journal}
         />
       ) : (
         <></>

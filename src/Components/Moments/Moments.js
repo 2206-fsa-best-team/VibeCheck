@@ -10,6 +10,7 @@ import {
   Stack,
   Icon,
 } from "@chakra-ui/react";
+import MomentCard from "./MomentCard";
 import FloatingAdd from "../Buttons/FloatingAdd";
 import { colorSelector } from "../Helpers/colorChanger";
 
@@ -33,8 +34,6 @@ const Moments = () => {
   }
 
   const location = "moment";
-
-
 
   const navToMoment = (id) => {
     navigate(`/moments/${id}`);
@@ -70,47 +69,53 @@ const Moments = () => {
               maxW="700px"
             >
               {moments.map((moment) => (
-                <Box
-                  maxW="sm"
-                  // display='flex'
-                  align="stretch"
-                  borderWidth="1px"
-                  borderRadius="lg"
+                <MomentCard
                   key={moment.id}
+                  loading={loading}
+                  moment={moment}
                   onClick={() => navToMoment(moment.id)}
-                >
-                  <HStack h={["60px", "100px"]}>
-                    <Icon
-                      viewBox="0 0 200 200"
-                      color={() => colorSelector(moment.vibe)}
-                      ml="16px"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-                      />
-                    </Icon>
-                    <Text
-                      lineHeight={"tight"}
-                      noOfLines={[3, 4, 5]}
-                      minW="180px"
-                    >
-                      {moment.content.length < 140
-                        ? moment.content
-                        : `${moment.content.slice(0, 140)}...`}
-                    </Text>
-                    <Text
-                      fontSize="10px"
-                      color="gray"
-                      w="100%"
-                      align="right"
-                      p="16px"
-                    >
-                      Created: <br />
-                      {moment.created_at.slice(0, 10)}
-                    </Text>
-                  </HStack>
-                </Box>
+                />
+                // <Box
+                //   maxW="sm"
+                //   // display='flex'
+                //   align="stretch"
+                //   borderWidth="1px"
+                //   borderRadius="lg"
+                //   key={moment.id}
+                //   onClick={() => navToMoment(moment.id)}
+                // >
+                //   <HStack h={["60px", "100px"]}>
+                //     <Icon
+                //       viewBox="0 0 200 200"
+                //       color={() => colorSelector(moment.vibe)}
+                //       ml="16px"
+                //     >
+                //       <path
+                //         fill="currentColor"
+                //         d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+                //       />
+                //     </Icon>
+                //     <Text
+                //       lineHeight={"tight"}
+                //       noOfLines={[3, 4, 5]}
+                //       minW="180px"
+                //     >
+                //       {moment.content.length < 140
+                //         ? moment.content
+                //         : `${moment.content.slice(0, 140)}...`}
+                //     </Text>
+                //     <Text
+                //       fontSize="10px"
+                //       color="gray"
+                //       w="100%"
+                //       align="right"
+                //       p="16px"
+                //     >
+                //       Created: <br />
+                //       {moment.created_at.slice(0, 10)}
+                //     </Text>
+                //   </HStack>
+                // </Box>
               ))}
             </VStack>
           )}

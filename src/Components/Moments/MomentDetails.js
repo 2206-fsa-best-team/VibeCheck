@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
 import {
@@ -26,10 +26,13 @@ const MomentDetails = ({
   location,
 }) => {
   let startingContent = moment.content;
+  // const [count, setCount] = useState(0);
   const { momentId } = useParams();
 
   useEffect(() => {
     startingContent = moment.content;
+    // console.log(startingContent.length);
+    // setCount(startingContent.length);
   }, []);
 
   async function editMomentContent(e) {

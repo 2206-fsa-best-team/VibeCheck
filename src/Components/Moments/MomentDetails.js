@@ -37,6 +37,7 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
     } catch (error) {
       console.error(error.error_description || error.message);
     } finally {
+      // do we need this?
       setLoading(false);
     }
   }

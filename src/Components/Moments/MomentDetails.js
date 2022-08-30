@@ -17,22 +17,13 @@ import FloatingEdit from "../Buttons/FloatingEdit";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { vibeMsgSelector } from "../Helpers/vibeMsgSelector";
 
-const MomentDetails = ({
-  moment,
-  setMoment,
-  count,
-  setCount,
-  setLoading,
-  location,
-}) => {
+const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
   let startingContent = moment.content;
-  // const [count, setCount] = useState(0);
+  const [count, setCount] = useState(moment.content.length);
   const { momentId } = useParams();
 
   useEffect(() => {
     startingContent = moment.content;
-    // console.log(startingContent.length);
-    // setCount(startingContent.length);
   }, []);
 
   async function editMomentContent(e) {
@@ -65,6 +56,10 @@ const MomentDetails = ({
     setMoment({ ...moment, content: e });
     startingContent = e;
     editMomentContent(e);
+  };
+
+  const handleCancel = () => {
+    setCount(startingContent.length);
   };
 
   //// additional elements for editing
@@ -100,8 +95,9 @@ const MomentDetails = ({
         isPreviewFocusable={false}
         selectAllOnFocus={false}
         onSubmit={(e) => handleEdit(e)}
+        onCancel={() => handleCancel()}
       >
-        <EditablePreview py={2} px={4} />
+        <EditablePreview py={2} px={4} overflowWrap="anywhere" />
         <EditableTextarea
           // style this so the border isn't so huge
           w="100%"
@@ -110,7 +106,6 @@ const MomentDetails = ({
           resize="none"
           rows={8}
           maxLength={260}
-          overflowWrap="word-break"
           onChange={(e) => setCount(e.target.value.length)}
         />
         <EditableControls />

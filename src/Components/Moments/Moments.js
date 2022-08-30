@@ -36,6 +36,7 @@ const Moments = () => {
   const location = "moment";
 
   const navToMoment = (id) => {
+    console.log("HERE WE ARE");
     navigate(`/moments/${id}`);
   };
 
@@ -61,9 +62,9 @@ const Moments = () => {
             </Text>
           ) : (
             <VStack
-              p="5"
+              // p="5"
               m="16px"
-              spacing={"16px"}
+              // spacing={"16px"}
               borderRadius="lg"
               alignItems="stretch"
               maxW="700px"

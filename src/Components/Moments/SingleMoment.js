@@ -12,7 +12,6 @@ const SingleMoment = (props) => {
     vibe: null,
     created_at: Date(),
   });
-  const [count, setCount] = useState();
   const [loading, setLoading] = useState(true);
   const location = "moment";
 
@@ -32,7 +31,6 @@ const SingleMoment = (props) => {
       vibe,
       created_at,
     });
-    setCount(content.length);
   }
 
   async function fetchMoment() {
@@ -58,8 +56,6 @@ const SingleMoment = (props) => {
         loading={loading}
         moment={moment}
         setMoment={setMoment}
-        count={count}
-        setCount={setCount}
         setLoading={setLoading}
         location={location}
       />

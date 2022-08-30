@@ -4,7 +4,7 @@ import MomentDetails from "./MomentDetails";
 import { colorSelector } from "../Helpers/colorChanger";
 
 const MomentCard = (props) => {
-  const { loading, moment } = props;
+  const { loading, moment, onClick } = props;
 
   return loading ? (
     <Stack
@@ -28,6 +28,7 @@ const MomentCard = (props) => {
         maxW="700px"
       >
         <Box
+          onClick={onClick}
           maxW="sm"
           align="stretch"
           borderWidth="1px"

@@ -34,7 +34,13 @@ server error! we appologize for the inconvenience if so`
         </Text>
         {image === null ? (
           <>
-            <Webcam ref={camera} screenshotQuality={1} />
+            <Webcam
+              ref={camera}
+              screenshotQuality={1}
+              videoConstraints={{
+                facingMode: "environment",
+              }}
+            />
             <Button
               onClick={() => setImage(camera.current.getScreenshot())}
               colorScheme="teal"

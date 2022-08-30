@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { supabase } from "../../server/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import Cam from "../Camera";

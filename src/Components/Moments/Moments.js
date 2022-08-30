@@ -1,74 +1,66 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import {
-  VStack,
-  HStack,
-  Text,
-  Box,
-  Skeleton,
-  Stack,
-  Icon,
-} from "@chakra-ui/react";
+import { VStack, Text, Skeleton } from "@chakra-ui/react";
 import MomentCard from "./MomentCard";
 import FloatingAdd from "../Buttons/FloatingAdd";
-import { colorSelector } from "../Helpers/colorChanger";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const location = "moment";
 
   useEffect(() => {
     fetchMoments();
   }, []);
 
   async function fetchMoments() {
-    setLoading(true);
-    const { data } = await supabase
-      .from("moments")
-      .select()
-      .order("created_at", { ascending: false });
-    setMoments(data);
-    setLoading(false);
+    // setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from("moments")
+        .select()
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      setMoments(data);
+    } catch (error) {
+      console.error(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  const location = "moment";
-
   const navToMoment = (id) => {
-    console.log("HERE WE ARE");
     navigate(`/moments/${id}`);
   };
 
   return (
     <>
+      <Text ml="1rem" fontSize={"1.5rem"} pl={4} pt="1rem">
+        your moments
+      </Text>
       {loading ? (
-        <Stack padding={4} spacing={4} maxW="700px">
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-        </Stack>
+        <VStack
+          p="1rem"
+          m="16px"
+          spacing="1rem"
+          borderRadius="lg"
+          alignItems="stretch"
+          maxW="700px"
+        >
+          {moments.map((moment) => (
+            <Skeleton height="60px" />
+          ))}
+        </VStack>
       ) : (
         <>
-          <Text ml="24px" fontSize={"24"} pl="24px" pt="24px">
-            All Moments
-          </Text>
           {!moments.length ? (
-            <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">
-              Add a moment using the plus button!
+            <Text ml="1rem" fontSize={"1rem"} pl="1rem" pt="1rem">
+              add a moment using the plus button.
             </Text>
           ) : (
-            <VStack
-              // p="5"
-              m="16px"
-              // spacing={"16px"}
-              borderRadius="lg"
-              alignItems="stretch"
-              maxW="700px"
-            >
+            <VStack p="1rem" spacing="1rem" alignItems="stretch">
               {moments.map((moment) => (
                 <MomentCard
                   key={moment.id}
@@ -76,47 +68,6 @@ const Moments = () => {
                   moment={moment}
                   onClick={() => navToMoment(moment.id)}
                 />
-                // <Box
-                //   maxW="sm"
-                //   // display='flex'
-                //   align="stretch"
-                //   borderWidth="1px"
-                //   borderRadius="lg"
-                //   key={moment.id}
-                //   onClick={() => navToMoment(moment.id)}
-                // >
-                //   <HStack h={["60px", "100px"]}>
-                //     <Icon
-                //       viewBox="0 0 200 200"
-                //       color={() => colorSelector(moment.vibe)}
-                //       ml="16px"
-                //     >
-                //       <path
-                //         fill="currentColor"
-                //         d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-                //       />
-                //     </Icon>
-                //     <Text
-                //       lineHeight={"tight"}
-                //       noOfLines={[3, 4, 5]}
-                //       minW="180px"
-                //     >
-                //       {moment.content.length < 140
-                //         ? moment.content
-                //         : `${moment.content.slice(0, 140)}...`}
-                //     </Text>
-                //     <Text
-                //       fontSize="10px"
-                //       color="gray"
-                //       w="100%"
-                //       align="right"
-                //       p="16px"
-                //     >
-                //       Created: <br />
-                //       {moment.created_at.slice(0, 10)}
-                //     </Text>
-                //   </HStack>
-                // </Box>
               ))}
             </VStack>
           )}

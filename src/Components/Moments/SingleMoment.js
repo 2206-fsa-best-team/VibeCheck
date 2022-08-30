@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
+import { VStack } from "@chakra-ui/react";
 import FloatingDelete from "../Buttons/FloatingDelete";
 import MomentCard from "./MomentCard";
 
@@ -16,6 +17,7 @@ const SingleMoment = (props) => {
   const location = "moment";
 
   useEffect(() => {
+    // i don't know if there will ever be props?
     if (props.moment) {
       let { content, vibe, created_at } = props.moment;
       initializeMoment(content, vibe, created_at);
@@ -51,7 +53,14 @@ const SingleMoment = (props) => {
   }
 
   return (
-    <>
+    <VStack
+      p="5"
+      m="16px"
+      spacing={"16px"}
+      borderRadius="lg"
+      alignItems="stretch"
+      maxW="700px"
+    >
       <MomentCard
         loading={loading}
         moment={moment}
@@ -63,7 +72,7 @@ const SingleMoment = (props) => {
       <br />
       <br />
       <br />
-    </>
+    </VStack>
   );
 };
 

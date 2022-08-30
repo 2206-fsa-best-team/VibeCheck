@@ -24,7 +24,7 @@ const NoDataGraph = (props) => {
             <br />
             <br />
             <br />
-            <Text fontSize={"xl"}>{`add a ${location} here`}</Text>
+            <Text fontSize={"xl"}>{location === 'moment' ? 'add a moment here' : 'add a journal entry here'}</Text>
             <br />
             <br />
             <br />

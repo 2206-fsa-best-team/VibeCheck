@@ -8,9 +8,10 @@ import {
   Label,
 } from "recharts";
 import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
+import { findEntry } from "../Helpers/findEntry";
 
 const VibesLineGraph = (props) => {
-  const {setEntryId} = props
+  const {setEntryId, setMoment, setJournal} = props
 
   const dataType = (props) => {
     if (props.type === "moments") {
@@ -24,10 +25,14 @@ const VibesLineGraph = (props) => {
 
   const CustomTooltip = (data) => {
     const { payload, label, active, color, content } = data
-    console.log(content)
     if (active) {
-      console.log('expected',payload[0].payload.id)
       content.props.setEntryId(payload[0].payload.id)
+      if (props.type === "moments") {
+        content.props.setMoment(findEntry(dataType(props), payload[0].payload.id))
+      } else if (props.type === "journals") {
+        content.props.setJournal(findEntry(dataType(props), payload[0].payload.id))
+      }
+
       return (
         <Box
           h={"28px"}
@@ -70,7 +75,7 @@ const VibesLineGraph = (props) => {
             />
             <Tooltip
               content={
-                <CustomTooltip color={useColorModeValue("white", "tomato")} setEntryId={setEntryId}/>
+                <CustomTooltip color={useColorModeValue("white", "tomato")} setEntryId={setEntryId} setMoment={setMoment} setJournal={setJournal}/>
               }
 
             />

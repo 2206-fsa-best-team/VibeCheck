@@ -18,6 +18,7 @@ import Journals from "./Components/Journals/Journals";
 import AddJournal from "./Components/Journals/AddJournal";
 import VibeCharts from "./Components/Charts/VibeCharts.js";
 import SingleMoment from "./Components/Moments/SingleMoment";
+import SingleJournal from "./Components/Journals/SingleJournal";
 
 function App() {
   const [session, setSession] = useState("");
@@ -49,6 +50,10 @@ function App() {
               <Route path="/" element={<Navigate to="/moments" />} />
               <Route path="/moments/:momentId" element={<SingleMoment />} />
               <Route path="/moments" element={<Moments />} />
+              <Route
+                path="/journals/:journalEntryId"
+                element={<SingleJournal />}
+              />
               <Route path="/journals" element={<Journals />} />
               <Route path="/vibes" element={<VibeCharts />} />
               <Route path="/addamoment" element={<AddMoment />} />

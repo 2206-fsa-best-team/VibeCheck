@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
 import {
   VStack,
@@ -15,20 +16,26 @@ import { colorSelector } from "../Helpers/colorChanger";
 const Journals = () => {
   const [journals, setJournals] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = "journal";
+
   useEffect(() => {
     fetchJournals();
   }, []);
 
   async function fetchJournals() {
     setLoading(true);
-    const { data } = await supabase.from("journals").select().order("date", { ascending: false });
+    const { data } = await supabase
+      .from("journals")
+      .select()
+      .order("date", { ascending: false });
     setJournals(data);
     setLoading(false);
   }
 
-  const location = "journal";
-
-
+  const navToJournalEntry = (id) => {
+    navigate(`/journals/${id}`);
+  };
 
   return (
     <>
@@ -67,6 +74,7 @@ const Journals = () => {
                   borderWidth="1px"
                   borderRadius="lg"
                   key={journal.id}
+                  onClick={() => navToJournalEntry(journal.id)}
                 >
                   <HStack h={["100px", "140px"]}>
                     <Icon

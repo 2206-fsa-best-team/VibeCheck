@@ -16,6 +16,13 @@ const Cam = (props) => {
       setAllText(data.fullTextAnnotation);
     } catch (e) {
       console.error(e);
+      alert(
+        `there has been an error. likely this means no text could 
+be deciphered from your photo. please try again with a new 
+photo. if that doesn't work we are likely experiencing a 
+server error! we appologize for the inconvenience if so`
+      );
+      setModalLoading(false);
     }
   }
 

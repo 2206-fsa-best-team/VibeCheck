@@ -12,7 +12,7 @@ const SingleMoment = (props) => {
     vibe: null,
     created_at: Date(),
   });
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState();
   const [loading, setLoading] = useState(true);
   const location = "moment";
 

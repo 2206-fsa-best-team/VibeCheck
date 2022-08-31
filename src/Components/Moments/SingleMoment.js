@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { VStack } from "@chakra-ui/react";
+import { VStack, useToast } from "@chakra-ui/react";
 import FloatingDelete from "../Buttons/FloatingDelete";
 import MomentCard from "./MomentCard";
+import { DeletedMoment } from "../ToastAlerts/DeleteAlerts";
 
 const SingleMoment = (props) => {
   const { momentId } = useParams();
@@ -16,6 +17,7 @@ const SingleMoment = (props) => {
   const [loading, setLoading] = useState(true);
   const location = "moment";
   const navigate = useNavigate();
+  const toast = useToast();
 
   useEffect(() => {
     // i don't know if there will ever be props?
@@ -60,7 +62,8 @@ const SingleMoment = (props) => {
         .delete()
         .match({ id: moment.id });
       if (error) throw error;
-      navigate("/moments");
+      navigate("/moments")
+      toast(DeletedMoment())
     } catch (error) {
       console.error(error.error_description || error.message);
     }

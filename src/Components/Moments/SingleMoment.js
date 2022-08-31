@@ -49,6 +49,7 @@ const SingleMoment = (props) => {
       let { content, vibe, created_at } = data;
       initializeMoment(content, vibe, created_at);
     } catch (error) {
+      navigate("/error");
       console.error(error.error_description || error.message);
     } finally {
       setLoading(false);
@@ -62,8 +63,8 @@ const SingleMoment = (props) => {
         .delete()
         .match({ id: moment.id });
       if (error) throw error;
-      navigate("/moments")
-      toast(DeletedMoment())
+      navigate("/moments");
+      toast(DeletedMoment());
     } catch (error) {
       console.error(error.error_description || error.message);
     }

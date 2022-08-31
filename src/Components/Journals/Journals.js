@@ -21,7 +21,7 @@ const Journals = () => {
       const { data, error } = await supabase
         .from("journals")
         .select()
-        .order("created_at", { ascending: false });
+        .order("date", { ascending: false });
       if (error) throw error;
       setJournals(data);
     } catch (error) {

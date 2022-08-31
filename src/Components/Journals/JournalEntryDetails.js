@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
 import {
@@ -12,6 +12,7 @@ import {
   Editable,
   EditableTextarea,
   Flex,
+  Box,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
 import FloatingEdit from "../Buttons/FloatingEdit";
@@ -27,11 +28,14 @@ const JournalEntryDetails = ({
   setLoading,
   location,
 }) => {
-  const [count, setCount] = useState(journalEntry.content.length);
   const { journalEntryId } = useParams();
+  console.log("startingContent TOP -->", startingContent);
+  console.log("journalEntry TOP -->", journalEntry);
 
   useEffect(() => {
+    console.log("startingContent useEffect before -->", startingContent);
     startingContent = journalEntry.content;
+    console.log("startingContent useEffect after -->", startingContent);
   }, []);
 
   async function editJournalEntryContent(e) {
@@ -51,28 +55,23 @@ const JournalEntryDetails = ({
   }
 
   // format date from the db for how we want it displayed
-  // console.log("created_at", journalEntry.created_at);
-  let modifiedDate = `${journalEntry.created_at.slice(
-    0,
-    10
-  )} ${journalEntry.created_at.slice(11, 16)}`;
-  let date = new DateObject(modifiedDate);
-  date._format = "MMM D, YYYY - h:mm a";
+  let date = new DateObject(journalEntry.date);
+  date._format = "MMM D, YYYY";
   const dateFormatted = date.format();
 
   const handleEdit = (newValue) => {
     setJournalEntry({ ...journalEntry, content: newValue });
     startingContent = newValue;
+    console.log("startingContent handleEdit -->", startingContent);
     editJournalEntryContent(newValue);
   };
 
   const handleCancel = () => {
-    setCount(startingContent.length);
+    console.log("startingContent handleCancel -->", startingContent);
     setJournalEntry({ ...journalEntry, content: startingContent });
   };
 
   const handleChange = (e) => {
-    setCount(e.target.value.length);
     setJournalEntry({ ...journalEntry, content: e.target.value });
   };
 
@@ -95,13 +94,11 @@ const JournalEntryDetails = ({
       </ButtonGroup>
     ) : journalEntryId ? (
       <FloatingEdit location={location} {...getEditButtonProps()} />
-    ) : (
-      <></>
-    );
+    ) : null;
   }
 
   return (
-    <>
+    <Box>
       <Heading fontSize="1rem" w="100%" align="left" p="16px">
         {dateFormatted.toLowerCase()}
       </Heading>
@@ -120,7 +117,7 @@ const JournalEntryDetails = ({
           pt={2}
           px={4}
           overflowWrap="anywhere"
-          noOfLines={[8]}
+          noOfLines={journalEntryId ? undefined : [8]}
         />
         <EditableTextarea
           // style this so the border isn't so huge
@@ -151,7 +148,7 @@ const JournalEntryDetails = ({
           </Text>
         </Flex>
       </HStack>
-    </>
+    </Box>
   );
 };
 

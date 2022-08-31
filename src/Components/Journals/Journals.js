@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import {
-  VStack,
-  HStack,
-  Box,
-  Text,
-  Skeleton,
-  Stack,
-  Icon,
-} from "@chakra-ui/react";
+import { VStack, Text, Skeleton } from "@chakra-ui/react";
 import FloatingAdd from "../Buttons/FloatingAdd";
-import { colorSelector } from "../Helpers/colorChanger";
+import JournalEntryCard from "./JournalEntryCard";
 
 const Journals = () => {
   const [journals, setJournals] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = "journal";
 
@@ -24,13 +16,19 @@ const Journals = () => {
   }, []);
 
   async function fetchJournals() {
-    setLoading(true);
-    const { data } = await supabase
-      .from("journals")
-      .select()
-      .order("date", { ascending: false });
-    setJournals(data);
-    setLoading(false);
+    // setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from("journals")
+        .select()
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      setJournals(data);
+    } catch (error) {
+      console.error(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const navToJournalEntry = (id) => {
@@ -39,75 +37,37 @@ const Journals = () => {
 
   return (
     <>
+      <Text ml="1rem" fontSize={"1.5rem"} pl="4" pt="1rem">
+        your journal entries
+      </Text>
       {loading ? (
-        <Stack padding={4} spacing={4} maxW="700px">
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-          <Skeleton height="60px" />
-        </Stack>
+        <VStack
+          p="1rem"
+          m="16px"
+          spacing="1rem"
+          borderRadius="lg"
+          alignItems="stretch"
+          maxW="700px"
+        >
+          {journals.map((journal) => (
+            <Skeleton height="100px" />
+          ))}
+        </VStack>
       ) : (
         <>
-          <Text ml="24px" fontSize={"24"} pl="24px" pt="24px">
-            your journal entries
-          </Text>
           {!journals.length ? (
-            <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">
+            <Text ml="1rem" fontSize={"1rem"} pl="1rem" pt="1rem">
               add a new entry using the plus button.
             </Text>
           ) : (
-            <VStack
-              p="5"
-              m="16px"
-              spacing={"16px"}
-              borderRadius="lg"
-              alignItems="stretch"
-              maxW="700px"
-            >
+            <VStack p="1rem" spacing="1rem" alignItems="stretch">
               {journals.map((journal) => (
-                <Box
-                  maxW="sm"
-                  // display='flex'
-                  align="stretch"
-                  borderWidth="1px"
-                  borderRadius="lg"
+                <JournalEntryCard
                   key={journal.id}
+                  loading={loading}
+                  journalEntry={journal}
                   onClick={() => navToJournalEntry(journal.id)}
-                >
-                  <HStack h={["100px", "140px"]}>
-                    <Icon
-                      viewBox="0 0 200 200"
-                      color={() => colorSelector(journal.vibe)}
-                      ml="16px"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-                      />
-                    </Icon>
-                    <Text
-                      lineHeight={"tight"}
-                      noOfLines={[3, 4, 5]}
-                      minW="180px"
-                    >
-                      {journal.content.length < 140
-                        ? journal.content
-                        : `${journal.content.slice(0, 140)}...`}
-                    </Text>
-                    <Text
-                      fontSize="10px"
-                      color="gray"
-                      w="100%"
-                      align="right"
-                      p="16px"
-                    >
-                      Created: <br />
-                      {journal.date.slice(0, 10)}
-                    </Text>
-                  </HStack>
-                </Box>
+                />
               ))}
             </VStack>
           )}

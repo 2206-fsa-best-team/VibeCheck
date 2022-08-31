@@ -61,6 +61,7 @@ function App() {
               <Route path="/addajournal" element={<AddJournal />} />
               <Route path="/settings" element={<SettingsScreen />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/error" element={<ErrorPage />} />
 
               <Route
                 path="/welcome"

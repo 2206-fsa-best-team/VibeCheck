@@ -12,7 +12,7 @@ function MoodSlider(props) {
   const { sliderValue, setSliderValue } = props;
 
   return (
-    <Box pl={5} pr={5} pt={5}>
+    <Box p="16px">
       <Highlight
         query="vibe"
         styles={{

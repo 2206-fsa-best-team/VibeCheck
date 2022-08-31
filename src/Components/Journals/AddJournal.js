@@ -54,7 +54,7 @@ const AddJournal = () => {
   }
 
   return (
-    <Stack spacing={5} px="24px" display="flex">
+    <Stack  px="24px" display="flex">
       {/* date input */}
       <Text mt="32px" ml="8px" fontSize={"24px"}>
         date:
@@ -67,7 +67,7 @@ const AddJournal = () => {
       />
 
       {/* content input */}
-      <Text mt="32px" ml="8px" fontSize={"24px"}>
+      <Text mt="32px" pt="16px" ml="8px" fontSize={"24px"}>
         what's going on?
       </Text>
       <Textarea
@@ -102,28 +102,28 @@ const AddJournal = () => {
             setModalLoading={setModalLoading}
             modalLoading={modalLoading}
           />
-          <Text mt="32px" ml="8px" fontSize={"24px"}>
+          <Text pt="16px" ml="8px" fontSize={"24px"}>
             change your mind?
           </Text>
-          <Button onClick={() => setShowCamera(false)} bg="tomato">
+          <Button onClick={() => setShowCamera(false)} colorScheme="teal" variant='outline'>
             close camera
           </Button>
         </>
       ) : (
         <>
-          <Text mt="32px" ml="8px" fontSize={"24px"}>
+          <Text ml="8px" fontSize={"24px"}>
             have a hand-written journal you want to add?
           </Text>
-          <Button onClick={() => setShowCamera(true)} bg="tomato">
+          <Button onClick={() => setShowCamera(true)} variant='outline' colorScheme={'teal'}>
             open camera
           </Button>
         </>
       )}
       {submitLoading ? (
-        <CircularProgress isIndeterminate size="1.75rem" color="tomato" />
+        <CircularProgress isIndeterminate size="1.75rem" bg="teal" />
       ) : (
         <>
-          <Text mt="32px" ml="8px" fontSize={"24px"}>
+          <Text pt="16px" ml="8px" fontSize={"24px"}>
             all set?
           </Text>
           <Button onClick={createJournal} colorScheme="teal">

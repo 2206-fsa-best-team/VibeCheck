@@ -24,9 +24,16 @@ const AddMoment = () => {
       if (!content.length) {
         alert("write about your moment");
       } else {
+        const d = new Date();
+        d.setTime(d.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
         await supabase
           .from("moments")
-          .insert({ content, vibe: sliderValue, user_id: user.id })
+          .insert({
+            content,
+            vibe: sliderValue,
+            user_id: user.id,
+            created_at: d,
+          })
           .single();
         setMoment({ content: "" });
         navigate("/moments");

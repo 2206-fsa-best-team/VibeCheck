@@ -9,6 +9,7 @@ import DateObject from "react-date-object";
 import ChartType from "./ChartType";
 import { useNavigate } from "react-router-dom";
 import MomentCard from "../Moments/MomentCard";
+import JournalEntryCard from "../Journals/JournalEntryCard";
 
 const VibeCharts = (props) => {
   const [moments, setMoments] = useState([]);
@@ -182,8 +183,12 @@ const VibeCharts = (props) => {
       {type === "journals" && entryId !== 0 ? (
         <>
           <br />
-          <Box align="center" px="16px" onClick={() => navToJournal(journal.id)}>
-            {/* <JournalEntryCard journal={journal} /> */}
+          <Box
+            align="center"
+            px="16px"
+            onClick={() => navToJournal(journal.id)}
+          >
+            <JournalEntryCard journalEntry={journal} />
           </Box>
         </>
       ) : (

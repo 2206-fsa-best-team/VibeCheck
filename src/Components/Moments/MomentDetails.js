@@ -135,9 +135,17 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
           </Text>
         </Flex>
         <Flex flexGrow={1}>
-          <Text fontSize="0.75rem" color="gray" w="100%" align="right" p="16px">
-            {count}/260
-          </Text>
+          {momentId ? (
+            <Text
+              fontSize="0.75rem"
+              color="gray"
+              w="100%"
+              align="right"
+              p="16px"
+            >
+              {count}/260
+            </Text>
+          ) : null}
         </Flex>
       </HStack>
     </>

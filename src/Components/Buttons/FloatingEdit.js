@@ -15,7 +15,7 @@ const FloatingEdit = (props) => {
     <Container>
       <Flex alignItems="flex-end" direction="row">
         <Tooltip
-          label={`edit your moment`}
+          label={`edit your ${location}`}
           placement="left"
           aria-label={`tooltip for editing a ${location}`}
         >

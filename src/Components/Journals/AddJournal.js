@@ -54,13 +54,14 @@ const AddJournal = () => {
   }
 
   return (
-    <Stack  px="24px" display="flex">
+    <Stack px="24px" display="flex">
       {/* date input */}
       <Text mt="32px" ml="8px" fontSize={"24px"}>
         date:
       </Text>
       <Input
         type="date"
+        aria-label="date field"
         value={date}
         max={today}
         onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
@@ -77,6 +78,7 @@ const AddJournal = () => {
         }
         resize="vertical"
         placeholder="write your journal here"
+        aria-label="journal input field"
         size="lg"
       />
 
@@ -105,7 +107,12 @@ const AddJournal = () => {
           <Text pt="16px" ml="8px" fontSize={"24px"}>
             change your mind?
           </Text>
-          <Button onClick={() => setShowCamera(false)} colorScheme="teal" variant='outline'>
+          <Button
+            onClick={() => setShowCamera(false)}
+            colorScheme="teal"
+            variant="outline"
+            aria-label="close camera button"
+          >
             close camera
           </Button>
         </>
@@ -114,7 +121,12 @@ const AddJournal = () => {
           <Text ml="8px" fontSize={"24px"}>
             have a hand-written journal you want to add?
           </Text>
-          <Button onClick={() => setShowCamera(true)} variant='outline' colorScheme={'teal'}>
+          <Button
+            onClick={() => setShowCamera(true)}
+            variant="outline"
+            colorScheme={"teal"}
+            aria-label="open camera button"
+          >
             open camera
           </Button>
         </>
@@ -126,7 +138,11 @@ const AddJournal = () => {
           <Text pt="16px" ml="8px" fontSize={"24px"}>
             all set?
           </Text>
-          <Button onClick={createJournal} colorScheme="teal">
+          <Button
+            onClick={createJournal}
+            colorScheme="teal"
+            aria-label="add journal button"
+          >
             add this journal!
           </Button>
         </>

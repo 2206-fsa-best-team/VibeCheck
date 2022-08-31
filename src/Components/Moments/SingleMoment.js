@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
 import { VStack } from "@chakra-ui/react";
 import FloatingDelete from "../Buttons/FloatingDelete";
@@ -15,6 +15,7 @@ const SingleMoment = (props) => {
   });
   const [loading, setLoading] = useState(true);
   const location = "moment";
+  const navigate = useNavigate();
 
   useEffect(() => {
     // i don't know if there will ever be props?
@@ -52,6 +53,19 @@ const SingleMoment = (props) => {
     }
   }
 
+  async function handleDelete() {
+    try {
+      const { error } = await supabase
+        .from("moments")
+        .delete()
+        .match({ id: moment.id });
+      if (error) throw error;
+      navigate("/moments");
+    } catch (error) {
+      console.error(error.error_description || error.message);
+    }
+  }
+
   return (
     <VStack
       p="5"
@@ -68,7 +82,11 @@ const SingleMoment = (props) => {
         setLoading={setLoading}
         location={location}
       />
-      <FloatingDelete location={location} id={moment.id} />
+      <FloatingDelete
+        location={location}
+        id={moment.id}
+        onClick={handleDelete}
+      />
       <br />
       <br />
       <br />

@@ -51,11 +51,11 @@ const Journals = () => {
       ) : (
         <>
           <Text ml="24px" fontSize={"24"} pl="24px" pt="24px">
-            All Journals
+            your journal entries
           </Text>
           {!journals.length ? (
             <Text ml="24px" fontSize={"16"} pl="24px" pt="24px">
-              Add a new Journal using the plus button!
+              add a new entry using the plus button.
             </Text>
           ) : (
             <VStack

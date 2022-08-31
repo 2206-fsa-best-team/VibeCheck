@@ -17,9 +17,9 @@ const Cam = (props) => {
     } catch (e) {
       console.error(e);
       alert(
-        `there has been an error. likely this means no text could 
-be deciphered from your photo. please try again with a new 
-photo. if that doesn't work we are likely experiencing a 
+        `there has been an error. likely this means no text could
+be deciphered from your photo. please try again with a new
+photo. if that doesn't work we are likely experiencing a
 server error! we appologize for the inconvenience if so`
       );
       setModalLoading(false);
@@ -28,8 +28,14 @@ server error! we appologize for the inconvenience if so`
 
   return (
     <div>
-      <Box maxW="450px" mx={10}>
-        <Text pb="10px" ml="8px" fontSize="32px" fontStyle="italic">
+      <Box maxW="450px" mx={10} align="center">
+        <Text
+          pb="10px"
+          ml="8px"
+          fontSize="32px"
+          fontStyle="italic"
+          align="start"
+        >
           snap a pic of your journal!
         </Text>
         {image === null ? (
@@ -41,30 +47,33 @@ server error! we appologize for the inconvenience if so`
                 facingMode: "environment",
               }}
             />
+            <br />
             <Button
               onClick={() => setImage(camera.current.getScreenshot())}
               colorScheme="teal"
             >
-              <Text color="black">take photo</Text>
+              <Text>take photo</Text>
             </Button>
           </>
         ) : (
           <>
             <img src={image} alt="Taken" />
+            <br />
             <Button
               onClick={() => {
                 setImage(null);
               }}
               colorScheme={"teal"}
               mr={10}
+              variant="outline"
             >
-              <Text color="black">retake photo</Text>
+              <Text>retake photo</Text>
             </Button>
             {modalLoading ? (
               <CircularProgress isIndeterminate size="1.75rem" color="tomato" />
             ) : (
               <Button onClick={() => handleSubmit(image)} colorScheme={"teal"}>
-                <Text color="black">convert to text</Text>{" "}
+                <Text>convert to text</Text>{" "}
               </Button>
             )}
           </>

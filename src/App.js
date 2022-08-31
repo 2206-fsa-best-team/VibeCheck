@@ -18,6 +18,7 @@ import Journals from "./Components/Journals/Journals";
 import AddJournal from "./Components/Journals/AddJournal";
 import VibeCharts from "./Components/Charts/VibeCharts.js";
 import SingleMoment from "./Components/Moments/SingleMoment";
+import AboutPage from "./Components/About/AboutPage";
 import SingleJournal from "./Components/Journals/SingleJournal";
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
               <Route path="/addamoment" element={<AddMoment />} />
               <Route path="/addajournal" element={<AddJournal />} />
               <Route path="/settings" element={<SettingsScreen />} />
+              <Route path="/about" element={<AboutPage />} />
 
               <Route
                 path="/welcome"

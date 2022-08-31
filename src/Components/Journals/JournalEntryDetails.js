@@ -19,6 +19,7 @@ import FloatingEdit from "../Buttons/FloatingEdit";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { vibeMsgSelector } from "../Helpers/vibeMsgSelector";
 import wordsCount from "words-count";
+import TextareaAutosize from "react-textarea-autosize";
 
 let startingContent = "";
 
@@ -86,7 +87,14 @@ const JournalEntryDetails = ({
 
     return isEditing ? (
       <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
-        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
+        <IconButton
+          icon={<CheckIcon />}
+          {...getSubmitButtonProps()}
+          onClick={window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: "smooth",
+          })}
+        />
         <IconButton
           icon={<CloseIcon boxSize={3} />}
           {...getCancelButtonProps()}
@@ -114,18 +122,22 @@ const JournalEntryDetails = ({
         onCancel={() => handleCancel()}
       >
         <EditablePreview
+          w="100%"
           pt={2}
           px={4}
+          resize="none"
           overflowWrap="anywhere"
+          whiteSpace="pre-wrap"
           noOfLines={journalEntryId ? undefined : [8]}
         />
         <EditableTextarea
-          // style this so the border isn't so huge
           w="100%"
           py={2}
           px={4}
           resize="none"
+          transition="height none"
           onChange={(e) => handleChange(e)}
+          as={TextareaAutosize}
         />
         <EditableControls />
       </Editable>

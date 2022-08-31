@@ -49,7 +49,7 @@ const SingleJournal = (props) => {
       let { content, vibe, created_at } = data;
       initializeJournalEntry(content, vibe, created_at);
     } catch (error) {
-      navigate("/error")
+      navigate("/error");
       console.error(error.error_description || error.message);
     } finally {
       setLoading(false);

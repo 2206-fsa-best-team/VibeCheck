@@ -3,49 +3,49 @@ import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
 import { VStack } from "@chakra-ui/react";
 import FloatingDelete from "../Buttons/FloatingDelete";
-import MomentCard from "./MomentCard";
+import JournalEntryCard from "./JournalEntryCard";
 
-const SingleMoment = (props) => {
-  const { momentId } = useParams();
-  const [moment, setMoment] = useState({
-    id: momentId,
+const SingleJournal = (props) => {
+  const { journalEntryId } = useParams();
+  const [journalEntry, setJournalEntry] = useState({
+    id: journalEntryId,
     content: "",
     vibe: null,
     created_at: Date(),
   });
   const [loading, setLoading] = useState(true);
-  const location = "moment";
+  const location = "journal entry";
   const navigate = useNavigate();
 
   useEffect(() => {
     // i don't know if there will ever be props?
-    if (props.moment) {
-      let { content, vibe, created_at } = props.moment;
-      initializeMoment(content, vibe, created_at);
+    if (props.journalEntry) {
+      let { content, vibe, created_at } = props.journalEntry;
+      initializeJournalEntry(content, vibe, created_at);
     } else {
-      fetchMoment();
+      fetchJournalEntry();
     }
   }, []);
 
-  function initializeMoment(content, vibe, created_at) {
-    setMoment({
-      ...moment,
+  function initializeJournalEntry(content, vibe, created_at) {
+    setJournalEntry({
+      ...journalEntry,
       content,
       vibe,
       created_at,
     });
   }
 
-  async function fetchMoment() {
+  async function fetchJournalEntry() {
     try {
       const { data, error } = await supabase
-        .from("moments")
+        .from("journals")
         .select()
-        .eq("id", momentId)
+        .eq("id", journalEntryId)
         .single();
       if (error) throw error;
       let { content, vibe, created_at } = data;
-      initializeMoment(content, vibe, created_at);
+      initializeJournalEntry(content, vibe, created_at);
     } catch (error) {
       console.error(error.error_description || error.message);
     } finally {
@@ -58,7 +58,7 @@ const SingleMoment = (props) => {
       const { error } = await supabase
         .from("moments")
         .delete()
-        .match({ id: moment.id });
+        .match({ id: journalEntry.id });
       if (error) throw error;
       navigate("/moments");
     } catch (error) {
@@ -75,16 +75,16 @@ const SingleMoment = (props) => {
       alignItems="stretch"
       maxW="700px"
     >
-      <MomentCard
+      <JournalEntryCard
         loading={loading}
-        moment={moment}
-        setMoment={setMoment}
+        journalEntry={journalEntry}
+        setJournalEntry={setJournalEntry}
         setLoading={setLoading}
         location={location}
       />
       <FloatingDelete
         location={location}
-        id={moment.id}
+        id={journalEntry.id}
         onClick={handleDelete}
       />
       <br />
@@ -94,4 +94,4 @@ const SingleMoment = (props) => {
   );
 };
 
-export default SingleMoment;
+export default SingleJournal;

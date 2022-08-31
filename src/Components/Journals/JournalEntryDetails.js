@@ -4,6 +4,7 @@ import { supabase } from "../../server/supabaseClient";
 import {
   HStack,
   Text,
+  Heading,
   EditablePreview,
   IconButton,
   ButtonGroup,
@@ -16,23 +17,29 @@ import DateObject from "react-date-object";
 import FloatingEdit from "../Buttons/FloatingEdit";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { vibeMsgSelector } from "../Helpers/vibeMsgSelector";
+import wordsCount from "words-count";
 
 let startingContent = "";
 
-const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
-  const [count, setCount] = useState(moment.content.length);
-  const { momentId } = useParams();
+const JournalEntryDetails = ({
+  journalEntry,
+  setJournalEntry,
+  setLoading,
+  location,
+}) => {
+  const [count, setCount] = useState(journalEntry.content.length);
+  const { journalEntryId } = useParams();
 
   useEffect(() => {
-    startingContent = moment.content;
+    startingContent = journalEntry.content;
   }, []);
 
-  async function editMomentContent(e) {
+  async function editJournalEntryContent(e) {
     try {
       const { error } = await supabase
-        .from("moments")
+        .from("journals")
         .update({ content: e })
-        .eq("id", moment.id);
+        .eq("id", journalEntry.id);
 
       if (error) throw error;
     } catch (error) {
@@ -44,29 +51,29 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
   }
 
   // format date from the db for how we want it displayed
-  // console.log("created_at", moment.created_at);
-  let modifiedDate = `${moment.created_at.slice(
+  // console.log("created_at", journalEntry.created_at);
+  let modifiedDate = `${journalEntry.created_at.slice(
     0,
     10
-  )} ${moment.created_at.slice(11, 16)}`;
+  )} ${journalEntry.created_at.slice(11, 16)}`;
   let date = new DateObject(modifiedDate);
   date._format = "MMM D, YYYY - h:mm a";
   const dateFormatted = date.format();
 
   const handleEdit = (newValue) => {
-    setMoment({ ...moment, content: newValue });
+    setJournalEntry({ ...journalEntry, content: newValue });
     startingContent = newValue;
-    editMomentContent(newValue);
+    editJournalEntryContent(newValue);
   };
 
   const handleCancel = () => {
     setCount(startingContent.length);
-    setMoment({ ...moment, content: startingContent });
+    setJournalEntry({ ...journalEntry, content: startingContent });
   };
 
   const handleChange = (e) => {
     setCount(e.target.value.length);
-    setMoment({ ...moment, content: e.target.value });
+    setJournalEntry({ ...journalEntry, content: e.target.value });
   };
 
   //// additional elements for editing
@@ -86,7 +93,7 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
           {...getCancelButtonProps()}
         />
       </ButtonGroup>
-    ) : momentId ? (
+    ) : journalEntryId ? (
       <FloatingEdit location={location} {...getEditButtonProps()} />
     ) : (
       <></>
@@ -95,61 +102,57 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
 
   return (
     <>
+      <Heading fontSize="1rem" w="100%" align="left" p="16px">
+        {dateFormatted.toLowerCase()}
+      </Heading>
       <Editable
         w="100%"
         align="left"
-        defaultValue={moment.content}
-        placeholder="moment is empty"
-        value={moment.content}
+        defaultValue={journalEntry.content}
+        placeholder="journalEntry is empty"
+        value={journalEntry.content}
         isPreviewFocusable={false}
         selectAllOnFocus={false}
         onSubmit={(newvalue) => handleEdit(newvalue)}
         onCancel={() => handleCancel()}
       >
-        <EditablePreview py={2} px={4} overflowWrap="anywhere" />
+        <EditablePreview
+          pt={2}
+          px={4}
+          overflowWrap="anywhere"
+          noOfLines={[8]}
+        />
         <EditableTextarea
           // style this so the border isn't so huge
           w="100%"
           py={2}
           px={4}
           resize="none"
-          rows={8}
-          maxLength={260}
           onChange={(e) => handleChange(e)}
         />
         <EditableControls />
       </Editable>
-      <Text
-        fontSize="0.75rem"
-        fontStyle="italic"
-        w="100%"
-        align="left"
-        px="16px"
-      >
-        you were {vibeMsgSelector(moment.vibe)}
-      </Text>
+
       <HStack justifyContent="space-between">
         <Flex flexGrow={2}>
-          <Text fontSize="0.75rem" color="gray" w="100%" align="left" p="16px">
-            {dateFormatted.toLowerCase()}
+          <Text
+            fontSize="0.75rem"
+            fontStyle="italic"
+            w="100%"
+            align="left"
+            px="16px"
+          >
+            you were {vibeMsgSelector(journalEntry.vibe)}
           </Text>
         </Flex>
         <Flex flexGrow={1}>
-          {momentId ? (
-            <Text
-              fontSize="0.75rem"
-              color="gray"
-              w="100%"
-              align="right"
-              p="16px"
-            >
-              {count}/260
-            </Text>
-          ) : null}
+          <Text fontSize="0.75rem" color="gray" w="100%" align="right" p="16px">
+            word count: {wordsCount(journalEntry.content)}
+          </Text>
         </Flex>
       </HStack>
     </>
   );
 };
 
-export default MomentDetails;
+export default JournalEntryDetails;

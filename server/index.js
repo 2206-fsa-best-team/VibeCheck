@@ -18,7 +18,7 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "../build")));
 
 app.use((req, res, next) => {
   if (path.extname(req.path).length) {
@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
 
 app.post("/", async (req, res, next) => {

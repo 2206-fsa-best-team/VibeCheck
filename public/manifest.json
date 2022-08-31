@@ -1,6 +1,6 @@
 {
-  "short_name": "Moments",
-  "name": "Moments",
+  "short_name": "vibe check",
+  "name": "vibe check",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "check_192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "check_512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
@@ -21,6 +21,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ff6347",
+  "background_color": "#FF6347",
   "orientation": "portrait-primary"
 }

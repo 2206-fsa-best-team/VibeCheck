@@ -17,7 +17,7 @@ const FloatingAdd = (props) => {
       <Flex alignItems="flex-end" direction="row">
         <Link to={`/adda${location}`}>
           <Tooltip
-            label={`Add a new ${location}`}
+            label={`add a new ${location}`}
             placement="left"
             aria-label={`tooltip for adding a new ${location}`}
           >

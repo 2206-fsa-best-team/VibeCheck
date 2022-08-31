@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { VStack } from "@chakra-ui/react";
+import { Toast, useToast, VStack } from "@chakra-ui/react";
 import FloatingDelete from "../Buttons/FloatingDelete";
 import JournalEntryCard from "./JournalEntryCard";
+import { DeletedJournal } from "../ToastAlerts/DeleteAlerts";
 
 const SingleJournal = (props) => {
   const { journalEntryId } = useParams();
@@ -16,6 +17,7 @@ const SingleJournal = (props) => {
   const [loading, setLoading] = useState(true);
   const location = "journal entry";
   const navigate = useNavigate();
+  const toast = useToast()
 
   useEffect(() => {
     // i don't know if there will ever be props?
@@ -61,6 +63,7 @@ const SingleJournal = (props) => {
         .match({ id: journalEntry.id });
       if (error) throw error;
       navigate("/moments");
+      toast(DeletedJournal())
     } catch (error) {
       console.error(error.error_description || error.message);
     }

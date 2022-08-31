@@ -1,31 +1,15 @@
 import { IconButton, Flex, Container, Tooltip } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "../../server/supabaseClient";
 
 const FloatingDelete = (props) => {
-  const { location, momentId } = props;
-  const navigate = useNavigate();
-
-  async function handleDelete() {
-    try {
-      const { error } = await supabase
-        .from("moments")
-        .delete()
-        .match({ id: momentId });
-      if (error) throw error;
-      navigate("/moments");
-    } catch (error) {
-      console.error(error.error_description || error.message);
-    }
-  }
+  const { location, id } = props;
 
   return (
     <Container>
       <Flex alignItems="flex-end" direction="row">
         <Tooltip
-          label={`delete your moment`}
+          label={`delete your ${location}`}
           placement="left"
           aria-label={`tooltip for deleting a ${location}`}
         >
@@ -41,7 +25,7 @@ const FloatingDelete = (props) => {
             py={4}
             bottom={24}
             right={12}
-            onClick={handleDelete}
+            {...props}
           />
         </Tooltip>
       </Flex>

@@ -21,7 +21,7 @@ const Journals = () => {
       const { data, error } = await supabase
         .from("journals")
         .select()
-        .order("created_at", { ascending: false });
+        .order("date", { ascending: false });
       if (error) throw error;
       setJournals(data);
     } catch (error) {
@@ -63,6 +63,7 @@ const Journals = () => {
             <VStack p="1rem" spacing="1rem" alignItems="stretch">
               {journals.map((journal) => (
                 <JournalEntryCard
+                  aria-label="view your journal entry"
                   key={journal.id}
                   loading={loading}
                   journalEntry={journal}

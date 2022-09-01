@@ -8,7 +8,7 @@ import {
 import { EditIcon } from "@chakra-ui/icons";
 import React from "react";
 
-const FloatingEditLarge = (props) => {
+const FloatingEditWeb = (props) => {
   const { location } = props;
 
   return (
@@ -30,7 +30,7 @@ const FloatingEditLarge = (props) => {
             px={4}
             py={4}
             top={40}
-            right="5vw"
+            right={location === "moment" ? "22vw" : "5vw"}
             {...props}
           />
         </Tooltip>
@@ -39,4 +39,4 @@ const FloatingEditLarge = (props) => {
   );
 };
 
-export default FloatingEditLarge;
+export default FloatingEditWeb;

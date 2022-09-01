@@ -11,11 +11,16 @@ import {
   Editable,
   EditableTextarea,
   Flex,
+  Box,
+  Tooltip,
+  Show,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
-import FloatingEdit from "../Buttons/FloatingEdit";
+import FloatingEditMobile from "../Buttons/FloatingEditMobile";
+import FloatingEditWeb from "../Buttons/FloatingEditWeb";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { vibeMsgSelector } from "../Helpers/vibeMsgSelector";
+import TextareaAutosize from "react-textarea-autosize";
 
 let startingContent = "";
 
@@ -80,21 +85,43 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
 
     return isEditing ? (
       <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
-        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
-        <IconButton
-          icon={<CloseIcon boxSize={3} />}
-          {...getCancelButtonProps()}
-        />
+        <Tooltip
+          label="submit your edits"
+          placement="left"
+          aria-label="tooltip for submitting an edit"
+        >
+          <IconButton
+            icon={<CheckIcon />}
+            {...getSubmitButtonProps()}
+            aria-label="button to submit edits"
+          />
+        </Tooltip>
+        <Tooltip
+          label="cancel your edits"
+          placement="right"
+          aria-label="tooltip for canceling an edit"
+        >
+          <IconButton
+            icon={<CloseIcon boxSize={3} />}
+            {...getCancelButtonProps()}
+            aria-label="button to cancel edits"
+          />
+        </Tooltip>
       </ButtonGroup>
     ) : momentId ? (
-      <FloatingEdit location={location} {...getEditButtonProps()} />
-    ) : (
-      <></>
-    );
+      <>
+        <Show above="lg">
+          <FloatingEditWeb location={location} {...getEditButtonProps()} />
+        </Show>
+        <Show below="lg">
+          <FloatingEditMobile location={location} {...getEditButtonProps()} />
+        </Show>
+      </>
+    ) : null;
   }
 
   return (
-    <>
+    <Box>
       <Editable
         w="100%"
         align="left"
@@ -106,16 +133,23 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
         onSubmit={(newvalue) => handleEdit(newvalue)}
         onCancel={() => handleCancel()}
       >
-        <EditablePreview py={2} px={4} overflowWrap="anywhere" />
+        <EditablePreview
+          py={2}
+          px={4}
+          resize="none"
+          overflowWrap="anywhere"
+          whiteSpace="pre-wrap"
+        />
         <EditableTextarea
           // style this so the border isn't so huge
           w="100%"
           py={2}
           px={4}
           resize="none"
-          rows={8}
+          transition="height none"
           maxLength={260}
           onChange={(e) => handleChange(e)}
+          as={TextareaAutosize}
         />
         <EditableControls />
       </Editable>
@@ -148,7 +182,7 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
           ) : null}
         </Flex>
       </HStack>
-    </>
+    </Box>
   );
 };
 

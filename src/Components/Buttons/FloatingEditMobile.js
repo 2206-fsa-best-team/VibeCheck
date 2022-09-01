@@ -8,7 +8,7 @@ import {
 import { EditIcon } from "@chakra-ui/icons";
 import React from "react";
 
-const FloatingEdit = (props) => {
+const FloatingEditMobile = (props) => {
   const { location } = props;
 
   return (
@@ -39,4 +39,4 @@ const FloatingEdit = (props) => {
   );
 };
 
-export default FloatingEdit;
+export default FloatingEditMobile;

@@ -7,15 +7,8 @@ const MomentCard = (props) => {
   const { loading, moment, onClick } = props;
 
   return loading ? (
-    <VStack
-      p="5"
-      m="16px"
-      spacing={"16px"}
-      borderRadius="lg"
-      alignItems="stretch"
-      maxW="700px"
-    >
-      <Skeleton height="60px" />
+    <VStack p="5" m="16px" spacing={"16px"} alignItems="stretch" maxW="lg">
+      <Skeleton height="8rem" borderRadius="lg" />
     </VStack>
   ) : (
     <Box

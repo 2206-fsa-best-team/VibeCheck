@@ -41,14 +41,7 @@ const Moments = () => {
         your moments
       </Text>
       {loading ? (
-        <VStack
-          p="1rem"
-          m="16px"
-          spacing="1rem"
-          borderRadius="lg"
-          alignItems="stretch"
-          maxW="lg"
-        >
+        <VStack p="1rem" m="16px" spacing="1rem" alignItems="stretch" maxW="lg">
           <Skeleton height="8rem" borderRadius="lg" />
           <Skeleton height="8rem" borderRadius="lg" />
           <Skeleton height="8rem" borderRadius="lg" />

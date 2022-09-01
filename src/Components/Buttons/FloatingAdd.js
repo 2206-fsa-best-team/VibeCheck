@@ -24,7 +24,7 @@ const FloatingAdd = (props) => {
             <IconButton
               icon={<AddIcon />}
               isRound="true"
-              aria-label={`Add a new ${location}`}
+              aria-label={`add a new ${location}`}
               alignSelf="flex-end"
               size="lg"
               bg={useColorModeValue("gray.300", "tomato")}

@@ -13,7 +13,16 @@ const Cam = (props) => {
       setModalLoading(true);
       const body = { img };
       const { data } = await axios.post("/", body);
-      setAllText(data.fullTextAnnotation);
+      if (data.fullTextAnnotation) {
+        setAllText(data.fullTextAnnotation);
+      } else {
+        alert(
+          `there has been an error. likely this means no text could
+  be deciphered from your photo. please try again with a new
+  photo. if that doesn't work we are likely experiencing a
+  server error! we appologize for the inconvenience if so`
+        );
+      }
     } catch (e) {
       console.error(e);
       alert(

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { Toast, useToast, VStack } from "@chakra-ui/react";
+import { useToast, VStack, Skeleton, Show } from "@chakra-ui/react";
 import FloatingDelete from "../Buttons/FloatingDelete";
-import JournalEntryCard from "./JournalEntryCard";
+import FloatingDeleteLarge from "../Buttons/FloatingDeleteLarge";
+import JournalEntryDetails from "./JournalEntryDetails";
 import { DeletedJournal } from "../ToastAlerts/DeleteAlerts";
 
 const SingleJournal = (props) => {
@@ -12,65 +13,54 @@ const SingleJournal = (props) => {
     id: journalEntryId,
     content: "",
     vibe: null,
-    created_at: Date(),
+    date: Date(),
   });
   const [loading, setLoading] = useState(true);
   const location = "journal entry";
   const navigate = useNavigate();
-  const toast = useToast()
+  const toast = useToast();
 
   useEffect(() => {
-    // i don't know if there will ever be props?
-    if (props.journalEntry) {
-      let { content, vibe, created_at } = props.journalEntry;
-      initializeJournalEntry(content, vibe, created_at);
-    } else {
-      fetchJournalEntry();
+    async function fetchJournalEntry() {
+      try {
+        const { data, error } = await supabase
+          .from("journals")
+          .select()
+          .eq("id", journalEntryId)
+          .single();
+        if (error) throw error;
+        let { content, vibe, date } = data;
+        setJournalEntry({
+          ...journalEntry,
+          content,
+          vibe,
+          date,
+        });
+      } catch (error) {
+        navigate("/error");
+        console.error(error.error_description || error.message);
+      } finally {
+        setLoading(false);
+      }
     }
+    fetchJournalEntry().then(console.log("journalEntry", journalEntry));
   }, []);
-
-  function initializeJournalEntry(content, vibe, created_at) {
-    setJournalEntry({
-      ...journalEntry,
-      content,
-      vibe,
-      created_at,
-    });
-  }
-
-  async function fetchJournalEntry() {
-    try {
-      const { data, error } = await supabase
-        .from("journals")
-        .select()
-        .eq("id", journalEntryId)
-        .single();
-      if (error) throw error;
-      let { content, vibe, created_at } = data;
-      initializeJournalEntry(content, vibe, created_at);
-    } catch (error) {
-      navigate("/error");
-      console.error(error.error_description || error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   async function handleDelete() {
     try {
       const { error } = await supabase
-        .from("moments")
+        .from("journals")
         .delete()
         .match({ id: journalEntry.id });
       if (error) throw error;
-      navigate("/moments");
-      toast(DeletedJournal())
+      navigate("/journals");
+      toast(DeletedJournal());
     } catch (error) {
       console.error(error.error_description || error.message);
     }
   }
 
-  return (
+  return loading ? (
     <VStack
       p="5"
       m="16px"
@@ -79,18 +69,38 @@ const SingleJournal = (props) => {
       alignItems="stretch"
       maxW="700px"
     >
-      <JournalEntryCard
+      <Skeleton height="100px" />
+    </VStack>
+  ) : (
+    <VStack
+      p="5"
+      m="16px"
+      spacing={"16px"}
+      borderRadius="lg"
+      alignItems="stretch"
+      w={["vw", "70vw"]}
+    >
+      <JournalEntryDetails
         loading={loading}
         journalEntry={journalEntry}
         setJournalEntry={setJournalEntry}
         setLoading={setLoading}
         location={location}
       />
-      <FloatingDelete
-        location={location}
-        id={journalEntry.id}
-        onClick={handleDelete}
-      />
+      <Show above="lg">
+        <FloatingDeleteLarge
+          location={location}
+          id={journalEntry.id}
+          onClick={handleDelete}
+        />
+      </Show>
+      <Show below="lg">
+        <FloatingDelete
+          location={location}
+          id={journalEntry.id}
+          onClick={handleDelete}
+        />
+      </Show>
       <br />
       <br />
       <br />

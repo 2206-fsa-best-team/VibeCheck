@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { VStack, Text, Skeleton } from "@chakra-ui/react";
+import { VStack, Text, Skeleton, Show } from "@chakra-ui/react";
 import MomentCard from "./MomentCard";
 import FloatingAdd from "../Buttons/FloatingAdd";
 
@@ -65,7 +65,9 @@ const Moments = () => {
               ))}
             </VStack>
           )}
-          <FloatingAdd location={location} />
+          <Show below="lg">
+            <FloatingAdd location={location} />
+          </Show>
         </>
       )}
       <br />

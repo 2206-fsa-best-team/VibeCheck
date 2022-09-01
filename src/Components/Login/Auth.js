@@ -13,6 +13,7 @@ import {
   Box,
   FormControl,
   CircularProgress,
+  FormHelperText,
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import {
@@ -32,6 +33,8 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const toast = useToast();
+
+  const shortPass = password.length > 0 && password.length < 6;
 
   const credsInvalid = password.length < 6 || email.length === 0; // very rudimentary validation check
 
@@ -71,7 +74,7 @@ export default function Auth() {
             email,
             password,
           },
-          { redirectTo: "http://localhost:3000/welcome" }
+          { redirectTo: "https://vibe-check-2206.herokuapp.com/welcome" }
         );
 
         if (error) throw error;
@@ -133,7 +136,7 @@ export default function Auth() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </FormControl>
-              <FormControl mt={6} isRequired>
+              <FormControl mt={6} isRequired isInvalid={shortPass}>
                 <InputGroup size="md">
                   <Input
                     type={show ? "text" : "password"}
@@ -151,6 +154,13 @@ export default function Auth() {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
+                {shortPass ? (
+                  <FormHelperText color="red.300" fontSize='xs' pl='3' >
+                    password must be 6+ characters
+                  </FormHelperText>
+                ) : (
+                  <></>
+                )}
               </FormControl>
               <ButtonGroup size="md" mt={4}>
                 <Button type="submit" disabled={credsInvalid}>

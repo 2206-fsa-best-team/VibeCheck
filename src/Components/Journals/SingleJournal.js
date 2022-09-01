@@ -65,11 +65,10 @@ const SingleJournal = (props) => {
       p="5"
       m="16px"
       spacing={"16px"}
-      borderRadius="lg"
       alignItems="stretch"
-      maxW="700px"
+      w={["vw", "70vw"]}
     >
-      <Skeleton height="100px" />
+      <Skeleton height="50vh" borderRadius="lg" />
     </VStack>
   ) : (
     <VStack

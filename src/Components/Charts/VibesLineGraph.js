@@ -26,11 +26,12 @@ const VibesLineGraph = (props) => {
   const CustomTooltip = (data) => {
     const { payload, label, active, color, content } = data
     if (active) {
+      let val = findEntry(dataType(props), payload[0].payload.id)
       content.props.setEntryId(payload[0].payload.id)
       if (props.type === "moments") {
-        content.props.setMoment(findEntry(dataType(props), payload[0].payload.id))
+        content.props.setMoment(val)
       } else if (props.type === "journals") {
-        content.props.setJournal(findEntry(dataType(props), payload[0].payload.id))
+        content.props.setJournal(val)
       }
 
       return (

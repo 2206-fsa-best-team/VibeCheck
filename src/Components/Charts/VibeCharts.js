@@ -39,8 +39,8 @@ const VibeCharts = (props) => {
     setLoading(true);
     dateFilter(filter);
     fetchMoments();
-    fetchJournals();
-    setLoading(false);
+    fetchJournals()
+    setLoading(false)
   }, [filter, filterDate, entryId, type]);
 
   const dateFilter = async (val) => {
@@ -49,8 +49,20 @@ const VibeCharts = (props) => {
     let year = todaysDate.year;
     switch (val) {
       case "lastSeven":
-        day -= 7;
+        if (day - 7 >= 1) {
+          day -= 7;
+        } else {
+          month -= 1;
+          if (month === 2) {
+            day += 21;
+          } else if (month === (1 || 3 || 5 || 7 || 8 || 10 || 12)) {
+            day += 24;
+          } else {
+            day += 23;
+          }
+        }
         setFilterDate(`${year}-${month}-${day} 00:00:00`);
+
         break;
       case "lastThirty":
         month -= 1;
@@ -105,10 +117,6 @@ const VibeCharts = (props) => {
     <>
       {loading ? (
         <Container w={"90%"}>
-          <br />
-          <br />
-          <Skeleton height="200px" />
-          <br />
           <br />
           <br />
           <Skeleton height="200px" />

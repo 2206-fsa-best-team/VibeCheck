@@ -8,18 +8,19 @@ const ChartFilter = (props) => {
     setFilter(val);
   };
 
+
   return (
     <>
       <Container>
         <ButtonGroup
-          colorScheme={"blue"}
+
           w={"100%"}
           direction="flex"
           justifyContent={"center"}
         >
           <Button
             height={"32px"}
-            isActive={filter === "all" ? true : false}
+            variant={filter === 'all' ? 'solid' : 'outline'}
             onClick={(e) => {
               e.preventDefault();
               handleClick("all");
@@ -29,7 +30,7 @@ const ChartFilter = (props) => {
           </Button>
           <Button
             height={"32px"}
-            isActive={filter === "lastSeven" ? true : false}
+            variant={filter === 'lastSeven' ? 'solid' : 'outline'}
             onClick={(e) => {
               e.preventDefault();
               handleClick("lastSeven");
@@ -39,7 +40,7 @@ const ChartFilter = (props) => {
           </Button>
           <Button
             height={"32px"}
-            isActive={filter === "lastThirty" ? true : false}
+            variant={filter === 'lastThirty' ? 'solid' : 'outline'}
             onClick={(e) => {
               e.preventDefault();
               handleClick("lastThirty");
@@ -49,7 +50,7 @@ const ChartFilter = (props) => {
           </Button>
           <Button
             height={"32px"}
-            isActive={filter === "lastYear" ? true : false}
+            variant={filter === 'lastYear' ? 'solid' : 'outline'}
             onClick={(e) => {
               e.preventDefault();
               handleClick("lastYear");

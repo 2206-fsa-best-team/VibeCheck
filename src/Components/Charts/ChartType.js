@@ -14,7 +14,7 @@ const ChartType = (props) => {
 
   const handleClick = (e, val) => {
     // e.preventDefault();
-    setEntryId(0)
+    setEntryId(0);
     if (val === "moments") {
       setType("moments");
       setActive("moments");
@@ -29,15 +29,13 @@ const ChartType = (props) => {
       <Container align="center">
         <ButtonGroup isAttached>
           <Button
-            isActive={active === "moments" ? true : false}
-            colorScheme={"blue"}
+            variant={active === "moments" ? "solid" : "outline"}
             onClick={(e) => handleClick(e, "moments")}
           >
             moments
           </Button>
           <Button
-            isActive={active === "journals" ? true : false}
-            colorScheme={"blue"}
+            variant={active === "journals" ? "solid" : "outline"}
             onClick={(e) => handleClick(e, "journals")}
           >
             journals

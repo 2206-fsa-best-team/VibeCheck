@@ -61,6 +61,7 @@ export default function Navbar(props) {
                   cursor={"pointer"}
                   minW={0}
                   onClick={onOpen}
+                  aria-label="open user menu button"
                 >
                   <Avatar size={"sm"} name={name} src="" />
                 </MenuButton>

@@ -6,10 +6,10 @@ const LightDarkButton = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Button onClick={toggleColorMode}>
+    <Button onClick={toggleColorMode} aria-label="toggle light/dark mode">
       {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
     </Button>
   );
 };
 
-export default LightDarkButton
+export default LightDarkButton;

@@ -77,9 +77,10 @@ This project was built using a variety of frameworks and tools, but we will focu
 * ![image](https://img.shields.io/badge/-Chakra_UI-teal?style=for-the-badge)
 * ![image](https://img.shields.io/badge/-Supabase-green?style=for-the-badge)
 * ![image](https://img.shields.io/badge/-HTML/CSS-orange?style=for-the-badge)
-* ![image](https://img.shields.io/badge/-Google_Cloud_Vision-blue?style=for-the-badge)
+* ![image](https://img.shields.io/badge/-Google_Cloud_Vision-darkblue?style=for-the-badge)
 * ![image](https://img.shields.io/badge/-Heroku-purple?style=for-the-badge)
 * ![image](https://img.shields.io/badge/-Node.js-green?style=for-the-badge)
+* ![image](https://img.shields.io/badge/-PostgreSQL-blue?style=for-the-badge)
 * ![image](https://img.shields.io/badge/-express-grey?style=for-the-badge)
 * ![image](https://img.shields.io/badge/-Recharts-lightblue?style=for-the-badge)
 

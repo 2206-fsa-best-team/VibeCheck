@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import Webcam from "react-webcam";
-import { Box, Button, CircularProgress, Text } from "@chakra-ui/react";
+import { Box, Button, CircularProgress, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 
 const Cam = (props) => {
@@ -57,7 +57,7 @@ server error! we appologize for the inconvenience if so`
             </Button>
           </>
         ) : (
-          <>
+          <VStack align="center">
             <img src={image} alt="Taken" />
             <br />
             <Button
@@ -82,7 +82,7 @@ server error! we appologize for the inconvenience if so`
                 <Text>convert to text</Text>{" "}
               </Button>
             )}
-          </>
+          </VStack>
         )}
       </Box>
     </div>

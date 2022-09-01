@@ -22,6 +22,7 @@ const Cam = (props) => {
   photo. if that doesn't work we are likely experiencing a
   server error! we appologize for the inconvenience if so`
         );
+        setModalLoading(false);
       }
     } catch (e) {
       console.error(e);

@@ -63,6 +63,7 @@ const Journals = () => {
             <VStack p="1rem" spacing="1rem" alignItems="stretch">
               {journals.map((journal) => (
                 <JournalEntryCard
+                  aria-label="view your journal entry"
                   key={journal.id}
                   loading={loading}
                   journalEntry={journal}

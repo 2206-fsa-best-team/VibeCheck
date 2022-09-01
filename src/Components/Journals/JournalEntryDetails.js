@@ -13,9 +13,12 @@ import {
   EditableTextarea,
   Flex,
   Box,
+  Tooltip,
+  Show,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
 import FloatingEdit from "../Buttons/FloatingEdit";
+import FloatingEditLarge from "../Buttons/FloatingEditLarge";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { vibeMsgSelector } from "../Helpers/vibeMsgSelector";
 import wordsCount from "words-count";
@@ -30,13 +33,9 @@ const JournalEntryDetails = ({
   location,
 }) => {
   const { journalEntryId } = useParams();
-  console.log("startingContent TOP -->", startingContent);
-  console.log("journalEntry TOP -->", journalEntry);
 
   useEffect(() => {
-    console.log("startingContent useEffect before -->", startingContent);
     startingContent = journalEntry.content;
-    console.log("startingContent useEffect after -->", startingContent);
   }, []);
 
   async function editJournalEntryContent(e) {
@@ -63,12 +62,10 @@ const JournalEntryDetails = ({
   const handleEdit = (newValue) => {
     setJournalEntry({ ...journalEntry, content: newValue });
     startingContent = newValue;
-    console.log("startingContent handleEdit -->", startingContent);
     editJournalEntryContent(newValue);
   };
 
   const handleCancel = () => {
-    console.log("startingContent handleCancel -->", startingContent);
     setJournalEntry({ ...journalEntry, content: startingContent });
   };
 
@@ -87,21 +84,38 @@ const JournalEntryDetails = ({
 
     return isEditing ? (
       <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
-        <IconButton
-          icon={<CheckIcon />}
-          {...getSubmitButtonProps()}
-          onClick={window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: "smooth",
-          })}
-        />
-        <IconButton
-          icon={<CloseIcon boxSize={3} />}
-          {...getCancelButtonProps()}
-        />
+        <Tooltip
+          label="submit your edits"
+          placement="left"
+          aria-label="tooltip for submitting an edit"
+        >
+          <IconButton
+            icon={<CheckIcon />}
+            {...getSubmitButtonProps()}
+            aria-label="button to submit edits"
+          />
+        </Tooltip>
+        <Tooltip
+          label="cancel your edits"
+          placement="right"
+          aria-label="tooltip for canceling an edit"
+        >
+          <IconButton
+            icon={<CloseIcon boxSize={3} />}
+            {...getCancelButtonProps()}
+            aria-label="button to cancel edits"
+          />
+        </Tooltip>
       </ButtonGroup>
     ) : journalEntryId ? (
-      <FloatingEdit location={location} {...getEditButtonProps()} />
+      <>
+        <Show below="lg">
+          <FloatingEdit location={location} {...getEditButtonProps()} />
+        </Show>
+        <Show above="lg">
+          <FloatingEditLarge location={location} {...getEditButtonProps()} />
+        </Show>
+      </>
     ) : null;
   }
 

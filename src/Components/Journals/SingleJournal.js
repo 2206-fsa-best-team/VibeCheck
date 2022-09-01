@@ -1,9 +1,21 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { VStack, Skeleton } from "@chakra-ui/react";
+import {
+  VStack,
+  HStack,
+  Skeleton,
+  Button,
+  ButtonGroup,
+  Show,
+  Box,
+  Flex,
+  useEditableControls,
+  Editable,
+} from "@chakra-ui/react";
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import FloatingDelete from "../Buttons/FloatingDelete";
-import JournalEntryCard from "./JournalEntryCard";
+import FloatingDeleteLarge from "../Buttons/FloatingDeleteLarge";
 import JournalEntryDetails from "./JournalEntryDetails";
 
 const SingleJournal = (props) => {
@@ -46,11 +58,11 @@ const SingleJournal = (props) => {
   async function handleDelete() {
     try {
       const { error } = await supabase
-        .from("moments")
+        .from("journals")
         .delete()
         .match({ id: journalEntry.id });
       if (error) throw error;
-      navigate("/moments");
+      navigate("/journals");
     } catch (error) {
       console.error(error.error_description || error.message);
     }
@@ -68,13 +80,14 @@ const SingleJournal = (props) => {
       <Skeleton height="100px" />
     </VStack>
   ) : (
+    // <HStack alignItems="stretch" flexDirection="row">
     <VStack
       p="5"
       m="16px"
       spacing={"16px"}
       borderRadius="lg"
       alignItems="stretch"
-      maxW="700px"
+      w={["vw", "70vw"]}
     >
       <JournalEntryDetails
         loading={loading}
@@ -83,15 +96,33 @@ const SingleJournal = (props) => {
         setLoading={setLoading}
         location={location}
       />
-      <FloatingDelete
-        location={location}
-        id={journalEntry.id}
-        onClick={handleDelete}
-      />
+      <Show above="lg">
+        <FloatingDeleteLarge
+          location={location}
+          id={journalEntry.id}
+          onClick={handleDelete}
+        />
+      </Show>
+      <Show below="lg">
+        <FloatingDelete
+          location={location}
+          id={journalEntry.id}
+          onClick={handleDelete}
+        />
+      </Show>
       <br />
       <br />
       <br />
     </VStack>
+    // {/* <Show above="lg">
+    // <VStack p="5" m="16px" alignItems="stretch">
+    // <Button leftIcon={<EditIcon />}>edit</Button>
+    // <Button leftIcon={<DeleteIcon />} onClick={handleDelete}>
+    // delete
+    // </Button>
+    // </VStack>
+    // </Show> */}
+    // {/* </HStack> */}
   );
 };
 

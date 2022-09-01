@@ -54,8 +54,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![image](https://user-images.githubusercontent.com/4291769/187789538-0e54f70f-214e-4823-a41d-b55598651f90.png)  ![image](https://user-images.githubusercontent.com/4291769/187789455-2fa67718-96a7-4736-ba07-c35510d03090.png)
-
+<img src="https://user-images.githubusercontent.com/4291769/187789455-2fa67718-96a7-4736-ba07-c35510d03090.png" width="225" height="400" />
 
 Our team wanted to build an app that allowed us to check in on our own experiences throughout the day (via short-form journaling) and provide a platform for longer form journal entries to let us reflect on a broader time period. As a result, vibe check was born.
 
@@ -93,20 +92,16 @@ This project was built using a variety of frameworks and tools, but we will focu
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
   ```
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Clone the repo
    ```sh
@@ -116,6 +111,17 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    npm install
    ```
+3. Run the following command to build the app
+   ```sh
+   npm run start
+   ```
+4. Navigate to localhost:8080 on your browser
+5. Log in with the following demo credentials or enter your own credentials and sign up
+    Email: amaan.lakhani5+8@gmail.com
+    Password: 123456
+    
+6. Enjoy!
+    
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -126,13 +132,70 @@ _Below is an example of how you can instruct your audience on installing and set
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
+### Installing the app
+
+Tap on the install to home screen button on the bottom of your screen
+
+<img src="https://user-images.githubusercontent.com/4291769/187952940-9c13d7d0-5b5b-40e8-9ec3-797ae2411b99.png" width="225" height="400" />
+
+Confirm the installation
+
+<img src="https://user-images.githubusercontent.com/4291769/187952894-7743c9c7-f8d3-4766-a02e-8ed4c151fd68.png" width="225" height="400" />
+
+Navigate to the app from your home screen and open the app
+
+<img src="https://user-images.githubusercontent.com/4291769/187953132-6c78f017-8f1b-4a38-9219-e4ef4c2f8620.png" width="225" height="400" />
+
+You're all set!
+
+### Adding a Moment
+<img src="https://user-images.githubusercontent.com/4291769/187954448-83686a62-3d31-4a93-b18e-4a10d2f4c6c1.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187954448-83686a62-3d31-4a93-b18e-4a10d2f4c6c1.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187954487-bfc0d64b-8faa-42db-b40d-ed5cbb01969a.png" width="225" height="400" />
+
+### Adding a Journal Entry
+
+<img src="https://user-images.githubusercontent.com/4291769/187959813-009f50f8-498a-42c3-9014-716084896f13.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187959885-95c435fa-82e7-4298-aaeb-d66309c5a8c3.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187959919-c937232c-a74c-47f9-9164-f231d05f381a.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187959942-59521fbf-d0b1-4420-8ff0-b6a6be7ff352.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187959857-ba0fcecd-cf86-40ef-93f1-39acf0c74883.png" width="225" height="400" /> 
+
+### Adding a Journal Entry via written document
+<img src="https://user-images.githubusercontent.com/4291769/187961500-834bbcc1-b684-4f21-9834-bb31e5d203f4.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187961613-72142550-a649-49dc-9147-7e78956d3e09.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187961595-a591ef6f-2861-43ab-bdda-2bab5aea7a87.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187961525-c7e96c24-c933-4b27-9ebe-e54136676e9c.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187961515-d38e564f-4718-4abf-8df7-f75fe23e314d.png" width="225" height="400" /> 
+
+
+### Viewing your vibes over time
+<img src="https://user-images.githubusercontent.com/4291769/187962838-7144de1a-3369-4be9-962f-ac55f6e36605.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187965727-9bb44f2c-66ba-4c99-9c60-13a03f6ba30e.png" width="225" height="400" /> <img src="https://user-images.githubusercontent.com/4291769/187964182-fa5c9e05-c4c2-4267-ade5-319786d29866.png" width="225" height="400" />
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- ROADMAP -->
+## Proof of Concept
+* Create a Progressive Web Application in React✔
+* Connect the app to Supabase ✔
+* Enable Authentication via Supabase ✔
+* Set up a PostgresQL database ✔
+* Display all moments and individual moments ✔
+* Add new moments ✔
+* Set up navigation for moments and journal entries ✔
+
+## MVP
+* Display all journal entries and individual journal entries ✔
+* Add all journal entries ✔
+* Edit / Delete moments and journal entries ✔
+* Secure routes and reading moments / journal entries for each user ✔
+* Enable camera usage in app ✔
+* Enable camera capture of written journal entries using Google Cloud Vision ✔
+* Highlight low-confidence words from written journal entries ✔
+* Create charts based on vibe data for moments and journal entries ✔
+* Enable filtering for moments and journal entries ✔
+* Enhance responsiveness throughout all components to account for desktop and mobile usage ✔
+* Deploy the app via Heroku ✔
+* Enable continuous integration using Heroku and Github ✔
+
 ## Long-term Vision
+* Implementing NLP and incorporating sentiment analysis into the vibe values
+* Graphing NLP sentiment analysis over time
+* Provide more informed analyses of what trigger words are associated with "good" or "bad" vibes
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -151,12 +214,14 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 Amaan Lakhani - [Github](https://github.com/alakhani5) - [LinkedIn](https://www.linkedin.com/in/amaanlakhani/) - [Email](amaan.lakhani5@gmail.com)
-Daniel Jacobson - [Github](https://github.com/danielyj98) - [LinkedIn](https://www.linkedin.com/in/danielj98/) - [Email](Danielyjacobson@gmail.com)
-Evan Forde Barden - [Github](https://github.com/evanfordebarden) - [LinkedIn](https://www.linkedin.com/in/evanfordebarden/) - [Email](evanbarden@gmail.com)
-Nicholas Angelopoulos - [Github](https://github.com/NickyAngel) - [LinkedIn](https://www.linkedin.com/in/nickyangel/) - [Email](neangelopoulos@gmail.com) 
-    
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Daniel Jacobson - [Github](https://github.com/danielyj98) - [LinkedIn](https://www.linkedin.com/in/danielj98/) - [Email](Danielyjacobson@gmail.com)
+
+Evan Forde Barden - [Github](https://github.com/evanfordebarden) - [LinkedIn](https://www.linkedin.com/in/evanfordebarden/) - [Email](evanbarden@gmail.com)
+
+Nicholas Angelopoulos - [Github](https://github.com/NickyAngel) - [LinkedIn](https://www.linkedin.com/in/nickyangel/) - [Email](neangelopoulos@gmail.com) 
+
+Project Link: [vibe check](https://github.com/2206-fsa-best-team/VibeCheck)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -166,7 +231,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 ## Acknowledgments
 
 * [Chakra UI](https://chakra-ui.com/)
-* [Recharts] (https://recharts.org)
+* [Recharts](https://recharts.org)
 * [Heroku](https://cloud.google.com/vision)
 * [React Icons](https://react-icons.github.io/react-icons/search)
 

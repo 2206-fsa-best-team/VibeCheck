@@ -47,11 +47,12 @@ const Moments = () => {
           spacing="1rem"
           borderRadius="lg"
           alignItems="stretch"
-          maxW="700px"
+          maxW="lg"
         >
-          {moments.map((moment) => (
-            <Skeleton height="60px" />
-          ))}
+          <Skeleton height="8rem" borderRadius="lg" />
+          <Skeleton height="8rem" borderRadius="lg" />
+          <Skeleton height="8rem" borderRadius="lg" />
+          <Skeleton height="8rem" borderRadius="lg" />
         </VStack>
       ) : (
         <>

@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import MoodSlider from "../Buttons/Slider";
 import CheckConf from "./CheckConf";
+import TextareaAutosize from "react-textarea-autosize";
 
 const AddJournal = () => {
   let todayUtc = new Date();
@@ -54,7 +55,7 @@ const AddJournal = () => {
   }
 
   return (
-    <Stack px="24px" display="flex">
+    <Stack px="24px" display="flex" maxW="4xl">
       {/* date input */}
       <Text mt="32px" ml="8px" fontSize={"24px"}>
         date:
@@ -76,10 +77,11 @@ const AddJournal = () => {
         onChange={(evt) =>
           setJournal({ ...journal, content: evt.target.value })
         }
-        resize="vertical"
+        resize="none"
         placeholder="write your journal here"
         aria-label="journal input field"
         size="lg"
+        as={TextareaAutosize}
       />
 
       {/* modal popup */}

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
 import { useToast, VStack, Skeleton, Show } from "@chakra-ui/react";
-import FloatingDelete from "../Buttons/FloatingDelete";
-import FloatingDeleteLarge from "../Buttons/FloatingDeleteLarge";
+import FloatingDeleteMobile from "../Buttons/FloatingDeleteMobile";
+import FloatingDeleteWeb from "../Buttons/FloatingDeleteWeb";
 import JournalEntryDetails from "./JournalEntryDetails";
 import { DeletedJournal } from "../ToastAlerts/DeleteAlerts";
 
@@ -43,7 +43,7 @@ const SingleJournal = (props) => {
         setLoading(false);
       }
     }
-    fetchJournalEntry().then(console.log("journalEntry", journalEntry));
+    fetchJournalEntry();
   }, []);
 
   async function handleDelete() {
@@ -88,14 +88,14 @@ const SingleJournal = (props) => {
         location={location}
       />
       <Show above="lg">
-        <FloatingDeleteLarge
+        <FloatingDeleteWeb
           location={location}
           id={journalEntry.id}
           onClick={handleDelete}
         />
       </Show>
       <Show below="lg">
-        <FloatingDelete
+        <FloatingDeleteMobile
           location={location}
           id={journalEntry.id}
           onClick={handleDelete}

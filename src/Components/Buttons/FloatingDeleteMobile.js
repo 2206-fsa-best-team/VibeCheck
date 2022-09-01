@@ -2,8 +2,8 @@ import { IconButton, Flex, Container, Tooltip } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import React from "react";
 
-const FloatingDelete = (props) => {
-  const { location, id } = props;
+const FloatingDeleteMobile = (props) => {
+  const { location } = props;
 
   return (
     <Container>
@@ -33,4 +33,4 @@ const FloatingDelete = (props) => {
   );
 };
 
-export default FloatingDelete;
+export default FloatingDeleteMobile;

@@ -7,15 +7,8 @@ const JournalEntryCard = (props) => {
   const { loading, journalEntry, onClick } = props;
 
   return loading ? (
-    <VStack
-      p="5"
-      m="16px"
-      spacing={"16px"}
-      borderRadius="lg"
-      alignItems="stretch"
-      maxW="700px"
-    >
-      <Skeleton height="60px" />
+    <VStack p="5" m="16px" spacing={"16px"} alignItems="stretch" maxW="xl">
+      <Skeleton height="10rem" borderRadius="lg" />
     </VStack>
   ) : (
     <Box

@@ -20,7 +20,7 @@ const MomentCard = (props) => {
   ) : (
     <Box
       onClick={onClick}
-      maxW="sm"
+      maxW="lg"
       align="stretch"
       borderWidth="1px"
       borderRadius="lg"

@@ -16,7 +16,6 @@ const Journals = () => {
   }, []);
 
   async function fetchJournals() {
-    // setLoading(true);
     try {
       const { data, error } = await supabase
         .from("journals")
@@ -47,11 +46,11 @@ const Journals = () => {
           spacing="1rem"
           borderRadius="lg"
           alignItems="stretch"
-          maxW="700px"
+          maxW="xl"
         >
-          {journals.map((journal) => (
-            <Skeleton height="100px" />
-          ))}
+          <Skeleton height="10rem" borderRadius="lg" />
+          <Skeleton height="10rem" borderRadius="lg" />
+          <Skeleton height="10rem" borderRadius="lg" />
         </VStack>
       ) : (
         <>

@@ -4,6 +4,7 @@ import { supabase } from "../../server/supabaseClient";
 import { VStack, Text, Skeleton } from "@chakra-ui/react";
 import MomentCard from "./MomentCard";
 import FloatingAdd from "../Buttons/FloatingAdd";
+import SidePhoto from "../Navigation/SidePhoto";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
@@ -65,6 +66,7 @@ const Moments = () => {
               ))}
             </VStack>
           )}
+          <SidePhoto />
           <FloatingAdd location={location} />
         </>
       )}

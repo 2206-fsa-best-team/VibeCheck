@@ -9,6 +9,7 @@ import {
   Text,
   CircularProgress,
 } from "@chakra-ui/react";
+import TextareaAutosize from "react-textarea-autosize";
 
 const AddMoment = () => {
   const [moment, setMoment] = useState({ content: "" });
@@ -52,7 +53,7 @@ const AddMoment = () => {
 
   return (
     <>
-      <Stack px="24px" display="flex">
+      <Stack px="24px" display="flex" maxW="xl">
         <Text pb="16px" mt="32px" ml="8px" fontSize={"24px"}>
           how's your moment?
         </Text>
@@ -65,6 +66,7 @@ const AddMoment = () => {
             handleChange(evt);
           }}
           maxLength={260}
+          as={TextareaAutosize}
         />
         <Text fontSize="0.75rem" color="gray" w="100%" align="right" pr="16px">
           {count}/260

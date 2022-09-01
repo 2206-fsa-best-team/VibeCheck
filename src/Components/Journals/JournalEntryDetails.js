@@ -17,8 +17,8 @@ import {
   Show,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
-import FloatingEdit from "../Buttons/FloatingEdit";
-import FloatingEditLarge from "../Buttons/FloatingEditLarge";
+import FloatingEditMobile from "../Buttons/FloatingEditMobile";
+import FloatingEditWeb from "../Buttons/FloatingEditWeb";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { vibeMsgSelector } from "../Helpers/vibeMsgSelector";
 import wordsCount from "words-count";
@@ -109,11 +109,11 @@ const JournalEntryDetails = ({
       </ButtonGroup>
     ) : journalEntryId ? (
       <>
-        <Show below="lg">
-          <FloatingEdit location={location} {...getEditButtonProps()} />
-        </Show>
         <Show above="lg">
-          <FloatingEditLarge location={location} {...getEditButtonProps()} />
+          <FloatingEditWeb location={location} {...getEditButtonProps()} />
+        </Show>
+        <Show below="lg">
+          <FloatingEditMobile location={location} {...getEditButtonProps()} />
         </Show>
       </>
     ) : null;

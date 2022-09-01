@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import MoodSlider from "../Buttons/Slider";
 import CheckConf from "./CheckConf";
+import TextareaAutosize from "react-textarea-autosize";
 
 const AddJournal = () => {
   let todayUtc = new Date();
@@ -54,7 +55,7 @@ const AddJournal = () => {
   }
 
   return (
-    <Stack  px="24px" display="flex">
+    <Stack px="24px" display="flex" maxW="4xl">
       {/* date input */}
       <Text mt="32px" ml="8px" fontSize={"24px"}>
         date:
@@ -75,9 +76,10 @@ const AddJournal = () => {
         onChange={(evt) =>
           setJournal({ ...journal, content: evt.target.value })
         }
-        resize="vertical"
+        resize="none"
         placeholder="write your journal here"
         size="lg"
+        as={TextareaAutosize}
       />
 
       {/* modal popup */}
@@ -105,7 +107,11 @@ const AddJournal = () => {
           <Text pt="16px" ml="8px" fontSize={"24px"}>
             change your mind?
           </Text>
-          <Button onClick={() => setShowCamera(false)} colorScheme="teal" variant='outline'>
+          <Button
+            onClick={() => setShowCamera(false)}
+            colorScheme="teal"
+            variant="outline"
+          >
             close camera
           </Button>
         </>
@@ -114,7 +120,11 @@ const AddJournal = () => {
           <Text ml="8px" fontSize={"24px"}>
             have a hand-written journal you want to add?
           </Text>
-          <Button onClick={() => setShowCamera(true)} variant='outline' colorScheme={'teal'}>
+          <Button
+            onClick={() => setShowCamera(true)}
+            variant="outline"
+            colorScheme={"teal"}
+          >
             open camera
           </Button>
         </>

@@ -35,7 +35,7 @@ const CheckConf = (props) => {
       });
     });
   });
-  setModalLoading(false)
+  setModalLoading(false);
   useEffect(() => {
     setValue(textStr);
     onOpen();
@@ -57,7 +57,7 @@ const CheckConf = (props) => {
           words wrapped in *s are the most likely inaccuracies, correct any
           mistakes (or leave it be if it is right) and delete the *s so they
           don't show up in your journal!
-          <Box borderWidth='1px' borderRadius='lg' p={2} mt={2}>
+          <Box borderWidth="1px" borderRadius="lg" p={2} mt={2}>
             <HighlightWithinTextarea
               value={value}
               highlight={"*"}
@@ -75,16 +75,18 @@ const CheckConf = (props) => {
               setAllText({});
               onClose();
             }}
+            aria-label="save button"
           >
-            Save
+            save
           </Button>
           <Button
             onClick={() => {
               setAllText({});
               onClose();
             }}
+            aria-label="cancel button"
           >
-            Cancel
+            cancel
           </Button>
         </ModalFooter>
       </ModalContent>

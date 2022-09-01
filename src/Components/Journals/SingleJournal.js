@@ -1,22 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import {
-  VStack,
-  HStack,
-  Skeleton,
-  Button,
-  ButtonGroup,
-  Show,
-  Box,
-  Flex,
-  useEditableControls,
-  Editable,
-} from "@chakra-ui/react";
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { useToast, VStack, Skeleton, Show } from "@chakra-ui/react";
 import FloatingDelete from "../Buttons/FloatingDelete";
 import FloatingDeleteLarge from "../Buttons/FloatingDeleteLarge";
 import JournalEntryDetails from "./JournalEntryDetails";
+import { DeletedJournal } from "../ToastAlerts/DeleteAlerts";
 
 const SingleJournal = (props) => {
   const { journalEntryId } = useParams();
@@ -29,6 +18,7 @@ const SingleJournal = (props) => {
   const [loading, setLoading] = useState(true);
   const location = "journal entry";
   const navigate = useNavigate();
+  const toast = useToast();
 
   useEffect(() => {
     async function fetchJournalEntry() {
@@ -47,6 +37,7 @@ const SingleJournal = (props) => {
           date,
         });
       } catch (error) {
+        navigate("/error");
         console.error(error.error_description || error.message);
       } finally {
         setLoading(false);
@@ -63,6 +54,7 @@ const SingleJournal = (props) => {
         .match({ id: journalEntry.id });
       if (error) throw error;
       navigate("/journals");
+      toast(DeletedJournal());
     } catch (error) {
       console.error(error.error_description || error.message);
     }
@@ -80,7 +72,6 @@ const SingleJournal = (props) => {
       <Skeleton height="100px" />
     </VStack>
   ) : (
-    // <HStack alignItems="stretch" flexDirection="row">
     <VStack
       p="5"
       m="16px"
@@ -114,15 +105,6 @@ const SingleJournal = (props) => {
       <br />
       <br />
     </VStack>
-    // {/* <Show above="lg">
-    // <VStack p="5" m="16px" alignItems="stretch">
-    // <Button leftIcon={<EditIcon />}>edit</Button>
-    // <Button leftIcon={<DeleteIcon />} onClick={handleDelete}>
-    // delete
-    // </Button>
-    // </VStack>
-    // </Show> */}
-    // {/* </HStack> */}
   );
 };
 

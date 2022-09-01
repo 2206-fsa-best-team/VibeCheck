@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
+  Box,
   VStack,
   Input,
   InputGroup,
@@ -84,61 +85,59 @@ const SettingsScreen = (props) => {
             <Text alignContent="flex-start" pr="3" fontSize={"24px"}>
               edit email
             </Text>
-            <HStack align={"center"} flexDirection="row">
-              <Input
-                type="email"
-                placeholder="your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+
+            <Input
+              type="email"
+              placeholder="your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {emailLoading ? (
+              <CircularProgress
+                isIndeterminate
+                size="1.75rem"
+                color="tomato"
+                align="right" pr={'32px'}
               />
-              {emailLoading ? (
-                <CircularProgress
-                  isIndeterminate
-                  size="1.75rem"
-                  color="tomato"
-                  align="center"
-                />
-              ) : (
-                <Button size="md" w="10rem" onClick={updateEmail}>
+            ) : (
+              <Box align="right">
+                <Button size="md" w="6rem" onClick={updateEmail}>
                   update
                 </Button>
-              )}
-            </HStack>
+              </Box>
+            )}
             <br />
             <Text alignContent="flex-start" pr="3" fontSize={"24px"}>
               edit password
             </Text>
-            <HStack align={"center"} flexDirection="row">
-              <InputGroup size="md" alignItems={"center"}>
-                <Input
-                  pr="4.5rem"
-                  type={show ? "text" : "password"}
-                  placeholder="your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <InputRightElement w="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show ? "Hide" : "Show"}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              {passwordLoading ? (
-                <CircularProgress
-                  isIndeterminate
-                  size="1.75rem"
-                  color="tomato"
-                  align="center"
-                />
-              ) : (
-                <>
-                  <Button size="md" w="8rem" onClick={updatePassword}>
-                    update
-                  </Button>
-                </>
-              )}
-            </HStack>
-
+            <InputGroup size="md" alignItems={"center"}>
+              <Input
+                pr="4.5rem"
+                type={show ? "text" : "password"}
+                placeholder="your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <InputRightElement w="4.5rem">
+                <Button h="1.75rem" size="sm" onClick={handleClick}>
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            {passwordLoading ? (
+              <CircularProgress
+                isIndeterminate
+                size="1.75rem"
+                color="tomato"
+                align="right" pr={'32px'}
+              />
+            ) : (
+              <Box align="right">
+                <Button size="md" w="6rem" onClick={updatePassword}>
+                  update
+                </Button>
+              </Box>
+            )}
           </>
         )}
       </VStack>

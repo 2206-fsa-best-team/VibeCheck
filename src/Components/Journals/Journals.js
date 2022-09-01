@@ -40,14 +40,7 @@ const Journals = () => {
         your journal entries
       </Text>
       {loading ? (
-        <VStack
-          p="1rem"
-          m="16px"
-          spacing="1rem"
-          borderRadius="lg"
-          alignItems="stretch"
-          maxW="xl"
-        >
+        <VStack p="1rem" m="16px" spacing="1rem" alignItems="stretch" maxW="xl">
           <Skeleton height="10rem" borderRadius="lg" />
           <Skeleton height="10rem" borderRadius="lg" />
           <Skeleton height="10rem" borderRadius="lg" />

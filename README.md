@@ -131,8 +131,6 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
 ### Installing the app
 
 Tap on the install to home screen button on the bottom of your screen

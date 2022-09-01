@@ -62,6 +62,7 @@ const AddJournal = () => {
       </Text>
       <Input
         type="date"
+        aria-label="date field"
         value={date}
         max={today}
         onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
@@ -78,6 +79,7 @@ const AddJournal = () => {
         }
         resize="none"
         placeholder="write your journal here"
+        aria-label="journal input field"
         size="lg"
         as={TextareaAutosize}
       />
@@ -111,6 +113,7 @@ const AddJournal = () => {
             onClick={() => setShowCamera(false)}
             colorScheme="teal"
             variant="outline"
+            aria-label="close camera button"
           >
             close camera
           </Button>
@@ -124,6 +127,7 @@ const AddJournal = () => {
             onClick={() => setShowCamera(true)}
             variant="outline"
             colorScheme={"teal"}
+            aria-label="open camera button"
           >
             open camera
           </Button>
@@ -136,7 +140,11 @@ const AddJournal = () => {
           <Text pt="16px" ml="8px" fontSize={"24px"}>
             all set?
           </Text>
-          <Button onClick={createJournal} colorScheme="teal">
+          <Button
+            onClick={createJournal}
+            colorScheme="teal"
+            aria-label="add journal button"
+          >
             add this journal!
           </Button>
         </>

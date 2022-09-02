@@ -25,12 +25,22 @@ const CheckConf = (props) => {
     page.blocks.forEach((block) => {
       block.paragraphs.forEach((paragraph) => {
         paragraph.words.forEach((word) => {
-          if (word.confidence < 0.75 && word.symbols[0].text !== "*") {
+          if (word.confidence < 0.85 && word.symbols[0].text !== "*") {
             word.symbols.unshift({ text: "*" });
             word.symbols.push({ text: "*" });
           }
           const wordText = word.symbols.map((s) => s.text).join("");
-          textStr += wordText + " ";
+          if (wordText.match(/[!?,\.%*]/)) {
+            textStr = textStr.slice(0, -1);
+            textStr += wordText + " ";
+          } else if (wordText.match(/[-\(\)@]/)) {
+            textStr = textStr.slice(0, -1);
+            textStr += wordText;
+          } else if(wordText.match(/[~$]/)) {
+            textStr += wordText;
+          }else {
+            textStr += wordText + " ";
+          }
         });
       });
     });

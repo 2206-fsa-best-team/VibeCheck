@@ -20,6 +20,7 @@ import VibeCharts from "./Components/Charts/VibeCharts.js";
 import SingleMoment from "./Components/Moments/SingleMoment";
 import AboutPage from "./Components/About/AboutPage";
 import SingleJournal from "./Components/Journals/SingleJournal";
+import SidePhoto from "./Components/Navigation/SidePhoto";
 
 function App() {
   const [session, setSession] = useState("");
@@ -45,6 +46,9 @@ function App() {
           <Navbar isLoggedIn={isLoggedIn} />
           <Show above="lg">
             <SideMenu />
+          </Show>
+          <Show above="lg">
+            <SidePhoto />
           </Show>
           <Box mt={16} ml={{ base: "0", lg: "20%" }} mb={20} zIndex={-1}>
             <Routes>

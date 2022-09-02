@@ -66,7 +66,7 @@ const Moments = () => {
               ))}
             </VStack>
           )}
-          <SidePhoto />
+          {/* <SidePhoto /> */}
           <FloatingAdd location={location} />
         </>
       )}

@@ -63,7 +63,7 @@ export default function Navbar(props) {
                   onClick={onOpen}
                   aria-label="open user menu button"
                 >
-                  <Avatar size={"sm"} name={name} src="" />
+                  <Avatar size={"sm"} name={name} src="" bg="teal" />
                 </MenuButton>
                 <Portal>
                   <MenuList
@@ -74,7 +74,7 @@ export default function Navbar(props) {
                   >
                     <br />
                     <Center>
-                      <Avatar size={"2xl"} name={name} src={""} />
+                      <Avatar size={"2xl"} name={name} src={""} bg="teal" />
                     </Center>
                     <br />
                     <Center>

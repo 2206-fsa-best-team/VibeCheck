@@ -30,15 +30,15 @@ const CheckConf = (props) => {
             word.symbols.push({ text: "*" });
           }
           const wordText = word.symbols.map((s) => s.text).join("");
-          if (wordText.match(/[!?,\.%*]/)) {
+          if (wordText.match(/[!?,\.%]/)) {
             textStr = textStr.slice(0, -1);
             textStr += wordText + " ";
-          } else if (wordText.match(/[-\(\)@]/)) {
+          } else if (wordText.match(/[-\(\)@']/)) {
             textStr = textStr.slice(0, -1);
             textStr += wordText;
-          } else if(wordText.match(/[~$]/)) {
+          } else if (wordText.match(/[~$]/)) {
             textStr += wordText;
-          }else {
+          } else {
             textStr += wordText + " ";
           }
         });

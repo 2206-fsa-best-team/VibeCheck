@@ -4,6 +4,7 @@ import { supabase } from "../../server/supabaseClient";
 import { VStack, Text, Skeleton, Show } from "@chakra-ui/react";
 import MomentCard from "./MomentCard";
 import FloatingAdd from "../Buttons/FloatingAdd";
+import SidePhoto from "../Navigation/SidePhoto";
 
 const Moments = () => {
   const [moments, setMoments] = useState([]);
@@ -40,6 +41,7 @@ const Moments = () => {
       <Text ml="1rem" fontSize={"1.5rem"} pl={4} pt="1rem">
         your moments
       </Text>
+      <SidePhoto />
       {loading ? (
         <VStack p="1rem" m="16px" spacing="1rem" alignItems="stretch" maxW="lg">
           <Skeleton height="8rem" borderRadius="lg" />

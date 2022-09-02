@@ -9,9 +9,10 @@ import {
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdFormatListBulleted } from "react-icons/md";
 import { BiLineChart } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Footer() {
+  const location = useLocation();
   return (
     <Box
       bg={useColorModeValue("gray.300", "#0a0f1c")}
@@ -27,8 +28,9 @@ function Footer() {
         <Spacer />
         <Link to="/moments">
           <Icon
+            borderRadius="0.5rem"
             variant="ghost"
-            color={"tomato"}
+            color={location.pathname === "/moments" ? "teal" : "tomato"}
             aria-label="All Moments Page"
             w={10}
             h={10}
@@ -40,8 +42,10 @@ function Footer() {
         <Spacer />
         <Link to="/journals">
           <Icon
+            borderRadius="0.5rem"
+            py={1}
             variant="ghost"
-            color={"tomato"}
+            color={location.pathname === "/journals" ? "teal" : "tomato"}
             aria-label="All Journals Page"
             w={10}
             h={10}
@@ -53,8 +57,9 @@ function Footer() {
         <Spacer />
         <Link to="/vibes">
           <Icon
+            borderRadius="0.5rem"
             variant="ghost"
-            color={"tomato"}
+            color={location.pathname === "/vibes" ? "teal" : "tomato"}
             aria-label="Vibe graphs"
             w={10}
             h={10}

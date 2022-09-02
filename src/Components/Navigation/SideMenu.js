@@ -37,7 +37,6 @@ function SideMenu() {
       >
         <VStack
           align={"space-between"}
-          h={10}
           divider={<StackDivider borderColor="gray.200" />}
         >
           <Link to="/moments">
@@ -45,8 +44,8 @@ function SideMenu() {
               variant="ghost"
               color={"tomato"}
               aria-label="All Moments Page"
-              w={10}
-              h={10}
+              w={8}
+              h={8}
               onClick={() => handleClick("moment")}
               as={MdFormatListBulleted}
             />
@@ -65,8 +64,8 @@ function SideMenu() {
               variant="ghost"
               color={"tomato"}
               aria-label="All Journal Entries Page"
-              w={10}
-              h={10}
+              w={8}
+              h={8}
               as={BsFillJournalBookmarkFill}
               onClick={() => handleClick("journal entry")}
             />
@@ -85,8 +84,8 @@ function SideMenu() {
               variant="ghost"
               color={"tomato"}
               aria-label="Vibe graphs"
-              w={10}
-              h={10}
+              w={8}
+              h={8}
               as={BiLineChart}
             />
             <Box display={"inline"} px={5} pt={2} pos={"absolute"}>

@@ -4,28 +4,28 @@ import {
   SliderFilledTrack,
   SliderThumb,
 } from "@chakra-ui/slider";
-import { Box, Highlight } from "@chakra-ui/react";
+import { Box, Text, HStack} from "@chakra-ui/react";
 import { TbFaceId } from "react-icons/tb";
+import { Tooltip } from "@chakra-ui/react";
 import { colorSelector } from "../Helpers/colorChanger";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 
 function MoodSlider(props) {
   const { sliderValue, setSliderValue } = props;
 
   return (
-    <Box p="16px">
-      <Highlight
-        query="vibe"
-        styles={{
-          fontStyle: "italic",
-          px: "2",
-          py: "1",
-          rounded: "full",
-          bg: "teal.100",
-          fontSize: "16",
-        }}
-      >
-        what's your vibe like?
-      </Highlight>
+    <Box p="8px">
+      <HStack justify={"left"}  pb="8px">
+      <Text fontSize={"24px"} pb='4px'>how are you feeling?</Text>
+        <Tooltip
+          hasArrow
+          label="use this slider below to record how you're feeling. to the right is more positive, to the left is more negative."
+          fontSize="sm"
+          placement='top'
+        >
+          <InfoOutlineIcon />
+        </Tooltip>
+      </HStack>
       <Slider
         aria-label="vibe-check-slider"
         onChange={(val) => setSliderValue(val)}

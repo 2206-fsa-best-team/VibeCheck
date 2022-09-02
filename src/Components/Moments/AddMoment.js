@@ -55,7 +55,7 @@ const AddMoment = () => {
     <>
       <Stack px="24px" display="flex" maxW="xl">
         <Text pb="16px" mt="32px" ml="8px" fontSize={"24px"}>
-          how's your moment?
+          what's going on?
         </Text>
         <Textarea
           resize={"none"}
@@ -83,6 +83,9 @@ const AddMoment = () => {
           <>
             <Button onClick={createMoment} colorScheme="teal">
               add this moment
+            </Button>
+            <Button variant='ghost' onClick={() => navigate('/moments')}>
+              nevermind
             </Button>
           </>
         )}

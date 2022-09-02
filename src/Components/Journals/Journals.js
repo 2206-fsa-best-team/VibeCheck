@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { VStack, Text, Skeleton, Show } from "@chakra-ui/react";
+import { VStack, Text, Skeleton, Show, Container } from "@chakra-ui/react";
 import FloatingAdd from "../Buttons/FloatingAdd";
 import JournalEntryCard from "./JournalEntryCard";
 import SidePhoto from "../Navigation/SidePhoto";
@@ -37,40 +37,45 @@ const Journals = () => {
 
   return (
     <>
-      <Text ml="1rem" fontSize={"1.5rem"} pl="4" pt="1rem">
-        your journal entries
-      </Text>
       <SidePhoto />
-      {loading ? (
-        <VStack p="1rem" m="16px" spacing="1rem" alignItems="stretch" maxW="xl">
-          <Skeleton height="10rem" borderRadius="lg" />
-          <Skeleton height="10rem" borderRadius="lg" />
-          <Skeleton height="10rem" borderRadius="lg" />
-        </VStack>
-      ) : (
-        <>
-          {!journals.length ? (
-            <Text ml="1rem" fontSize={"1rem"} pl="1rem" pt="1rem">
-              add a new entry using the plus button.
-            </Text>
-          ) : (
-            <VStack p="1rem" spacing="1rem" alignItems="stretch">
-              {journals.map((journal) => (
-                <JournalEntryCard
-                  aria-label="view your journal entry"
-                  key={journal.id}
-                  loading={loading}
-                  journalEntry={journal}
-                  onClick={() => navToJournalEntry(journal.id)}
-                />
-              ))}
-            </VStack>
-          )}
-          <Show below="lg">
-            <FloatingAdd location={location} />
-          </Show>
-        </>
-      )}
+      <Container alignItems="center" pt="5">
+        {loading ? (
+          <VStack
+            p="1rem"
+            m="16px"
+            spacing="1rem"
+            alignItems="stretch"
+            maxW="xl"
+          >
+            <Skeleton height="10rem" borderRadius="lg" />
+            <Skeleton height="10rem" borderRadius="lg" />
+            <Skeleton height="10rem" borderRadius="lg" />
+          </VStack>
+        ) : (
+          <>
+            {!journals.length ? (
+              <Text ml="1rem" fontSize={"1rem"} pl="1rem" pt="1rem">
+                add a new entry using the plus button.
+              </Text>
+            ) : (
+              <VStack p="1rem" spacing="1rem" alignItems="stretch">
+                {journals.map((journal) => (
+                  <JournalEntryCard
+                    aria-label="view your journal entry"
+                    key={journal.id}
+                    loading={loading}
+                    journalEntry={journal}
+                    onClick={() => navToJournalEntry(journal.id)}
+                  />
+                ))}
+              </VStack>
+            )}
+            <Show below="lg">
+              <FloatingAdd location={location} />
+            </Show>
+          </>
+        )}
+      </Container>
       <br />
       <br />
       <br />

@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { VStack, useToast, Skeleton, Show } from "@chakra-ui/react";
+import {
+  VStack,
+  useToast,
+  Skeleton,
+  Show,
+  useDisclosure,
+} from "@chakra-ui/react";
 import FloatingDeleteMobile from "../Buttons/FloatingDeleteMobile";
 import FloatingDeleteWeb from "../Buttons/FloatingDeleteWeb";
 import MomentDetails from "./MomentDetails";
 import { DeletedMoment } from "../ToastAlerts/DeleteAlerts";
+import DeleteModal from "../Buttons/DeleteModal";
 
 const SingleMoment = (props) => {
   const { momentId } = useParams();
@@ -19,6 +26,7 @@ const SingleMoment = (props) => {
   const location = "moment";
   const navigate = useNavigate();
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     async function fetchMoment() {
@@ -84,16 +92,19 @@ const SingleMoment = (props) => {
         <FloatingDeleteWeb
           location={location}
           id={moment.id}
-          onClick={handleDelete}
+          onClick={onOpen}
         />
       </Show>
       <Show below="lg">
         <FloatingDeleteMobile
           location={location}
           id={moment.id}
-          onClick={handleDelete}
+          onClick={onOpen}
         />
       </Show>
+
+      <DeleteModal location={location} onClose={onClose} isOpen={isOpen} handleDelete={handleDelete}/>
+
       <br />
       <br />
       <br />

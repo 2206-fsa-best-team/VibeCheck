@@ -52,14 +52,14 @@ function Footer() {
         <Divider orientation={"vertical"} />
         <Spacer />
         <Link to="/vibes">
-          <Icon
-            variant="ghost"
-            color={"tomato"}
-            aria-label="Vibe graphs"
-            w={10}
-            h={10}
-            as={BiLineChart}
-          />
+            <Icon
+              variant="ghost"
+              color={"tomato"}
+              aria-label="Vibe graphs"
+              w={10}
+              h={10}
+              as={BiLineChart}
+            />
         </Link>
         <Spacer />
       </Flex>

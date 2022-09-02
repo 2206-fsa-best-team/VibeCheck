@@ -80,7 +80,7 @@ const AddJournal = () => {
         ) : (
           <>
             <Text ml="8px" fontSize={"24px"}>
-              have a hand-written journal you want to add?
+              have a hand-written journal entry you want to add?
             </Text>
             <Button
               onClick={() => setShowCamera(true)}
@@ -114,8 +114,8 @@ const AddJournal = () => {
           setJournal({ ...journal, content: evt.target.value })
         }
         resize="none"
-        placeholder="write your journal here"
-        aria-label="journal input field"
+        placeholder="write your journal entry here"
+        aria-label="journal entry input field"
         size="lg"
         as={TextareaAutosize}
       />
@@ -140,15 +140,12 @@ const AddJournal = () => {
         <CircularProgress isIndeterminate size="1.75rem" bg="teal" />
       ) : (
         <>
-          <Text pt="16px" ml="8px" fontSize={"24px"}>
-            all set?
-          </Text>
           <Button
             onClick={createJournal}
             colorScheme="teal"
-            aria-label="add journal button"
+            aria-label="add journal entry button"
           >
-            add this journal!
+            add this journal entry!
           </Button>
           <Button variant="ghost" onClick={() => navigate("/journals")}>
             nevermind

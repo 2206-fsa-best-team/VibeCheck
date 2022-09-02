@@ -1,4 +1,4 @@
-import { Box, Container, Skeleton } from "@chakra-ui/react";
+import { Box, Container, HStack, Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../server/supabaseClient";
 import VibesLineGraph from "./VibesLineGraph";
@@ -124,11 +124,14 @@ const VibeCharts = (props) => {
       ) : (
         <>
           <br />
+          <HStack justify='center'>
+          <ChartType type={type} setType={setType} setEntryId={setEntryId} />
           <ChartFilter
             setFilter={setFilter}
             filter={filter}
             setEntryId={setEntryId}
           />
+          </HStack>
           <br />
           {type === "moments" ? (
             <Container
@@ -136,7 +139,7 @@ const VibeCharts = (props) => {
               height={"100%"}
               justifyContent="center"
               align={"center"}
-              px={"20px"}
+              px={"3%"}
             >
               <Text fontSize={"2xl"}>moment-to-moment vibes</Text>
               {moments.length < 2 ? (
@@ -156,7 +159,7 @@ const VibeCharts = (props) => {
               height={"100%"}
               justifyContent="center"
               align={"center"}
-              px={"20px"}
+              px={"3%"}
             >
               <Text fontSize={"2xl"}>entry-to-entry vibes</Text>
               {journals.length < 2 ? (
@@ -175,8 +178,6 @@ const VibeCharts = (props) => {
           )}
         </>
       )}
-      <br />
-      <ChartType type={type} setType={setType} setEntryId={setEntryId} />
 
       {type === "moments" && entryId !== 0 ? (
         <>

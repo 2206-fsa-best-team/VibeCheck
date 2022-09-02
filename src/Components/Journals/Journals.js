@@ -4,6 +4,7 @@ import { supabase } from "../../server/supabaseClient";
 import { VStack, Text, Skeleton, Show } from "@chakra-ui/react";
 import FloatingAdd from "../Buttons/FloatingAdd";
 import JournalEntryCard from "./JournalEntryCard";
+import SidePhoto from "../Navigation/SidePhoto";
 
 const Journals = () => {
   const [journals, setJournals] = useState([]);
@@ -39,6 +40,7 @@ const Journals = () => {
       <Text ml="1rem" fontSize={"1.5rem"} pl="4" pt="1rem">
         your journal entries
       </Text>
+      <SidePhoto />
       {loading ? (
         <VStack p="1rem" m="16px" spacing="1rem" alignItems="stretch" maxW="xl">
           <Skeleton height="10rem" borderRadius="lg" />

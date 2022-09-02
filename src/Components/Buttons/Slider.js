@@ -36,7 +36,7 @@ function MoodSlider(props) {
           <SliderFilledTrack bg={colorSelector(sliderValue).border} />
         </SliderTrack>
         <SliderThumb boxSize={6}>
-          <Box color="tomato" as={TbFaceId} />
+          <Box /*color="tomato"*/ as={TbFaceId} />
         </SliderThumb>
       </Slider>
     </Box>

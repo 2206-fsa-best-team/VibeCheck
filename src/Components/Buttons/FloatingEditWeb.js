@@ -25,7 +25,7 @@ const FloatingEditWeb = (props) => {
             aria-label={`edit your ${location}`}
             alignSelf="flex-end"
             size="lg"
-            bg={useColorModeValue("gray.300", "tomato")}
+            // bg={useColorModeValue("gray.300", "tomato")}
             pos="fixed"
             px={4}
             py={4}

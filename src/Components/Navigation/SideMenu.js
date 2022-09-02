@@ -25,7 +25,7 @@ function SideMenu() {
   return (
     <Container>
       <Box
-        bg={useColorModeValue("gray.300", "#0a0f1c")}
+        bg={useColorModeValue("gray.400", "gray.700")}
         px={4}
         py={2}
         pb={5}
@@ -38,12 +38,12 @@ function SideMenu() {
         <VStack
           align={"space-between"}
           h={10}
-          divider={<StackDivider borderColor="gray.200" />}
+          divider={<StackDivider /*borderColor="gray.200"*/ />}
         >
           <Link to="/moments">
             <Icon
               variant="ghost"
-              color={"tomato"}
+              // color={"tomato"}
               aria-label="All Moments Page"
               w={10}
               h={10}
@@ -63,7 +63,7 @@ function SideMenu() {
           <Link to="/journals">
             <Icon
               variant="ghost"
-              color={"tomato"}
+              // color={"tomato"}
               aria-label="All Journal Entries Page"
               w={10}
               h={10}
@@ -83,7 +83,7 @@ function SideMenu() {
           <Link to="/vibes">
             <Icon
               variant="ghost"
-              color={"tomato"}
+              // color={"tomato"}
               aria-label="Vibe graphs"
               w={10}
               h={10}

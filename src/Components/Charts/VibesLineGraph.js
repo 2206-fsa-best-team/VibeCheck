@@ -7,7 +7,7 @@ import {
   XAxis,
   Label,
 } from "recharts";
-import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import { findEntry } from "../Helpers/findEntry";
 
 const VibesLineGraph = (props) => {
@@ -53,16 +53,16 @@ const VibesLineGraph = (props) => {
 
   return (
     <>
-      <Container >
-        <Text align="left" fontSize={"lg"}>
+
+        <Text align="left" fontSize={"lg"} >
           vibe
         </Text>
-        <ResponsiveContainer width="100%" height={150}>
+        <ResponsiveContainer width={"105%"} height={200}>
           <LineChart
             margin={{
-              top: 5,
+              top: 8,
               right: 30,
-              left: 30,
+              left: 10,
             }}
             data={dataType(props)}
           >
@@ -93,7 +93,7 @@ const VibesLineGraph = (props) => {
             />
           </LineChart>
         </ResponsiveContainer>
-      </Container>
+
     </>
   );
 };

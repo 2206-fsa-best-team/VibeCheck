@@ -47,9 +47,9 @@ function App() {
           <Show above="lg">
             <SideMenu />
           </Show>
-          <Show above="lg">
+          {/* <Show above="lg">
             <SidePhoto />
-          </Show>
+          </Show> */}
           <Box mt={16} ml={{ base: "0", lg: "20%" }} mr={{base: "0", lg: "20%"}} mb={20} zIndex={-1}>
             <Routes>
               <Route path="/" element={<Navigate to="/moments" />} />

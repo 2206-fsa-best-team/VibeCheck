@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Image, Box } from "@chakra-ui/react";
 const slicedURL = document.location.href.split("/");
-const noSidebar = slicedURL.includes("addamoment" || "addajournal");
+let sidebarVar = false
+if (slicedURL.includes("addamoment" || "addajournal")) sidebarVar = true;
 
 const SidePhoto = () => {
+  // const [slicedURL] = useState(document.location.href.split("/"))
+  // const [noSidebar, setNoSidebar] = useState(Boolean(sidebarVar))
+  // useEffect(() => {
+  //   // for (let i = 0; i < slicedURL.length; i++) {
+  //   //   let char = slicedURL[i];
+  //   //   if (Number(char)) noSidebar = true;
+  //   // }
+  // }, []);
+
   return (
-    <>
-      {noSidebar ? (
-        <></>
-      ) : (
+    // <>
+    //   {noSidebar ? (
+    //     <></>
+    //   ) : (
         <Container>
           <Box
+            mt='0'
             right={0}
             pos={"fixed"}
             borderLeft={"1px"}
@@ -19,8 +30,8 @@ const SidePhoto = () => {
             <Image src="https://i.ibb.co/FqbjLw6/dark-banner-2.png"></Image>
           </Box>
         </Container>
-      )}
-    </>
+  //     )}
+  //   </>
   );
 };
 

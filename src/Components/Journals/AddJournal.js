@@ -111,7 +111,7 @@ const AddJournal = () => {
           </Text>
           <Button
             onClick={() => setShowCamera(false)}
-            colorScheme="teal"
+            // colorScheme="teal"
             variant="outline"
             aria-label="close camera button"
           >
@@ -126,7 +126,7 @@ const AddJournal = () => {
           <Button
             onClick={() => setShowCamera(true)}
             variant="outline"
-            colorScheme={"teal"}
+            // colorScheme={"teal"}
             aria-label="open camera button"
           >
             open camera
@@ -142,7 +142,7 @@ const AddJournal = () => {
           </Text>
           <Button
             onClick={createJournal}
-            colorScheme="teal"
+            // colorScheme="teal"
             aria-label="add journal button"
           >
             add this journal!

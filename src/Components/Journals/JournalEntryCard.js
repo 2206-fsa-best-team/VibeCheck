@@ -18,7 +18,7 @@ const JournalEntryCard = (props) => {
       borderWidth="1px"
       borderRadius="lg"
       borderTopWidth=".25rem"
-      borderTopColor={() => colorSelector(journalEntry.vibe)}
+      borderTopColor={() => colorSelector(journalEntry.vibe).border}
     >
       <JournalEntryDetails {...props} />
     </Box>

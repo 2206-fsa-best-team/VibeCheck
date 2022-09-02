@@ -11,7 +11,6 @@ import {
   Editable,
   EditableTextarea,
   Flex,
-  Box,
   Tooltip,
   Show,
 } from "@chakra-ui/react";
@@ -43,13 +42,11 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
     } catch (error) {
       console.error(error.error_description || error.message);
     } finally {
-      // do we need this?
       setLoading(false);
     }
   }
 
   // format date from the db for how we want it displayed
-  // console.log("created_at", moment.created_at);
   let modifiedDate = `${moment.created_at.slice(
     0,
     10
@@ -121,7 +118,7 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
   }
 
   return (
-    <Box>
+    <>
       <Editable
         w="100%"
         align="left"
@@ -141,7 +138,6 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
           whiteSpace="pre-wrap"
         />
         <EditableTextarea
-          // style this so the border isn't so huge
           w="100%"
           py={2}
           px={4}
@@ -159,30 +155,25 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
         w="100%"
         align="left"
         px="16px"
+        pt={2}
       >
         you were {vibeMsgSelector(moment.vibe)}
       </Text>
-      <HStack justifyContent="space-between">
+      <HStack justifyContent="space-between" px="16px" pb={2}>
         <Flex flexGrow={2}>
-          <Text fontSize="0.75rem" color="gray" w="100%" align="left" p="16px">
+          <Text fontSize="0.75rem" w="100%" align="left">
             {dateFormatted.toLowerCase()}
           </Text>
         </Flex>
         <Flex flexGrow={1}>
           {momentId ? (
-            <Text
-              fontSize="0.75rem"
-              color="gray"
-              w="100%"
-              align="right"
-              p="16px"
-            >
+            <Text fontSize="0.75rem" w="100%" align="right">
               {count}/260
             </Text>
           ) : null}
         </Flex>
       </HStack>
-    </Box>
+    </>
   );
 };
 

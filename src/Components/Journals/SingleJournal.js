@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { useToast, VStack, Skeleton, Show } from "@chakra-ui/react";
+import { useToast, VStack, Skeleton, Show, useDisclosure } from "@chakra-ui/react";
 import FloatingDeleteMobile from "../Buttons/FloatingDeleteMobile";
 import FloatingDeleteWeb from "../Buttons/FloatingDeleteWeb";
 import JournalEntryDetails from "./JournalEntryDetails";
 import { DeletedJournal } from "../ToastAlerts/DeleteAlerts";
+import DeleteModal from "../Buttons/DeleteModal";
 
 const SingleJournal = (props) => {
   const { journalEntryId } = useParams();
@@ -19,6 +20,7 @@ const SingleJournal = (props) => {
   const location = "journal entry";
   const navigate = useNavigate();
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     async function fetchJournalEntry() {
@@ -90,16 +92,17 @@ const SingleJournal = (props) => {
         <FloatingDeleteWeb
           location={location}
           id={journalEntry.id}
-          onClick={handleDelete}
+          onClick={onOpen}
         />
       </Show>
       <Show below="lg">
         <FloatingDeleteMobile
           location={location}
           id={journalEntry.id}
-          onClick={handleDelete}
+          onClick={onOpen}
         />
       </Show>
+      <DeleteModal location={location} onClose={onClose} isOpen={isOpen} handleDelete={handleDelete}/>
       <br />
       <br />
       <br />

@@ -10,6 +10,7 @@ import ChartType from "./ChartType";
 import { useNavigate } from "react-router-dom";
 import MomentCard from "../Moments/MomentCard";
 import JournalEntryCard from "../Journals/JournalEntryCard";
+import SidePhoto from "../Navigation/SidePhoto";
 
 const VibeCharts = (props) => {
   const [moments, setMoments] = useState([]);
@@ -115,6 +116,7 @@ const VibeCharts = (props) => {
 
   return (
     <>
+    <SidePhoto />
       {loading ? (
         <Container w={"90%"}>
           <br />

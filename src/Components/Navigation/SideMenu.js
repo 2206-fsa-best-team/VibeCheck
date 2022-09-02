@@ -34,72 +34,83 @@ function SideMenu() {
           align={"space-between"}
           divider={<StackDivider borderColor="gray.200" />}
         >
-          <Link to="/moments">
-            <Icon
-              variant="ghost"
-              color={"tomato"}
-              aria-label="All Moments Page"
-              w={8}
-              h={8}
-              as={MdFormatListBulleted}
-            />
-            <Box
-              display={"inline"}
-              pl={5}
-              pr={"7.75ch"}
-              pt={2}
-              pb={2}
-              pos={"absolute"}
-              bg={location.pathname === "/moments" ? "teal" : ""}
-              borderRadius=".5rem"
-            >
-              moments
-            </Box>
-          </Link>
-          <Link to="/journals">
-            <Icon
-              variant="ghost"
-              color={"tomato"}
-              aria-label="All Journal Entries Page"
-              w={8}
-              h={8}
-              as={BsFillJournalBookmarkFill}
-            />
-            <Box
-              display={"inline"}
-              pl={5}
-              pr={"12vh"}
-              pt={2}
-              pb={2}
-              pos={"absolute"}
-              bg={location.pathname === "/journals" ? "teal" : ""}
-              borderRadius=".5rem"
-            >
-              journal
-            </Box>
-          </Link>
-          <Link to="/vibes">
-            <Icon
-              variant="ghost"
-              color={"tomato"}
-              aria-label="Vibe graphs"
-              w={8}
-              h={8}
-              as={BiLineChart}
-            />
-            <Box
-              display={"inline"}
-              pl={5}
-              pr={"8.5vh"}
-              pt={2}
-              pb={2}
-              pos={"absolute"}
-              bg={location.pathname === "/vibes" ? "teal" : ""}
-              borderRadius=".5rem"
-            >
-              dashboard
-            </Box>
-          </Link>
+          <Box
+            bg={location.pathname === "/moments" ? "teal" : ""}
+            borderRadius=".5rem"
+          >
+            <Link to="/moments">
+              <Icon
+                variant="ghost"
+                color={"tomato"}
+                aria-label="All Moments Page"
+                w={8}
+                h={8}
+                as={MdFormatListBulleted}
+              />
+              <Box
+                display={"inline"}
+                pl={5}
+                pr={"7.75ch"}
+                pt={2}
+                pb={2}
+                pos={"absolute"}
+              >
+                moments
+              </Box>
+            </Link>
+          </Box>
+          <Box
+            bg={location.pathname === "/journals" ? "teal" : ""}
+            borderRadius=".5rem"
+          >
+            <Link to="/journals">
+              <Icon
+                variant="ghost"
+                color={"tomato"}
+                aria-label="All Journal Entries Page"
+                pt={1}
+                w={8}
+                h={8}
+                as={BsFillJournalBookmarkFill}
+              />
+              <Box
+                display={"inline"}
+                pl={5}
+                pr={"12vh"}
+                pt={2}
+                pb={2}
+                pos={"absolute"}
+              >
+                journal
+              </Box>
+            </Link>
+          </Box>
+          <Box
+            bg={location.pathname === "/vibes" ? "teal" : ""}
+            borderRadius=".5rem"
+          >
+            <Link to="/vibes">
+              <Icon
+                variant="ghost"
+                color={"tomato"}
+                aria-label="Vibe graphs"
+                pt={0.5}
+                w={8}
+                h={8}
+                as={BiLineChart}
+              />
+              <Box
+                display={"inline"}
+                pl={5}
+                pr={"8.5vh"}
+                pt={2}
+                pb={2}
+                pos={"absolute"}
+              >
+                dashboard
+              </Box>
+            </Link>
+          </Box>
           <VStack>
             <AddMomentButton />
             <AddJournalEntryButton />

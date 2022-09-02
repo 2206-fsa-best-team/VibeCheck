@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 const ChartType = (props) => {
@@ -21,7 +16,7 @@ const ChartType = (props) => {
     } else {
       setType("journals");
       setActive("journals");
-      setReadable("journals");
+      setReadable("journal entries");
     }
   };
 
@@ -29,7 +24,9 @@ const ChartType = (props) => {
     <>
       <Menu>
         <MenuButton
-          px={4}
+          rightIcon={<ChevronDownIcon />}
+          as={Button}
+          mr={"1em"}
           py={2}
           transition="all 0.1s"
           borderRadius="md"
@@ -37,8 +34,9 @@ const ChartType = (props) => {
           _hover={{ bg: "gray.400" }}
           _expanded={{ bg: "blue.400" }}
           _focus={{ boxShadow: "outline" }}
+          justifyItems="left"
         >
-          {readable} <ChevronDownIcon />
+          {readable}
         </MenuButton>
         <MenuList>
           <MenuItem

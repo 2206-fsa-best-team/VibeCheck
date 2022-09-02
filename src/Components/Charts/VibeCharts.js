@@ -39,8 +39,8 @@ const VibeCharts = (props) => {
     setLoading(true);
     dateFilter(filter);
     fetchMoments();
-    fetchJournals()
-    setLoading(false)
+    fetchJournals();
+    setLoading(false);
   }, [filter, filterDate, entryId, type]);
 
   const dateFilter = async (val) => {
@@ -124,14 +124,14 @@ const VibeCharts = (props) => {
       ) : (
         <>
           <br />
-          <HStack justify='center'>
-          <ChartType type={type} setType={setType} setEntryId={setEntryId} />
-          <ChartFilter
-            setFilter={setFilter}
-            filter={filter}
-            setEntryId={setEntryId}
-          />
-          </HStack>
+          <Container align="center">
+            <ChartType type={type} setType={setType} setEntryId={setEntryId} />
+            <ChartFilter
+              setFilter={setFilter}
+              filter={filter}
+              setEntryId={setEntryId}
+            />
+          </Container>
           <br />
           {type === "moments" ? (
             <Container

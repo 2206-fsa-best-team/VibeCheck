@@ -1,10 +1,5 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuItem, MenuList, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 const ChartFilter = (props) => {
@@ -30,11 +25,12 @@ const ChartFilter = (props) => {
     }
   };
 
-
   return (
     <>
       <Menu>
         <MenuButton
+          rightIcon={<ChevronDownIcon />}
+          as={Button}
           px={4}
           py={2}
           transition="all 0.1s"
@@ -44,7 +40,7 @@ const ChartFilter = (props) => {
           _expanded={{ bg: "blue.400" }}
           _focus={{ boxShadow: "outline" }}
         >
-          {readable} <ChevronDownIcon />
+          {readable}
         </MenuButton>
         <MenuList>
           <MenuItem
@@ -81,7 +77,6 @@ const ChartFilter = (props) => {
           </MenuItem>
         </MenuList>
       </Menu>
-
     </>
   );
 };

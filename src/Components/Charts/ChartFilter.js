@@ -1,64 +1,82 @@
-import { ButtonGroup, Button, Container } from "@chakra-ui/react";
-import React from "react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Menu, MenuButton, MenuItem, MenuList, Button } from "@chakra-ui/react";
+import React, { useState } from "react";
 
 const ChartFilter = (props) => {
-  const { filter, setFilter, setEntryId } = props;
+  const { setFilter, setEntryId } = props;
+  const [readable, setReadable] = useState("all");
+
   const handleClick = (val) => {
-    setEntryId(0)
+    setEntryId(0);
     setFilter(val);
+    switch (val) {
+      case "lastSeven":
+        setReadable("last 7 days");
+        break;
+      case "lastThirty":
+        setReadable("last 30 days");
+        break;
+      case "lastYear":
+        setReadable("last year");
+        break;
+      default:
+        setReadable("all");
+        break;
+    }
   };
 
   return (
     <>
-      <Container>
-        <ButtonGroup
-          colorScheme={"blue"}
-          w={"100%"}
-          direction="flex"
-          justifyContent={"center"}
+      <Menu>
+        <MenuButton
+          rightIcon={<ChevronDownIcon />}
+          as={Button}
+          px={4}
+          py={2}
+          transition="all 0.1s"
+          borderRadius="md"
+          borderWidth="1px"
+          _hover={{ bg: "gray.400" }}
+          _expanded={{ bg: "blue.400" }}
+          _focus={{ boxShadow: "outline" }}
         >
-          <Button
-            height={"32px"}
-            isActive={filter === "all" ? true : false}
+          {readable}
+        </MenuButton>
+        <MenuList>
+          <MenuItem
             onClick={(e) => {
               e.preventDefault();
               handleClick("all");
             }}
           >
             all
-          </Button>
-          <Button
-            height={"32px"}
-            isActive={filter === "lastSeven" ? true : false}
+          </MenuItem>
+          <MenuItem
             onClick={(e) => {
               e.preventDefault();
               handleClick("lastSeven");
             }}
           >
             last 7 days
-          </Button>
-          <Button
-            height={"32px"}
-            isActive={filter === "lastThirty" ? true : false}
+          </MenuItem>
+          <MenuItem
             onClick={(e) => {
               e.preventDefault();
               handleClick("lastThirty");
             }}
           >
             last 30 days
-          </Button>
-          <Button
-            height={"32px"}
-            isActive={filter === "lastYear" ? true : false}
+          </MenuItem>
+          <MenuItem
             onClick={(e) => {
               e.preventDefault();
               handleClick("lastYear");
             }}
           >
             last year
-          </Button>
-        </ButtonGroup>
-      </Container>
+          </MenuItem>
+        </MenuList>
+      </Menu>
     </>
   );
 };

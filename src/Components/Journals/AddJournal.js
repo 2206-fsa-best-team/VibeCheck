@@ -150,6 +150,9 @@ const AddJournal = () => {
           >
             add this journal!
           </Button>
+          <Button variant="ghost" onClick={() => navigate("/journals")}>
+            nevermind
+          </Button>
         </>
       )}
     </Stack>

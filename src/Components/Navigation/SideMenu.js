@@ -10,17 +10,12 @@ import {
 import { BiLineChart } from "react-icons/bi";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdFormatListBulleted } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AddMomentButton from "../Buttons/AddMomentButton";
 import AddJournalEntryButton from "../Buttons/AddJournalEntryButton";
 
 function SideMenu() {
-  const [lastClicked, setLastClicked] = useState("moment");
-
-  const handleClick = (location) => {
-    setLastClicked(location);
-    console.log("lastClicked", lastClicked);
-  };
+  const location = useLocation();
 
   return (
     <Container>
@@ -46,15 +41,17 @@ function SideMenu() {
               aria-label="All Moments Page"
               w={8}
               h={8}
-              onClick={() => handleClick("moment")}
               as={MdFormatListBulleted}
             />
             <Box
               display={"inline"}
-              px={5}
+              pl={5}
+              pr={"7.75ch"}
               pt={2}
+              pb={2}
               pos={"absolute"}
-              onClick={() => handleClick("moment")}
+              bg={location.pathname === "/moments" ? "teal" : ""}
+              borderRadius=".5rem"
             >
               moments
             </Box>
@@ -67,14 +64,16 @@ function SideMenu() {
               w={8}
               h={8}
               as={BsFillJournalBookmarkFill}
-              onClick={() => handleClick("journal entry")}
             />
             <Box
               display={"inline"}
-              px={5}
+              pl={5}
+              pr={"12vh"}
               pt={2}
+              pb={2}
               pos={"absolute"}
-              onClick={() => handleClick("journal entry")}
+              bg={location.pathname === "/journals" ? "teal" : ""}
+              borderRadius=".5rem"
             >
               journal
             </Box>
@@ -88,7 +87,16 @@ function SideMenu() {
               h={8}
               as={BiLineChart}
             />
-            <Box display={"inline"} px={5} pt={2} pos={"absolute"}>
+            <Box
+              display={"inline"}
+              pl={5}
+              pr={"8.5vh"}
+              pt={2}
+              pb={2}
+              pos={"absolute"}
+              bg={location.pathname === "/vibes" ? "teal" : ""}
+              borderRadius=".5rem"
+            >
               dashboard
             </Box>
           </Link>

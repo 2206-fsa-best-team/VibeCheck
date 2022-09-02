@@ -48,7 +48,9 @@ export default function Navbar(props) {
       zIndex={999}
     >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-        <Box fontSize={["36px", "48px"]}>vibe☑</Box>
+        <Link to="/moments">
+          <Box fontSize={["36px", "48px"]}>vibe☑</Box>
+        </Link>
         <Flex alignItems={"center"}>
           <Stack direction={"row"} spacing={7}>
             <LightDarkButton />
@@ -63,7 +65,7 @@ export default function Navbar(props) {
                   onClick={onOpen}
                   aria-label="open user menu button"
                 >
-                  <Avatar size={"sm"} name={name} src="" />
+                  <Avatar size={"sm"} name={name} src="" bg="teal" />
                 </MenuButton>
                 <Portal>
                   <MenuList
@@ -74,7 +76,7 @@ export default function Navbar(props) {
                   >
                     <br />
                     <Center>
-                      <Avatar size={"2xl"} name={name} src={""} />
+                      <Avatar size={"2xl"} name={name} src={""} bg="teal" />
                     </Center>
                     <br />
                     <Center>

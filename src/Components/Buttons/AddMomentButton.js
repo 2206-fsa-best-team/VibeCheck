@@ -24,7 +24,8 @@ const AddMomentButton = () => {
               aria-label={`add a new moment`}
               size="md"
               bg={useColorModeValue("gray.300", "tomato")}
-              px={4}
+              pl={4}
+              pr={12}
               py={4}
             >
               moment

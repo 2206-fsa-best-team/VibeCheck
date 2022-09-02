@@ -37,7 +37,7 @@ const DeleteModal = (props) => {
           </Button>
           <Button
             colorScheme="red"
-            variant="outline"
+            variant="solid"
             mr={3}
             onClick={() => {
               onClose();

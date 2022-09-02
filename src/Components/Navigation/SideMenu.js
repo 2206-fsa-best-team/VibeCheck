@@ -51,7 +51,7 @@ function SideMenu() {
                 display={"inline"}
                 pl={5}
                 pr={"7.75ch"}
-                pt={2}
+                pt={1}
                 pb={2}
                 pos={"absolute"}
               >
@@ -77,7 +77,7 @@ function SideMenu() {
                 display={"inline"}
                 pl={5}
                 pr={"12vh"}
-                pt={2}
+                pt={1.5}
                 pb={2}
                 pos={"absolute"}
               >
@@ -103,7 +103,7 @@ function SideMenu() {
                 display={"inline"}
                 pl={5}
                 pr={"8.5vh"}
-                pt={2}
+                pt={1.5}
                 pb={2}
                 pos={"absolute"}
               >

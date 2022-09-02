@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import Webcam from "react-webcam";
-import { Box, Button, CircularProgress, Text } from "@chakra-ui/react";
+import { Box, Button, CircularProgress, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 
 const Cam = (props) => {
@@ -13,7 +13,17 @@ const Cam = (props) => {
       setModalLoading(true);
       const body = { img };
       const { data } = await axios.post("/", body);
-      setAllText(data.fullTextAnnotation);
+      if (data.fullTextAnnotation) {
+        setAllText(data.fullTextAnnotation);
+      } else {
+        alert(
+          `there has been an error. likely this means no text could
+  be deciphered from your photo. please try again with a new
+  photo. if that doesn't work we are likely experiencing a
+  server error! we appologize for the inconvenience if so`
+        );
+        setModalLoading(false);
+      }
     } catch (e) {
       console.error(e);
       alert(
@@ -57,7 +67,7 @@ server error! we appologize for the inconvenience if so`
             </Button>
           </>
         ) : (
-          <>
+          <VStack align="center">
             <img src={image} alt="Taken" />
             <br />
             <Button
@@ -82,7 +92,7 @@ server error! we appologize for the inconvenience if so`
                 <Text>convert to text</Text>{" "}
               </Button>
             )}
-          </>
+          </VStack>
         )}
       </Box>
     </div>

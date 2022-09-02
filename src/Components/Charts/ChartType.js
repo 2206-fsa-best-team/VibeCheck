@@ -1,49 +1,60 @@
 import React, { useState } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  HStack,
-  Switch,
-  Text,
-} from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 const ChartType = (props) => {
   const { type, setType, setEntryId } = props;
   const [active, setActive] = useState("moments");
+  const [readable, setReadable] = useState("moments");
 
-  const handleClick = (e, val) => {
-    // e.preventDefault();
-    setEntryId(0)
+  const handleClick = (val) => {
+    setEntryId(0);
     if (val === "moments") {
       setType("moments");
       setActive("moments");
+      setReadable("moments");
     } else {
       setType("journals");
       setActive("journals");
+      setReadable("journal entries");
     }
   };
 
   return (
     <>
-      <Container align="center">
-        <ButtonGroup isAttached>
-          <Button
-            isActive={active === "moments" ? true : false}
-            colorScheme={"blue"}
-            onClick={(e) => handleClick(e, "moments")}
+      <Menu>
+        <MenuButton
+          rightIcon={<ChevronDownIcon />}
+          as={Button}
+          mr={"1em"}
+          py={2}
+          transition="all 0.1s"
+          borderRadius="md"
+          borderWidth="1px"
+          _hover={{ bg: "gray.400" }}
+          _expanded={{ bg: "blue.400" }}
+          _focus={{ boxShadow: "outline" }}
+          justifyItems="left"
+        >
+          {readable}
+        </MenuButton>
+        <MenuList>
+          <MenuItem
+            onClick={() => {
+              handleClick("moments");
+            }}
           >
             moments
-          </Button>
-          <Button
-            isActive={active === "journals" ? true : false}
-            colorScheme={"blue"}
-            onClick={(e) => handleClick(e, "journals")}
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleClick("journals");
+            }}
           >
-            journals
-          </Button>
-        </ButtonGroup>
-      </Container>
+            journal entries
+          </MenuItem>
+        </MenuList>
+      </Menu>
     </>
   );
 };

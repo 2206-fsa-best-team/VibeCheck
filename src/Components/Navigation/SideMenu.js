@@ -89,7 +89,7 @@ function SideMenu() {
               as={BiLineChart}
             />
             <Box display={"inline"} px={5} pt={2} pos={"absolute"}>
-              vibes
+              dashboard
             </Box>
           </Link>
           <VStack>

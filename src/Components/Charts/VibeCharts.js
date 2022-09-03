@@ -1,4 +1,4 @@
-import { Box, Container, Skeleton } from "@chakra-ui/react";
+import { Box, Container, HStack, Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../server/supabaseClient";
 import VibesLineGraph from "./VibesLineGraph";
@@ -10,6 +10,7 @@ import ChartType from "./ChartType";
 import { useNavigate } from "react-router-dom";
 import MomentCard from "../Moments/MomentCard";
 import JournalEntryCard from "../Journals/JournalEntryCard";
+import SidePhoto from "../Navigation/SidePhoto";
 
 const VibeCharts = (props) => {
   const [moments, setMoments] = useState([]);
@@ -39,8 +40,8 @@ const VibeCharts = (props) => {
     setLoading(true);
     dateFilter(filter);
     fetchMoments();
-    fetchJournals()
-    setLoading(false)
+    fetchJournals();
+    setLoading(false);
   }, [filter, filterDate, entryId, type]);
 
   const dateFilter = async (val) => {
@@ -115,6 +116,7 @@ const VibeCharts = (props) => {
 
   return (
     <>
+    <SidePhoto />
       {loading ? (
         <Container w={"90%"}>
           <br />
@@ -124,11 +126,14 @@ const VibeCharts = (props) => {
       ) : (
         <>
           <br />
-          <ChartFilter
-            setFilter={setFilter}
-            filter={filter}
-            setEntryId={setEntryId}
-          />
+          <Container align="center">
+            <ChartType type={type} setType={setType} setEntryId={setEntryId} />
+            <ChartFilter
+              setFilter={setFilter}
+              filter={filter}
+              setEntryId={setEntryId}
+            />
+          </Container>
           <br />
           {type === "moments" ? (
             <Container
@@ -136,7 +141,7 @@ const VibeCharts = (props) => {
               height={"100%"}
               justifyContent="center"
               align={"center"}
-              px={"20px"}
+              px={"3%"}
             >
               <Text fontSize={"2xl"}>moment-to-moment vibes</Text>
               {moments.length < 2 ? (
@@ -156,7 +161,7 @@ const VibeCharts = (props) => {
               height={"100%"}
               justifyContent="center"
               align={"center"}
-              px={"20px"}
+              px={"3%"}
             >
               <Text fontSize={"2xl"}>entry-to-entry vibes</Text>
               {journals.length < 2 ? (
@@ -175,8 +180,6 @@ const VibeCharts = (props) => {
           )}
         </>
       )}
-      <br />
-      <ChartType type={type} setType={setType} setEntryId={setEntryId} />
 
       {type === "moments" && entryId !== 0 ? (
         <>

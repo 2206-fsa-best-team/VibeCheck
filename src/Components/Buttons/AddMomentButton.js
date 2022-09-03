@@ -1,10 +1,4 @@
-import {
-  Button,
-  Flex,
-  Container,
-  useColorModeValue,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Button, Flex, Container, Tooltip } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -23,7 +17,6 @@ const AddMomentButton = () => {
               leftIcon={<AddIcon />}
               aria-label={`add a new moment`}
               size="md"
-              // bg={useColorModeValue("gray.300", "tomato")}
               px={4}
               py={4}
             >

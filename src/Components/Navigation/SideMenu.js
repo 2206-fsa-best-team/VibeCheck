@@ -35,15 +35,10 @@ function SideMenu() {
         w={"20%"}
         flexDirection="column"
       >
-        <VStack
-          align={"space-between"}
-          h={10}
-          divider={<StackDivider /*borderColor="gray.200"*/ />}
-        >
+        <VStack align={"space-between"} h={10} divider={<StackDivider />}>
           <Link to="/moments">
             <Icon
               variant="ghost"
-              // color={"tomato"}
               aria-label="All Moments Page"
               w={10}
               h={10}
@@ -63,7 +58,6 @@ function SideMenu() {
           <Link to="/journals">
             <Icon
               variant="ghost"
-              // color={"tomato"}
               aria-label="All Journal Entries Page"
               w={10}
               h={10}
@@ -83,7 +77,6 @@ function SideMenu() {
           <Link to="/vibes">
             <Icon
               variant="ghost"
-              // color={"tomato"}
               aria-label="Vibe graphs"
               w={10}
               h={10}

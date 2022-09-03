@@ -73,17 +73,10 @@ const AddMoment = () => {
         </Text>
         <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
         {submitLoading ? (
-          <CircularProgress
-            isIndeterminate
-            size="1.75rem"
-            color="tomato"
-            align="center"
-          />
+          <CircularProgress isIndeterminate size="1.75rem" align="center" />
         ) : (
           <>
-            <Button onClick={createMoment} colorScheme="teal">
-              add this moment
-            </Button>
+            <Button onClick={createMoment}>add this moment</Button>
           </>
         )}
       </Stack>

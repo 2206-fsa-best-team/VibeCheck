@@ -11,27 +11,27 @@ import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
 import { findEntry } from "../Helpers/findEntry";
 
 const VibesLineGraph = (props) => {
-  const {setEntryId, setMoment, setJournal} = props
+  const { setEntryId, setMoment, setJournal } = props;
 
   const dataType = (props) => {
     if (props.type === "moments") {
       const { moments } = props;
       return moments;
     } else if (props.type === "journals") {
-      const { journals } = props
+      const { journals } = props;
       return journals;
     }
   };
 
   const CustomTooltip = (data) => {
-    const { payload, label, active, color, content } = data
+    const { payload, label, active, color, content } = data;
     if (active) {
-      let val = findEntry(dataType(props), payload[0].payload.id)
-      content.props.setEntryId(payload[0].payload.id)
+      let val = findEntry(dataType(props), payload[0].payload.id);
+      content.props.setEntryId(payload[0].payload.id);
       if (props.type === "moments") {
-        content.props.setMoment(val)
+        content.props.setMoment(val);
       } else if (props.type === "journals") {
-        content.props.setJournal(val)
+        content.props.setJournal(val);
       }
 
       return (
@@ -42,7 +42,6 @@ const VibesLineGraph = (props) => {
           borderRadius={"xl"}
           bg={color}
           borderColor={"black"}
-
         >
           <Text>{`vibe: ${payload[0].value}`}</Text>
         </Box>
@@ -53,7 +52,7 @@ const VibesLineGraph = (props) => {
 
   return (
     <>
-      <Container >
+      <Container>
         <Text align="left" fontSize={"lg"}>
           vibe
         </Text>
@@ -69,16 +68,20 @@ const VibesLineGraph = (props) => {
             <Line
               type="monotone"
               dataKey={"vibe"}
-              stroke={'tomato'}
+              // stroke={"tomato"}
               dot={true}
-              fill={"tomato"}
+              // fill={"tomato"}
               activeDot={{ r: 6 }}
             />
             <Tooltip
               content={
-                <CustomTooltip color={useColorModeValue("white", "tomato")} setEntryId={setEntryId} setMoment={setMoment} setJournal={setJournal}/>
+                <CustomTooltip
+                  // color={useColorModeValue("white", "tomato")}
+                  setEntryId={setEntryId}
+                  setMoment={setMoment}
+                  setJournal={setJournal}
+                />
               }
-
             />
             <XAxis
               label={

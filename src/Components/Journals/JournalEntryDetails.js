@@ -161,6 +161,7 @@ const JournalEntryDetails = ({
           <Text
             fontSize="0.75rem"
             fontStyle="italic"
+            color="gray"
             w="100%"
             align="left"
             px="16px"

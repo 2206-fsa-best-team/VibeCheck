@@ -17,7 +17,8 @@ const AddMomentButton = () => {
               leftIcon={<AddIcon />}
               aria-label={`add a new moment`}
               size="md"
-              px={4}
+              pl={4}
+              pr={12}
               py={4}
             >
               moment

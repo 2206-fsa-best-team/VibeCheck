@@ -7,7 +7,7 @@ import {
   XAxis,
   Label,
 } from "recharts";
-import { Box, Container, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import { findEntry } from "../Helpers/findEntry";
 
 const VibesLineGraph = (props) => {
@@ -52,51 +52,49 @@ const VibesLineGraph = (props) => {
 
   return (
     <>
-      <Container>
-        <Text align="left" fontSize={"lg"}>
-          vibe
-        </Text>
-        <ResponsiveContainer width="100%" height={150}>
-          <LineChart
-            margin={{
-              top: 5,
-              right: 30,
-              left: 30,
-            }}
-            data={dataType(props)}
-          >
-            <Line
-              type="monotone"
-              dataKey={"vibe"}
-              // stroke={"tomato"}
-              dot={true}
-              // fill={"tomato"}
-              activeDot={{ r: 6 }}
-            />
-            <Tooltip
-              content={
-                <CustomTooltip
-                  // color={useColorModeValue("white", "tomato")}
-                  setEntryId={setEntryId}
-                  setMoment={setMoment}
-                  setJournal={setJournal}
-                />
-              }
-            />
-            <XAxis
-              label={
-                <Label
-                  value="time"
-                  fill={useColorModeValue("black", "white")}
-                  fontSize="18"
-                />
-              }
-              fontSize={0}
-              tickLine={false}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </Container>
+      <Text align="left" fontSize={"lg"}>
+        vibe
+      </Text>
+      <ResponsiveContainer width={"105%"} height={200}>
+        <LineChart
+          margin={{
+            top: 8,
+            right: 30,
+            left: 10,
+          }}
+          data={dataType(props)}
+        >
+          <Line
+            type="monotone"
+            dataKey={"vibe"}
+            // stroke={"tomato"}
+            dot={true}
+            // fill={"tomato"}
+            activeDot={{ r: 6 }}
+          />
+          <Tooltip
+            content={
+              <CustomTooltip
+                // color={useColorModeValue("white", "tomato")}
+                setEntryId={setEntryId}
+                setMoment={setMoment}
+                setJournal={setJournal}
+              />
+            }
+          />
+          <XAxis
+            label={
+              <Label
+                value="time"
+                fill={useColorModeValue("black", "white")}
+                fontSize="18"
+              />
+            }
+            fontSize={0}
+            tickLine={false}
+          />
+        </LineChart>
+      </ResponsiveContainer>
     </>
   );
 };

@@ -52,7 +52,7 @@ server error! we appologize for the inconvenience if so`
           <>
             <Webcam
               ref={camera}
-              screenshotQuality={1}
+              forceScreenshotSourceSize
               videoConstraints={{
                 facingMode: "environment",
               }}

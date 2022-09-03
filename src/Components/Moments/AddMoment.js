@@ -27,7 +27,7 @@ const AddMoment = () => {
     setSubmitLoading(true);
     try {
       if (!content.length) {
-        alert("write about your moment");
+        alert("add your moment");
       } else {
         const d = new Date();
         d.setTime(d.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
@@ -55,7 +55,7 @@ const AddMoment = () => {
     <>
       <Stack px="24px" display="flex" maxW="xl">
         <Text pb="16px" mt="32px" ml="8px" fontSize={"24px"}>
-          how's your moment?
+          what's going on?
         </Text>
         <Textarea
           resize={"none"}
@@ -76,7 +76,10 @@ const AddMoment = () => {
           <CircularProgress isIndeterminate size="1.75rem" align="center" />
         ) : (
           <>
-            <Button onClick={createMoment}>add this moment</Button>
+            <Button onClick={createMoment}>add moment</Button>
+            <Button variant="outline" onClick={() => navigate("/moments")}>
+              cancel
+            </Button>
           </>
         )}
       </Stack>

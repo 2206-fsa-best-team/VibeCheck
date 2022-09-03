@@ -10,6 +10,7 @@ import {
   Stack,
   Text,
   Textarea,
+  Show,
 } from "@chakra-ui/react";
 import MoodSlider from "../Buttons/Slider";
 import CheckConf from "./CheckConf";
@@ -55,7 +56,41 @@ const AddJournal = () => {
   }
 
   return (
-    <Stack px="24px" display="flex" maxW="4xl">
+    <Stack px="24px" display="flex" maxW="3xl">
+      <Show below="lg">
+        {showCamera ? (
+          <>
+            <Cam
+              setAllText={setAllText}
+              setModalLoading={setModalLoading}
+              modalLoading={modalLoading}
+            />
+            <Text pt="16px" ml="8px" fontSize={"24px"}>
+              change your mind?
+            </Text>
+            <Button
+              onClick={() => setShowCamera(false)}
+              variant="outline"
+              aria-label="close camera button"
+            >
+              close camera
+            </Button>
+          </>
+        ) : (
+          <>
+            <Text ml="8px" fontSize={"24px"}>
+              have a hand-written journal entry you want to add?
+            </Text>
+            <Button
+              onClick={() => setShowCamera(true)}
+              variant="outline"
+              aria-label="open camera button"
+            >
+              open camera
+            </Button>
+          </>
+        )}
+      </Show>
       {/* date input */}
       <Text mt="32px" ml="8px" fontSize={"24px"}>
         date:
@@ -67,7 +102,6 @@ const AddJournal = () => {
         max={today}
         onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
       />
-
       {/* content input */}
       <Text mt="32px" pt="16px" ml="8px" fontSize={"24px"}>
         what's going on?
@@ -78,8 +112,8 @@ const AddJournal = () => {
           setJournal({ ...journal, content: evt.target.value })
         }
         resize="none"
-        placeholder="write your journal here"
-        aria-label="journal input field"
+        placeholder="write your journal entry here"
+        aria-label="journal entry input field"
         size="lg"
         as={TextareaAutosize}
       />
@@ -99,47 +133,24 @@ const AddJournal = () => {
 
       {/* vibe input */}
       <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
-      {showCamera ? (
-        <>
-          <Cam
-            setAllText={setAllText}
-            setModalLoading={setModalLoading}
-            modalLoading={modalLoading}
-          />
-          <Text pt="16px" ml="8px" fontSize={"24px"}>
-            change your mind?
-          </Text>
-          <Button
-            onClick={() => setShowCamera(false)}
-            variant="outline"
-            aria-label="close camera button"
-          >
-            close camera
-          </Button>
-        </>
-      ) : (
-        <>
-          <Text ml="8px" fontSize={"24px"}>
-            have a hand-written journal you want to add?
-          </Text>
-          <Button
-            onClick={() => setShowCamera(true)}
-            variant="outline"
-            aria-label="open camera button"
-          >
-            open camera
-          </Button>
-        </>
-      )}
+      {/* submit button */}
       {submitLoading ? (
-        <CircularProgress isIndeterminate size="1.75rem" bg="teal" />
+        <CircularProgress isIndeterminate size="1.75rem" />
       ) : (
         <>
-          <Text pt="16px" ml="8px" fontSize={"24px"}>
-            all set?
-          </Text>
-          <Button onClick={createJournal} aria-label="add journal button">
-            add this journal!
+          <Button
+            maxW="lg"
+            onClick={createJournal}
+            aria-label="add journal entry button"
+          >
+            add entry
+          </Button>
+          <Button
+            maxW="lg"
+            variant="outline"
+            onClick={() => navigate("/journals")}
+          >
+            cancel
           </Button>
         </>
       )}

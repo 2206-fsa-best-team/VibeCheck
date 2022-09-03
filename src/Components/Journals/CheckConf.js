@@ -81,7 +81,7 @@ const CheckConf = (props) => {
             colorScheme="teal"
             mr={3}
             onClick={() => {
-              setJournal({ ...journal, content: value });
+              setJournal({ ...journal, content: journal.content + value });
               setAllText({});
               onClose();
             }}

@@ -11,6 +11,7 @@ import {
   Text,
   Textarea,
   Show,
+  Box,
 } from "@chakra-ui/react";
 import MoodSlider from "../Buttons/Slider";
 import CheckConf from "./CheckConf";
@@ -64,10 +65,12 @@ const AddJournal = () => {
               setAllText={setAllText}
               setModalLoading={setModalLoading}
               modalLoading={modalLoading}
+              value={content}
             />
-            <Text pt="16px" ml="8px" fontSize={"24px"}>
+            {/* <Text pt="16px" ml="8px" fontSize={"24px"}>
               change your mind?
-            </Text>
+            </Text> */}
+            <br />
             <Button
               onClick={() => setShowCamera(false)}
               colorScheme="teal"

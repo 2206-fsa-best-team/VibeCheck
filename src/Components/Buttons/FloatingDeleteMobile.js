@@ -19,7 +19,7 @@ const FloatingDeleteMobile = (props) => {
             aria-label={`delete your ${location}`}
             alignSelf="flex-end"
             size="lg"
-            variant="ghost"
+            variant="solid"
             pos="fixed"
             px={4}
             py={4}

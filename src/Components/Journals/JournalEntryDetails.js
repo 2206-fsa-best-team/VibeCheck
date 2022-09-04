@@ -15,7 +15,6 @@ import {
   Box,
   Tooltip,
   Show,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
 import FloatingEditMobile from "../Buttons/FloatingEditMobile";
@@ -162,7 +161,6 @@ const JournalEntryDetails = ({
           <Text
             fontSize="0.75rem"
             fontStyle="italic"
-            color={useColorModeValue("gray", "lightgray")}
             w="100%"
             align="left"
             px="16px"
@@ -171,13 +169,7 @@ const JournalEntryDetails = ({
           </Text>
         </Flex>
         <Flex flexGrow={1}>
-          <Text
-            fontSize="0.75rem"
-            color={useColorModeValue("gray", "lightgray")}
-            w="100%"
-            align="right"
-            p="16px"
-          >
+          <Text fontSize="0.75rem" color="gray" w="100%" align="right" p="16px">
             word count: {wordsCount(journalEntry.content)}
           </Text>
         </Flex>

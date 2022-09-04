@@ -13,11 +13,9 @@ import { Link, useLocation } from "react-router-dom";
 
 function Footer() {
   const location = useLocation();
-  const highlightColor = useColorModeValue("whiteAlpha.900", "gray.700");
-
   return (
     <Box
-      bg={useColorModeValue("gray.400", "gray.800")}
+      bg={useColorModeValue("gray.300", "#0a0f1c")}
       px={4}
       py={2}
       pb={5}
@@ -32,7 +30,7 @@ function Footer() {
           <Icon
             borderRadius="0.5rem"
             variant="ghost"
-            color={location.pathname === "/moments" ? "" : highlightColor}
+            color={location.pathname === "/moments" ? "teal" : "tomato"}
             aria-label="All Moments Page"
             w={10}
             h={10}
@@ -47,7 +45,7 @@ function Footer() {
             borderRadius="0.5rem"
             py={1}
             variant="ghost"
-            color={location.pathname === "/journals" ? "" : highlightColor}
+            color={location.pathname === "/journals" ? "teal" : "tomato"}
             aria-label="All Journals Page"
             w={10}
             h={10}
@@ -61,7 +59,7 @@ function Footer() {
           <Icon
             borderRadius="0.5rem"
             variant="ghost"
-            color={location.pathname === "/vibes" ? "" : highlightColor}
+            color={location.pathname === "/vibes" ? "teal" : "tomato"}
             aria-label="Vibe graphs"
             w={10}
             h={10}

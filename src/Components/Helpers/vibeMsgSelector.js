@@ -9,7 +9,7 @@ export const vibeMsgSelector = (vibe) => {
     case vibe <= 80 && vibe > 60:
       return "feeling pretty good";
     case vibe <= 100 && vibe > 80:
-      return "loving life";
+      return "absolutely vibin'";
     default:
       return "inconclusive";
   }

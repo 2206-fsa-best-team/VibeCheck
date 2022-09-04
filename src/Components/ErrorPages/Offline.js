@@ -7,10 +7,10 @@ import {
   Heading,
   HStack,
   Icon,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { TbLetterB, TbLetterE, TbLetterI, TbLetterV } from "react-icons/tb";
+import {TbLetterB, TbLetterE, TbLetterI, TbLetterV} from 'react-icons/tb'
 
 const root = ReactDOM.createRoot(document.getElementById("offline"));
 root.render(
@@ -26,6 +26,7 @@ root.render(
             <HStack align="center" justify="center">
               <Icon
                 variant="ghost"
+                color={'tomato'}
                 aria-label="V"
                 w={16}
                 h={16}
@@ -33,6 +34,7 @@ root.render(
               />
               <Icon
                 variant="ghost"
+                color={'tomato'}
                 aria-label="V"
                 w={16}
                 h={16}
@@ -40,6 +42,7 @@ root.render(
               />
               <Icon
                 variant="ghost"
+                color={'tomato'}
                 aria-label="V"
                 w={16}
                 h={16}
@@ -47,6 +50,7 @@ root.render(
               />
               <Icon
                 variant="ghost"
+                color={'tomato'}
                 aria-label="V"
                 w={16}
                 h={16}

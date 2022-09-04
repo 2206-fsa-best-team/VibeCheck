@@ -78,6 +78,7 @@ const CheckConf = (props) => {
 
         <ModalFooter>
           <Button
+            colorScheme="teal"
             mr={3}
             onClick={() => {
               setJournal({ ...journal, content: journal.content + value });

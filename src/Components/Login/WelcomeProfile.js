@@ -96,7 +96,7 @@ export default function Account({ session }) {
             close this popup to create your first moment!
           </ModalBody>
           <ModalFooter>
-            <Button mr={3} onClick={closeModal}>
+            <Button colorScheme="blue" mr={3} onClick={closeModal}>
               Close
             </Button>
           </ModalFooter>

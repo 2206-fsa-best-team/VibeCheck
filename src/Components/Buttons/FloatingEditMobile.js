@@ -1,4 +1,10 @@
-import { IconButton, Flex, Container, Tooltip } from "@chakra-ui/react";
+import {
+  IconButton,
+  Flex,
+  Container,
+  useColorModeValue,
+  Tooltip,
+} from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
 import React from "react";
 
@@ -19,6 +25,7 @@ const FloatingEditMobile = (props) => {
             aria-label={`edit your ${location}`}
             alignSelf="flex-end"
             size="lg"
+            bg={useColorModeValue("gray.300", "tomato")}
             pos="fixed"
             px={4}
             py={4}

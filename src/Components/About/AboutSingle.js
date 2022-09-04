@@ -6,6 +6,7 @@ import {
   Image,
   HStack,
   Icon,
+  useColorModeValue,
   Link,
 } from "@chakra-ui/react";
 import { AiFillLinkedin, AiOutlineMail, AiFillGithub } from "react-icons/ai";
@@ -27,7 +28,7 @@ const AboutSingle = ({ person }) => {
             align="center"
             justify="center"
             py="4px"
-            borderRadius="full"
+            borderRadius='full'
             boxSize="100px"
             objectFit="cover"
             alt={person.name}
@@ -43,6 +44,7 @@ const AboutSingle = ({ person }) => {
           <Link href={person.linkedIn} isExternal>
             <Icon
               variant="ghost"
+              color={useColorModeValue("blue.500", "blue.400")}
               aria-label="LinkedIn"
               w={8}
               h={8}
@@ -54,6 +56,7 @@ const AboutSingle = ({ person }) => {
           <a href={`mailto:${person.email}`}>
             <Icon
               variant="ghost"
+              color={useColorModeValue("black", "blue.400")}
               aria-label="email"
               w={8}
               h={8}
@@ -65,6 +68,7 @@ const AboutSingle = ({ person }) => {
           <Link href={person.github} isExternal>
             <Icon
               variant="ghost"
+              color={useColorModeValue("black", "blue.400")}
               aria-label="github"
               w={8}
               h={8}

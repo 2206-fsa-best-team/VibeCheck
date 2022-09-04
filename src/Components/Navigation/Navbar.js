@@ -40,7 +40,7 @@ export default function Navbar(props) {
 
   return (
     <Box
-      bg={useColorModeValue("gray.300", "gray.800")}
+      bg={useColorModeValue("tomato", "#0a0f1c")}
       px={4}
       pos={"fixed"}
       w={"100%"}
@@ -65,13 +65,7 @@ export default function Navbar(props) {
                   onClick={onOpen}
                   aria-label="open user menu button"
                 >
-                  <Avatar
-                    size={"sm"}
-                    name={name}
-                    src=""
-                    bg={useColorModeValue("gray.800", "whiteAlpha.900")}
-                    color={useColorModeValue("whiteAlpha.900", "gray.700")}
-                  />
+                  <Avatar size={"sm"} name={name} src="" bg="teal" />
                 </MenuButton>
                 <Portal>
                   <MenuList
@@ -79,18 +73,10 @@ export default function Navbar(props) {
                     onClose={onClose}
                     m={0}
                     zIndex="popover"
-                    borderWidth={2}
-                    bg={useColorModeValue("gray.50", "gray.600")}
                   >
                     <br />
                     <Center>
-                      <Avatar
-                        size={"2xl"}
-                        name={name}
-                        src={""}
-                        bg={useColorModeValue("gray.800", "whiteAlpha.900")}
-                        color={useColorModeValue("whiteAlpha.900", "gray.700")}
-                      />
+                      <Avatar size={"2xl"} name={name} src={""} bg="teal" />
                     </Center>
                     <br />
                     <Center>

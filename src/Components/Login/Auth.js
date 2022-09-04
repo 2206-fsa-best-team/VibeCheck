@@ -155,7 +155,7 @@ export default function Auth() {
                   </InputRightElement>
                 </InputGroup>
                 {shortPass ? (
-                  <FormHelperText color="red.600" fontSize="xs" pl="3">
+                  <FormHelperText color="red.300" fontSize='xs' pl='3' >
                     password must be 6+ characters
                   </FormHelperText>
                 ) : (
@@ -165,7 +165,11 @@ export default function Auth() {
               <ButtonGroup size="md" mt={4}>
                 <Button type="submit" disabled={credsInvalid}>
                   {loadingLogin ? (
-                    <CircularProgress isIndeterminate size="1.75rem" />
+                    <CircularProgress
+                      isIndeterminate
+                      size="1.75rem"
+                      color="tomato"
+                    />
                   ) : (
                     "login"
                   )}
@@ -179,7 +183,11 @@ export default function Auth() {
                   disabled={credsInvalid}
                 >
                   {loadingSignUp ? (
-                    <CircularProgress isIndeterminate size="1.75rem" />
+                    <CircularProgress
+                      isIndeterminate
+                      size="1.75rem"
+                      color="tomato"
+                    />
                   ) : (
                     "sign up"
                   )}

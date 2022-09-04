@@ -60,6 +60,7 @@ server error! we appologize for the inconvenience if so`
             <br />
             <Button
               onClick={() => setImage(camera.current.getScreenshot())}
+              colorScheme="teal"
               aria-label="take photo button"
             >
               <Text>take photo</Text>
@@ -73,6 +74,7 @@ server error! we appologize for the inconvenience if so`
               onClick={() => {
                 setImage(null);
               }}
+              colorScheme={"teal"}
               mr={10}
               variant="outline"
               aria-label="take another photo button"
@@ -80,10 +82,11 @@ server error! we appologize for the inconvenience if so`
               <Text>take another photo</Text>
             </Button>
             {modalLoading ? (
-              <CircularProgress isIndeterminate size="1.75rem" />
+              <CircularProgress isIndeterminate size="1.75rem" color="tomato" />
             ) : (
               <Button
                 onClick={() => handleSubmit(image)}
+                colorScheme={"teal"}
                 aria-label="convert to text button"
               >
                 <Text>{value ? "add to entry" : "convert to text"}</Text>{" "}

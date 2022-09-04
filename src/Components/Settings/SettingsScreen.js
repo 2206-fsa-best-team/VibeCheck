@@ -119,7 +119,7 @@ const SettingsScreen = (props) => {
               />
               <InputRightElement w="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>
-                  {show ? "Hide" : "Show"}
+                  {show ? "hide" : "show"}
                 </Button>
               </InputRightElement>
             </InputGroup>

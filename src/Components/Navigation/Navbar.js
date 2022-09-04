@@ -40,7 +40,7 @@ export default function Navbar(props) {
 
   return (
     <Box
-      bg={useColorModeValue("gray.400", "gray.800")}
+      bg={useColorModeValue("gray.300", "gray.800")}
       px={4}
       pos={"fixed"}
       w={"100%"}

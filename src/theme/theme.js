@@ -14,6 +14,28 @@ const colors = {
     800: "#18414E",
     900: "#0C2127",
   },
+  blue: {
+    50: "#C7F2FF",
+    100: "#A6DDFD",
+    200: "#88C2F6",
+    300: "#70A7E8",
+    400: "#5B8DD2",
+    500: "#4A74B5",
+    600: "#105CBC",
+    700: "#0C458D",
+    800: "#082E5E",
+    900: "#04172F",
+    // 50: "#EDF1F8",
+    // 100: "#EDF1F8",
+    // 200: "#ACBFDD",
+    // 300: "#8BA6D0",
+    // 400: "#6A8DC2",
+    // 500: "#4A74B5",
+    // 600: "#3B5C91",
+    // 700: "#2C456D",
+    // 800: "#1E2E48",
+    // 900: "#0F1724",
+  },
 };
 
 const styles = {
@@ -41,11 +63,11 @@ const Button = {
   // }),
   variants: {
     outline: (props) => ({
-      borderColor: mode("cyan.200", "cyan.500")(props),
+      borderColor: mode("blue.200", "blue.500")(props),
       // color: "white",
     }),
     solid: (props) => ({
-      bg: mode("cyan.200", "cyan.500")(props),
+      bg: mode("blue.200", "blue.500")(props),
     }),
     // ghost: (props) => ({
     //   bg: mode("cyan.200", "cyan.500")(props),

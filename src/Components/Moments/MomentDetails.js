@@ -13,6 +13,7 @@ import {
   Flex,
   Tooltip,
   Show,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import DateObject from "react-date-object";
 import FloatingEditMobile from "../Buttons/FloatingEditMobile";
@@ -26,6 +27,7 @@ let startingContent = "";
 const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
   const [count, setCount] = useState(moment.content.length);
   const { momentId } = useParams();
+  const subtextColor = useColorModeValue("gray.700", "gray.300");
 
   useEffect(() => {
     startingContent = moment.content;
@@ -156,18 +158,24 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
         align="left"
         px="16px"
         pt={2}
+        color={subtextColor}
       >
         you were {vibeMsgSelector(moment.vibe)}
       </Text>
       <HStack justifyContent="space-between" px="16px" pb={2}>
         <Flex flexGrow={2}>
-          <Text fontSize="0.75rem" w="100%" align="left">
+          <Text fontSize="0.75rem" w="100%" align="left" color={subtextColor}>
             {dateFormatted.toLowerCase()}
           </Text>
         </Flex>
         <Flex flexGrow={1}>
           {momentId ? (
-            <Text fontSize="0.75rem" w="100%" align="right">
+            <Text
+              fontSize="0.75rem"
+              w="100%"
+              align="right"
+              color={subtextColor}
+            >
               {count}/260
             </Text>
           ) : null}

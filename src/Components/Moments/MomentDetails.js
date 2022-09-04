@@ -14,7 +14,9 @@ import {
   Tooltip,
   Show,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
+import { colorSelector } from "../Helpers/colorChanger";
 import DateObject from "react-date-object";
 import FloatingEditMobile from "../Buttons/FloatingEditMobile";
 import FloatingEditWeb from "../Buttons/FloatingEditWeb";
@@ -151,36 +153,43 @@ const MomentDetails = ({ moment, setMoment, setLoading, location }) => {
         />
         <EditableControls />
       </Editable>
-      <Text
-        fontSize="0.75rem"
-        fontStyle="italic"
-        w="100%"
-        align="left"
-        px="16px"
-        pt={2}
-        color={subtextColor}
+      <VStack
+        alignItems={"flex-start"}
+        borderLeft={momentId ? "solid" : ""}
+        borderLeftWidth={momentId ? 4 : 0}
+        borderLeftColor={() => colorSelector(moment.vibe).border}
       >
-        you were {vibeMsgSelector(moment.vibe)}
-      </Text>
-      <HStack justifyContent="space-between" px="16px" pb={2}>
-        <Flex flexGrow={2}>
-          <Text fontSize="0.75rem" w="100%" align="left" color={subtextColor}>
-            {dateFormatted.toLowerCase()}
-          </Text>
-        </Flex>
-        <Flex flexGrow={1}>
-          {momentId ? (
-            <Text
-              fontSize="0.75rem"
-              w="100%"
-              align="right"
-              color={subtextColor}
-            >
-              {count}/260
+        <Text
+          fontSize="0.75rem"
+          fontStyle="italic"
+          w="100%"
+          align="left"
+          px="16px"
+          pt={2}
+          color={subtextColor}
+        >
+          you were {vibeMsgSelector(moment.vibe)}
+        </Text>
+        <HStack justifyContent="space-between" w="100%" px="16px" pb={2}>
+          <Flex flexGrow={2}>
+            <Text fontSize="0.75rem" w="100%" align="left" color={subtextColor}>
+              {dateFormatted.toLowerCase()}
             </Text>
-          ) : null}
-        </Flex>
-      </HStack>
+          </Flex>
+          <Flex flexGrow={1}>
+            {momentId ? (
+              <Text
+                fontSize="0.75rem"
+                w="100%"
+                align="right"
+                color={subtextColor}
+              >
+                {count}/260
+              </Text>
+            ) : null}
+          </Flex>
+        </HStack>
+      </VStack>
     </>
   );
 };

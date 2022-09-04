@@ -17,7 +17,6 @@ const Moments = () => {
   }, []);
 
   async function fetchMoments() {
-    // setLoading(true);
     try {
       const { data, error } = await supabase
         .from("moments")

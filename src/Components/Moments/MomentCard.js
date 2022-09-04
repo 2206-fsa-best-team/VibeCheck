@@ -17,8 +17,9 @@ const MomentCard = (props) => {
       align="stretch"
       borderWidth="1px"
       borderRadius="lg"
-      borderTopWidth=".25rem"
-      borderTopColor={() => colorSelector(moment.vibe)}
+      borderTopWidth=".5rem"
+      borderTopColor={() => colorSelector(moment.vibe).border}
+      bgColor={() => colorSelector(moment.vibe).bg}
     >
       <MomentDetails {...props} />
     </Box>

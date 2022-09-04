@@ -1,10 +1,4 @@
-import {
-  IconButton,
-  Flex,
-  Container,
-  useColorModeValue,
-  Tooltip,
-} from "@chakra-ui/react";
+import { IconButton, Flex, Container, Tooltip } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -27,7 +21,6 @@ const FloatingAdd = (props) => {
               aria-label={`add a new ${location}`}
               alignSelf="flex-end"
               size="lg"
-              bg={useColorModeValue("gray.300", "tomato")}
               pos="fixed"
               px={4}
               py={4}

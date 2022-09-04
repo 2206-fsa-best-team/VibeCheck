@@ -27,7 +27,7 @@ const AddMoment = () => {
     setSubmitLoading(true);
     try {
       if (!content.length) {
-        alert("write about your moment");
+        alert("add your moment");
       } else {
         const d = new Date();
         d.setTime(d.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
@@ -73,19 +73,12 @@ const AddMoment = () => {
         </Text>
         <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
         {submitLoading ? (
-          <CircularProgress
-            isIndeterminate
-            size="1.75rem"
-            color="tomato"
-            align="center"
-          />
+          <CircularProgress isIndeterminate size="1.75rem" align="center" />
         ) : (
           <>
-            <Button onClick={createMoment} colorScheme="teal">
-              add this moment
-            </Button>
-            <Button variant='ghost' onClick={() => navigate('/moments')}>
-              nevermind
+            <Button onClick={createMoment}>add moment</Button>
+            <Button variant="outline" onClick={() => navigate("/moments")}>
+              cancel
             </Button>
           </>
         )}

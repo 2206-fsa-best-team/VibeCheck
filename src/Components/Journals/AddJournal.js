@@ -57,7 +57,7 @@ const AddJournal = () => {
   }
 
   return (
-    <Stack px="24px" display="flex" maxW="xl">
+    <Stack px="24px" display="flex" maxW="3xl">
       <Show below="lg">
         {showCamera ? (
           <>
@@ -73,7 +73,6 @@ const AddJournal = () => {
             <br />
             <Button
               onClick={() => setShowCamera(false)}
-              colorScheme="teal"
               variant="outline"
               aria-label="close camera button"
             >
@@ -88,7 +87,6 @@ const AddJournal = () => {
             <Button
               onClick={() => setShowCamera(true)}
               variant="outline"
-              colorScheme={"teal"}
               aria-label="open camera button"
             >
               open camera
@@ -140,18 +138,22 @@ const AddJournal = () => {
       <MoodSlider sliderValue={sliderValue} setSliderValue={setSliderValue} />
       {/* submit button */}
       {submitLoading ? (
-        <CircularProgress isIndeterminate size="1.75rem" bg="teal" />
+        <CircularProgress isIndeterminate size="1.75rem" />
       ) : (
         <>
           <Button
+            maxW="lg"
             onClick={createJournal}
-            colorScheme="teal"
             aria-label="add journal entry button"
           >
-            add this journal entry!
+            add entry
           </Button>
-          <Button variant="ghost" onClick={() => navigate("/journals")}>
-            nevermind
+          <Button
+            maxW="lg"
+            variant="outline"
+            onClick={() => navigate("/journals")}
+          >
+            cancel
           </Button>
         </>
       )}

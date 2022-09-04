@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import {
   Box,
   useColorModeValue,
@@ -16,32 +16,27 @@ import AddJournalEntryButton from "../Buttons/AddJournalEntryButton";
 
 function SideMenu() {
   const location = useLocation();
+  const highlightColor = useColorModeValue("whiteAlpha.900", "gray.700");
 
   return (
     <Container>
       <Box
-        bg={useColorModeValue("gray.300", "#0a0f1c")}
+        bg={useColorModeValue("gray.300", "gray.800")}
         px={4}
-        py={2}
-        pb={5}
+        py={4}
         pos={"fixed"}
         left={0}
         h={"100%"}
         w={"20%"}
         flexDirection="column"
       >
-        <VStack
-          align={"space-between"}
-          divider={<StackDivider borderColor="gray.200" />}
-        >
+        <VStack align={"space-between"} divider={<StackDivider />}>
           <Box
-            bg={location.pathname === "/moments" ? "teal" : ""}
-            borderRadius=".5rem"
+            bg={location.pathname === "/moments" ? highlightColor : ""}
+            borderRadius="lg"
           >
             <Link to="/moments">
               <Icon
-                variant="ghost"
-                color={"tomato"}
                 aria-label="All Moments Page"
                 w={8}
                 h={8}
@@ -60,13 +55,12 @@ function SideMenu() {
             </Link>
           </Box>
           <Box
-            bg={location.pathname === "/journals" ? "teal" : ""}
+            bg={location.pathname === "/journals" ? highlightColor : ""}
             borderRadius=".5rem"
           >
             <Link to="/journals">
               <Icon
                 variant="ghost"
-                color={"tomato"}
                 aria-label="All Journal Entries Page"
                 pt={1}
                 w={8}
@@ -86,14 +80,13 @@ function SideMenu() {
             </Link>
           </Box>
           <Box
-            bg={location.pathname === "/vibes" ? "teal" : ""}
+            bg={location.pathname === "/vibes" ? highlightColor : ""}
             borderRadius=".5rem"
           >
             <Link to="/vibes">
               <Icon
                 variant="ghost"
-                color={"tomato"}
-                aria-label="Vibe graphs"
+                aria-label="dashboard"
                 pt={0.5}
                 w={8}
                 h={8}

@@ -8,7 +8,6 @@ import {
   InputGroup,
   InputRightElement,
   Text,
-  HStack,
   CircularProgress,
   Skeleton,
   useToast,
@@ -96,8 +95,8 @@ const SettingsScreen = (props) => {
               <CircularProgress
                 isIndeterminate
                 size="1.75rem"
-                color="tomato"
-                align="right" pr={'32px'}
+                align="right"
+                pr={"32px"}
               />
             ) : (
               <Box align="right">
@@ -120,7 +119,7 @@ const SettingsScreen = (props) => {
               />
               <InputRightElement w="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>
-                  {show ? "Hide" : "Show"}
+                  {show ? "hide" : "show"}
                 </Button>
               </InputRightElement>
             </InputGroup>
@@ -128,8 +127,8 @@ const SettingsScreen = (props) => {
               <CircularProgress
                 isIndeterminate
                 size="1.75rem"
-                color="tomato"
-                align="right" pr={'32px'}
+                align="right"
+                pr={"32px"}
               />
             ) : (
               <Box align="right">

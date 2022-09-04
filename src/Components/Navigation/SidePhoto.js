@@ -11,7 +11,6 @@ const SidePhoto = () => {
       backgroundRepeat="repeat"
       bgPosition="top">
       X // is this a typo?
-        <Image src={photo}></Image>
       </Box>
     </Show>
   );

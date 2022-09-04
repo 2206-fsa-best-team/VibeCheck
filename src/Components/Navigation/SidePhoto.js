@@ -2,10 +2,11 @@ import { Show, Image, Box } from "@chakra-ui/react";
 
 const SidePhoto = () => {
   return (
-    <Show above="lg">
+    <Show above="xl">
       <Box
         mt="-16"
         right={0}
+        zIndex={-2}
         pos={"fixed"}
         borderLeft={"1px"}
         borderColor={"gray.700"}

@@ -10,7 +10,6 @@ const SidePhoto = () => {
       bgImage={`url(${photo})`}
       backgroundRepeat="repeat"
       bgPosition="top">
-      X // is this a typo?
       </Box>
     </Show>
   );

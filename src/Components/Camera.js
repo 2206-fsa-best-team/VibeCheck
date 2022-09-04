@@ -7,7 +7,7 @@ import axios from "axios";
 const Cam = (props) => {
   const camera = useRef(null);
   const [image, setImage] = useState(null);
-  const { setAllText, modalLoading, setModalLoading } = props;
+  const { setAllText, modalLoading, setModalLoading, value } = props;
   async function handleSubmit(img) {
     try {
       setModalLoading(true);
@@ -75,9 +75,9 @@ server error! we appologize for the inconvenience if so`
               }}
               mr={10}
               variant="outline"
-              aria-label="retake photo button"
+              aria-label="take another photo button"
             >
-              <Text>retake photo</Text>
+              <Text>take another photo</Text>
             </Button>
             {modalLoading ? (
               <CircularProgress isIndeterminate size="1.75rem" />
@@ -86,7 +86,7 @@ server error! we appologize for the inconvenience if so`
                 onClick={() => handleSubmit(image)}
                 aria-label="convert to text button"
               >
-                <Text>convert to text</Text>{" "}
+                <Text>{value ? "add to entry" : "convert to text"}</Text>{" "}
               </Button>
             )}
           </VStack>

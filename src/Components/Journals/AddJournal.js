@@ -16,6 +16,7 @@ import {
 import MoodSlider from "../Buttons/Slider";
 import CheckConf from "./CheckConf";
 import TextareaAutosize from "react-textarea-autosize";
+import axios from "axios";
 
 const AddJournal = () => {
   let todayUtc = new Date();
@@ -41,9 +42,16 @@ const AddJournal = () => {
       if (!content.length) {
         alert("write your journal entry");
       } else {
+        const { data } = await axios.put("/journals", { content });
         await supabase
           .from("journals")
-          .insert({ content, vibe: sliderValue, date, user_id: user.id })
+          .insert({
+            content,
+            vibe: sliderValue,
+            date,
+            user_id: user.id,
+            sentiment: data.hundredSent,
+          })
           .single();
         setJournal({ content: "", date: today });
         navigate("/journals");

@@ -13,6 +13,7 @@ import {
   Show,
   HStack,
   IconButton,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { AiOutlineCamera } from "react-icons/ai";
 import MoodSlider from "../Buttons/Slider";
@@ -57,6 +58,11 @@ const AddJournal = () => {
       throw error;
     }
   }
+
+  const placeholderText = useBreakpointValue({
+    base: "write your journal entry here or snap a pic of a handwritten page",
+    sm: "write your journal entry here or snap a pic of a handwritten page using your mobile device",
+  });
 
   return (
     <Stack px="24px" display="flex" maxW="3xl">
@@ -103,7 +109,7 @@ const AddJournal = () => {
           setJournal({ ...journal, content: evt.target.value })
         }
         resize="none"
-        placeholder="write your journal entry here or snap a pic of a pic of a handwritten page using your mobile device"
+        placeholder={placeholderText}
         aria-label="journal entry input field"
         size="lg"
         as={TextareaAutosize}

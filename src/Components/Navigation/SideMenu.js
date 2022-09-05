@@ -30,80 +30,61 @@ function SideMenu() {
         w={"20%"}
         flexDirection="column"
       >
-        <VStack align={"space-between"} divider={<StackDivider />}>
-          <Box
-            bg={location.pathname === "/moments" ? highlightColor : ""}
-            borderRadius="lg"
-          >
-            <Link to="/moments">
+        <VStack align={"space-between"} divider={<StackDivider />} as="ol">
+          <Link to="/moments">
+            <Box
+              bg={location.pathname === "/moments" ? highlightColor : ""}
+              borderRadius="lg"
+              display="flex"
+              alignItems="center"
+              gap="1rem"
+              padding=".25rem"
+              as="li"
+            >
               <Icon
                 aria-label="All Moments Page"
                 w={8}
                 h={8}
                 as={MdFormatListBulleted}
+                display="block"
               />
-              <Box
-                display={"inline"}
-                pl={5}
-                pr={"7.75ch"}
-                pt={1}
-                pb={2}
-                pos={"absolute"}
-              >
-                moments
-              </Box>
-            </Link>
-          </Box>
-          <Box
-            bg={location.pathname === "/journals" ? highlightColor : ""}
-            borderRadius=".5rem"
-          >
-            <Link to="/journals">
+              <Box as="p">moments</Box>
+            </Box>
+          </Link>
+          <Link to="/journals">
+            <Box
+              bg={location.pathname === "/journals" ? highlightColor : ""}
+              borderRadius="lg"
+              display="flex"
+              alignItems="center"
+              gap="1rem"
+              padding=".25rem"
+              as="li"
+            >
               <Icon
                 variant="ghost"
                 aria-label="All Journal Entries Page"
-                pt={1}
                 w={8}
                 h={8}
                 as={BsFillJournalBookmarkFill}
               />
-              <Box
-                display={"inline"}
-                pl={5}
-                pr={"12vh"}
-                pt={1.5}
-                pb={2}
-                pos={"absolute"}
-              >
-                journal
-              </Box>
-            </Link>
-          </Box>
-          <Box
-            bg={location.pathname === "/vibes" ? highlightColor : ""}
-            borderRadius=".5rem"
-          >
-            <Link to="/vibes">
-              <Icon
-                variant="ghost"
-                aria-label="dashboard"
-                pt={0.5}
-                w={8}
-                h={8}
-                as={BiLineChart}
-              />
-              <Box
-                display={"inline"}
-                pl={5}
-                pr={"8.5vh"}
-                pt={1.5}
-                pb={2}
-                pos={"absolute"}
-              >
-                dashboard
-              </Box>
-            </Link>
-          </Box>
+              <Box>journal</Box>
+            </Box>
+          </Link>
+          <Link to="/vibes">
+            <Box
+              bg={location.pathname === "/vibes" ? highlightColor : ""}
+              borderRadius="lg"
+              display="flex"
+              alignItems="center"
+              gap="1rem"
+              padding=".25rem"
+              as="li"
+            >
+              <Icon aria-label="dashboard" w={8} h={8} as={BiLineChart} />
+              <Box>dashboard</Box>
+            </Box>
+          </Link>
           <VStack>
             <AddMomentButton />
             <AddJournalEntryButton />

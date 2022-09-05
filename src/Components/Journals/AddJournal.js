@@ -11,8 +11,11 @@ import {
   Text,
   Textarea,
   Show,
-  Box,
+  HStack,
+  IconButton,
+  useBreakpointValue,
 } from "@chakra-ui/react";
+import { AiOutlineCamera } from "react-icons/ai";
 import MoodSlider from "../Buttons/Slider";
 import CheckConf from "./CheckConf";
 import TextareaAutosize from "react-textarea-autosize";
@@ -64,46 +67,15 @@ const AddJournal = () => {
     }
   }
 
+  const placeholderText = useBreakpointValue({
+    base: "write your journal entry here or snap a pic of a handwritten page",
+    sm: "write your journal entry here or snap a pic of a handwritten page using your mobile device",
+  });
+
   return (
     <Stack px="24px" display="flex" maxW="3xl">
-      <Show below="lg">
-        {showCamera ? (
-          <>
-            <Cam
-              setAllText={setAllText}
-              setModalLoading={setModalLoading}
-              modalLoading={modalLoading}
-              value={content}
-            />
-            {/* <Text pt="16px" ml="8px" fontSize={"24px"}>
-              change your mind?
-            </Text> */}
-            <br />
-            <Button
-              onClick={() => setShowCamera(false)}
-              variant="outline"
-              aria-label="close camera button"
-            >
-              close camera
-            </Button>
-          </>
-        ) : (
-          <>
-            <Text ml="8px" fontSize={"24px"}>
-              have a hand-written journal entry you want to add?
-            </Text>
-            <Button
-              onClick={() => setShowCamera(true)}
-              variant="outline"
-              aria-label="open camera button"
-            >
-              open camera
-            </Button>
-          </>
-        )}
-      </Show>
       {/* date input */}
-      <Text mt="32px" ml="8px" fontSize={"24px"}>
+      <Text mt="32px" ml="8px" fontSize={["20px", "24px"]}>
         date:
       </Text>
       <Input
@@ -114,16 +86,38 @@ const AddJournal = () => {
         onChange={(evt) => setJournal({ ...journal, date: evt.target.value })}
       />
       {/* content input */}
-      <Text mt="32px" pt="16px" ml="8px" fontSize={"24px"}>
-        what's going on?
-      </Text>
+      <HStack alignItems={"center"} mt="32px" pt="16px" ml="8px">
+        <Text ml="8px" fontSize={["20px", "24px"]}>
+          your journal entry:
+        </Text>
+        <Show below="lg">
+          <IconButton
+            variant={showCamera ? "solid" : "outline"}
+            size="md"
+            onClick={() => setShowCamera(!showCamera)}
+            aria-label="toggle camera button"
+            icon={<AiOutlineCamera />}
+          ></IconButton>
+        </Show>
+      </HStack>
+      {showCamera ? (
+        <>
+          <Cam
+            setAllText={setAllText}
+            setModalLoading={setModalLoading}
+            modalLoading={modalLoading}
+            value={content}
+          />
+          <br />
+        </>
+      ) : null}
       <Textarea
         value={content}
         onChange={(evt) =>
           setJournal({ ...journal, content: evt.target.value })
         }
         resize="none"
-        placeholder="write your journal entry here"
+        placeholder={placeholderText}
         aria-label="journal entry input field"
         size="lg"
         as={TextareaAutosize}

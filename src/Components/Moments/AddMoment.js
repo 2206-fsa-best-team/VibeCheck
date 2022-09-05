@@ -54,7 +54,7 @@ const AddMoment = () => {
   return (
     <>
       <Stack px="24px" display="flex" maxW="xl">
-        <Text pb="16px" mt="32px" ml="8px" fontSize={"24px"}>
+        <Text pb="16px" mt="32px" ml="8px" fontSize={["20px", "24px"]}>
           what's going on?
         </Text>
         <Textarea

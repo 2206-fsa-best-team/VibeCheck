@@ -16,7 +16,7 @@ function MoodSlider(props) {
   return (
     <Box p="8px" maxW="lg">
       <HStack justify={"left"} pb="8px">
-        <Text fontSize={"24px"} pb="4px">
+        <Text fontSize={["20px", "24px"]} pb="4px">
           how are you feeling?
         </Text>
         <Tooltip

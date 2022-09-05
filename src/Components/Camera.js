@@ -39,13 +39,7 @@ server error! we appologize for the inconvenience if so`
   return (
     <div>
       <Box maxW="450px" mx={10} align="center">
-        <Text
-          pb="10px"
-          ml="8px"
-          fontSize="32px"
-          fontStyle="italic"
-          align="start"
-        >
+        <Text pb="10px" ml="8px" fontSize={["20px", "24px"]} fontStyle="italic">
           snap a pic of your journal!
         </Text>
         {image === null ? (

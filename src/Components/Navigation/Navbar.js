@@ -18,6 +18,7 @@ import { supabase } from "../../server/supabaseClient";
 import { Link } from "react-router-dom";
 import LightDarkButton from "../Buttons/LightDarkButton";
 import { useEffect, useState } from "react";
+import { Logo } from "./logo";
 
 export default function Navbar(props) {
   const { onOpen, onClose } = useDisclosure();
@@ -49,7 +50,9 @@ export default function Navbar(props) {
     >
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         <Link to="/moments">
-          <Box fontSize={["36px", "48px"]}>vibe☑</Box>
+          <Box h={[10, 14]} color={useColorModeValue("gray.800", "white")}>
+            <Logo />
+          </Box>
         </Link>
         <Flex alignItems={"center"}>
           <Stack direction={"row"} spacing={7}>

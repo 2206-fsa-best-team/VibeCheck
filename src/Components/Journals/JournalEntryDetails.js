@@ -17,6 +17,7 @@ import {
   Show,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { colorSelector } from "../Helpers/colorChanger";
 import DateObject from "react-date-object";
 import FloatingEditMobile from "../Buttons/FloatingEditMobile";
 import FloatingEditWeb from "../Buttons/FloatingEditWeb";
@@ -157,7 +158,12 @@ const JournalEntryDetails = ({
         <EditableControls />
       </Editable>
 
-      <HStack justifyContent="space-between">
+      <HStack
+        justifyContent="space-between"
+        borderLeft={journalEntryId ? "solid" : ""}
+        borderLeftWidth={journalEntryId ? 4 : 0}
+        borderLeftColor={() => colorSelector(journalEntry.vibe).border}
+      >
         <Flex flexGrow={2}>
           <Text
             fontSize="0.75rem"

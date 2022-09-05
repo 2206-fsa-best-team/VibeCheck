@@ -8,6 +8,11 @@ const vision = require("@google-cloud/vision");
 // Creates a client
 const client = new vision.ImageAnnotatorClient();
 const base64Img = require("base64-img");
+//nlp
+const natural = require("natural");
+const Analyser = natural.SentimentAnalyzer;
+const stemmer = natural.PorterStemmer;
+const analyser = new Analyser("English", stemmer, "afinn");
 
 module.exports = app;
 
@@ -47,6 +52,21 @@ app.post("/", async (req, res, next) => {
     res.send(result);
   } catch (err) {
     console.log(err);
+  }
+});
+
+app.put("/journals", async (req, res, next) => {
+  try {
+    let sent = analyser.getSentiment(req.body.content.split(" "));
+    if (sent > 0.3) {
+      sent = 0.3;
+    } else if (sent < -0.3) {
+      sent = -0.3;
+    }
+    const hundredSent = Math.floor(((sent - -0.3) * 100) / 0.6);
+    res.send({ hundredSent });
+  } catch (e) {
+    console.log(e);
   }
 });
 

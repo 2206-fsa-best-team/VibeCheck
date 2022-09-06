@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import MomentCard from "../Moments/MomentCard";
 import JournalEntryCard from "../Journals/JournalEntryCard";
 import SidePhoto from "../Navigation/SidePhoto";
+import { disableBodyScroll } from "body-scroll-lock";
 
 const VibeCharts = (props) => {
   const [moments, setMoments] = useState([]);
@@ -43,6 +44,8 @@ const VibeCharts = (props) => {
     fetchJournals();
     setLoading(false);
   }, [filter, filterDate, entryId, type]);
+
+  // disableBodyScroll(document)
 
   const dateFilter = async (val) => {
     let day = todaysDate.day;
@@ -116,7 +119,7 @@ const VibeCharts = (props) => {
 
   return (
     <>
-    <SidePhoto />
+      <SidePhoto />
       {loading ? (
         <Container w={"90%"}>
           <br />
@@ -137,7 +140,7 @@ const VibeCharts = (props) => {
           <br />
           {type === "moments" ? (
             <Container
-              w={"100%"}
+              w={"95%"}
               height={"100%"}
               justifyContent="center"
               align={"center"}
@@ -157,7 +160,7 @@ const VibeCharts = (props) => {
             </Container>
           ) : (
             <Container
-              w={"100%"}
+              w={"95%"}
               height={"100%"}
               justifyContent="center"
               align={"center"}
@@ -182,26 +185,32 @@ const VibeCharts = (props) => {
       )}
 
       {type === "moments" && entryId !== 0 ? (
-        <>
+        <Box align="center">
           <br />
-          <Box align="center" px="16px" onClick={() => navToMoment(moment.id)}>
+          <Box
+            align="center"
+            px="16px"
+            w="95%"
+            onClick={() => navToMoment(moment.id)}
+          >
             <MomentCard moment={moment} />
           </Box>
-        </>
+        </Box>
       ) : (
         <></>
       )}
       {type === "journals" && entryId !== 0 ? (
-        <>
+        <Box align="center">
           <br />
           <Box
             align="center"
+            w="95%"
             px="16px"
             onClick={() => navToJournal(journal.id)}
           >
             <JournalEntryCard journalEntry={journal} />
           </Box>
-        </>
+        </Box>
       ) : (
         <></>
       )}

@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/2206-fsa-best-team/VibeCheck">
-    <img src="public/check_192.png" alt="Logo" width="80" height="80">
+    <img src="public/check_512.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">vibe check</h3>

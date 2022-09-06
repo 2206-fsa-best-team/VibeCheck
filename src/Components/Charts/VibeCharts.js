@@ -1,4 +1,4 @@
-import { Box, Container, HStack, Skeleton } from "@chakra-ui/react";
+import { Box, Container, Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../server/supabaseClient";
 import VibesLineGraph from "./VibesLineGraph";

@@ -38,7 +38,7 @@ const Journals = () => {
   return (
     <>
       <Text ml="1rem" fontSize={"1.5rem"} pl="4" pt="1rem">
-        your journal entries
+        your journal
       </Text>
       <SidePhoto />
       {loading ? (

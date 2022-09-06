@@ -14,6 +14,7 @@ import {
   FormControl,
   CircularProgress,
   FormHelperText,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import {
@@ -25,6 +26,7 @@ import {
   invalidPasswordSignup,
   invalidCredentialsSignup,
 } from "../ToastAlerts/AuthFormAlerts";
+import { Logo } from "../Navigation/logo";
 
 export default function Auth() {
   const [loadingLogin, setLoadingLogin] = useState(false);
@@ -118,8 +120,14 @@ export default function Auth() {
           boxShadow="md"
         >
           <Box textAlign="center">
-            <Box fontSize={["36px", "48px"]}>vibe☑</Box>
-            <Heading size="md">time to check in</Heading>
+            <Box
+              h={[10, 14]}
+              color={useColorModeValue("gray.800", "white")}
+              align="center"
+            >
+              <Logo />
+            </Box>
+            <Heading size={["sm", "md"]}>time to check in</Heading>
           </Box>
           <Box my={4} textAlign="left">
             <form

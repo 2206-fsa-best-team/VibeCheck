@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../server/supabaseClient";
-import { useToast, VStack, Skeleton, Show, useDisclosure } from "@chakra-ui/react";
+import {
+  useToast,
+  VStack,
+  Skeleton,
+  Show,
+  useDisclosure,
+} from "@chakra-ui/react";
 import FloatingDeleteMobile from "../Buttons/FloatingDeleteMobile";
 import FloatingDeleteWeb from "../Buttons/FloatingDeleteWeb";
 import JournalEntryDetails from "./JournalEntryDetails";
@@ -14,6 +20,7 @@ const SingleJournal = (props) => {
     id: journalEntryId,
     content: "",
     vibe: null,
+    sentiment: null,
     date: Date(),
   });
   const [loading, setLoading] = useState(true);
@@ -31,11 +38,12 @@ const SingleJournal = (props) => {
           .eq("id", journalEntryId)
           .single();
         if (error) throw error;
-        let { content, vibe, date } = data;
+        let { content, vibe, sentiment, date } = data;
         setJournalEntry({
           ...journalEntry,
           content,
           vibe,
+          sentiment,
           date,
         });
       } catch (error) {
@@ -102,7 +110,12 @@ const SingleJournal = (props) => {
           onClick={onOpen}
         />
       </Show>
-      <DeleteModal location={location} onClose={onClose} isOpen={isOpen} handleDelete={handleDelete}/>
+      <DeleteModal
+        location={location}
+        onClose={onClose}
+        isOpen={isOpen}
+        handleDelete={handleDelete}
+      />
       <br />
       <br />
       <br />

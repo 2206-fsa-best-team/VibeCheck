@@ -10,7 +10,7 @@ export function Logo() {
     >
       <rect
         stroke="currentcolor"
-        stroke-width="2.5px"
+        strokeWidth="2.5px"
         fill="none"
         x="108.87"
         y="1.25"

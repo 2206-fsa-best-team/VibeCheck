@@ -1,4 +1,4 @@
-import { Box, Container, HStack, Skeleton } from "@chakra-ui/react";
+import { Box, Container, Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../server/supabaseClient";
 import VibesLineGraph from "./VibesLineGraph";
@@ -116,7 +116,7 @@ const VibeCharts = (props) => {
 
   return (
     <>
-    <SidePhoto />
+      <SidePhoto />
       {loading ? (
         <Container w={"90%"}>
           <br />
@@ -137,7 +137,7 @@ const VibeCharts = (props) => {
           <br />
           {type === "moments" ? (
             <Container
-              w={"100%"}
+              w={"95%"}
               height={"100%"}
               justifyContent="center"
               align={"center"}
@@ -157,7 +157,7 @@ const VibeCharts = (props) => {
             </Container>
           ) : (
             <Container
-              w={"100%"}
+              w={"95%"}
               height={"100%"}
               justifyContent="center"
               align={"center"}
@@ -182,26 +182,32 @@ const VibeCharts = (props) => {
       )}
 
       {type === "moments" && entryId !== 0 ? (
-        <>
+        <Box align="center">
           <br />
-          <Box align="center" px="16px" onClick={() => navToMoment(moment.id)}>
+          <Box
+            align="center"
+            px="16px"
+            w="95%"
+            onClick={() => navToMoment(moment.id)}
+          >
             <MomentCard moment={moment} />
           </Box>
-        </>
+        </Box>
       ) : (
         <></>
       )}
       {type === "journals" && entryId !== 0 ? (
-        <>
+        <Box align="center">
           <br />
           <Box
             align="center"
+            w="95%"
             px="16px"
             onClick={() => navToJournal(journal.id)}
           >
             <JournalEntryCard journalEntry={journal} />
           </Box>
-        </>
+        </Box>
       ) : (
         <></>
       )}

@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import MomentCard from "../Moments/MomentCard";
 import JournalEntryCard from "../Journals/JournalEntryCard";
 import SidePhoto from "../Navigation/SidePhoto";
-import { disableBodyScroll } from "body-scroll-lock";
 
 const VibeCharts = (props) => {
   const [moments, setMoments] = useState([]);
@@ -44,8 +43,6 @@ const VibeCharts = (props) => {
     fetchJournals();
     setLoading(false);
   }, [filter, filterDate, entryId, type]);
-
-  // disableBodyScroll(document)
 
   const dateFilter = async (val) => {
     let day = todaysDate.day;

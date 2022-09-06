@@ -25,6 +25,7 @@ const VibesLineGraph = (props) => {
 
   const CustomTooltip = (data) => {
     const { payload, label, active, color, content } = data;
+
     if (active) {
       let val = findEntry(dataType(props), payload[0].payload.id);
       content.props.setEntryId(payload[0].payload.id);
@@ -41,7 +42,7 @@ const VibesLineGraph = (props) => {
           border="1px"
           borderRadius={"xl"}
           bg={color}
-          borderColor={"black"}
+          borderColor={color}
         >
           <Text>{`vibe: ${payload[0].value}`}</Text>
         </Box>
@@ -67,15 +68,13 @@ const VibesLineGraph = (props) => {
           <Line
             type="monotone"
             dataKey={"vibe"}
-            // stroke={"tomato"}
             dot={true}
-            // fill={"tomato"}
             activeDot={{ r: 6 }}
           />
           <Tooltip
             content={
               <CustomTooltip
-                // color={useColorModeValue("white", "tomato")}
+                color={useColorModeValue("cyan.200", "cyan.500")}
                 setEntryId={setEntryId}
                 setMoment={setMoment}
                 setJournal={setJournal}

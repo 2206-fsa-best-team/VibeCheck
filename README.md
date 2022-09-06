@@ -227,7 +227,7 @@ Project Link: [vibe check](https://github.com/2206-fsa-best-team/VibeCheck)
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## Acknowledgments 
 
 * [Chakra UI](https://chakra-ui.com/)
 * [Recharts](https://recharts.org)

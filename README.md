@@ -61,7 +61,7 @@ Our team wanted to build an app that allowed us to check in on our own experienc
 Our goals:
 * Enable short-form journaling and a small "vibe check" for users to quickly enter in how they're feeling in the moment and keep living their life
 * Create an intuitive long-form journaling experience for those times when you have more to reflect on (e.g., at the end of the day, every few days, or each week)
-** This includees accounting for an offline experience where users might have written down their journal and wanted to upload it to the platform by taking a picture of it
+** This includes accounting for an offline experience where users might have written down their journal and wanted to upload it to the platform by taking a picture of it
 * Reflect on the vibe rating you provided over time and see which journal entries or moments had more positive or negative vibes associated with them
 
 

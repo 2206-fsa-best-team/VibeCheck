@@ -116,7 +116,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm run start
    ```
-4. Navigate to localhost:8080 on your browser
+4. Navigate to localhost:8080 on your browser (note: you will not be able to access Google Cloud Vision running the app locally)
 5. Log in with the following demo credentials or enter your own credentials and sign up
     Email: amaan.lakhani5+8@gmail.com
     Password: 123456

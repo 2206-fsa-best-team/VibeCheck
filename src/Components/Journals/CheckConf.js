@@ -12,15 +12,23 @@ import {
   ModalBody,
   useDisclosure,
 } from "@chakra-ui/react";
-import { HighlightWithinTextarea } from "react-highlight-within-textarea";
+
+// Due to an error with deployment stemming from the "react-highlight-within-textarea"
+// npm package, as well as the deprication of the Google Cloud Vision OCR feature,
+// we have decided to comment out all code using the "react-highlight-within-textarea" 
+// npm package. Comments below should help explain what features have been removed.
+
+// import { HighlightWithinTextarea } from "react-highlight-within-textarea";
 
 const CheckConf = (props) => {
   const { allText, setJournal, setAllText, setModalLoading, journal } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState("");
-  const onChange = (value) => {
-    setValue(value);
-  };
+  // this function would update the text entry when a user modified the text in 
+  // highlighted text area
+  // const onChange = (value) => {
+  //   setValue(value);
+  // };
   let textStr = "";
   allText.pages.forEach((page) => {
     page.blocks.forEach((block) => {
@@ -69,11 +77,14 @@ const CheckConf = (props) => {
           mistakes (or leave it be if it is right) and delete the *s so they
           don't show up in your journal!
           <Box borderWidth="1px" borderRadius="lg" p={2} mt={2}>
+            {/* 
+            This was the text area that would highlight low confidence words
+            as selected by the above ForEach loops.
             <HighlightWithinTextarea
               value={value}
               highlight={"*"}
               onChange={onChange}
-            />
+            /> */}
           </Box>
         </ModalBody>
 

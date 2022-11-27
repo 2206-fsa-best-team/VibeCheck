@@ -61,7 +61,7 @@ Our team wanted to build an app that allowed us to check in on our own experienc
 Our goals:
 * Enable short-form journaling and a small "vibe check" for users to quickly enter in how they're feeling in the moment and keep living their life
 * Create an intuitive long-form journaling experience for those times when you have more to reflect on (e.g., at the end of the day, every few days, or each week)
-** This includees accounting for an offline experience where users might have written down their journal and wanted to upload it to the platform by taking a picture of it
+** This includes accounting for an offline experience where users might have written down their journal and wanted to upload it to the platform by taking a picture of it
 * Reflect on the vibe rating you provided over time and see which journal entries or moments had more positive or negative vibes associated with them
 
 
@@ -116,7 +116,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm run start
    ```
-4. Navigate to localhost:8080 on your browser
+4. Navigate to localhost:8080 on your browser (note: you will not be able to access Google Cloud Vision running the app locally)
 5. Log in with the following demo credentials or enter your own credentials and sign up
     Email: amaan.lakhani5+8@gmail.com
     Password: 123456

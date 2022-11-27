@@ -51,7 +51,8 @@ app.post("/", async (req, res, next) => {
     const [result] = await client.documentTextDetection(filepath);
     res.send(result);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    res.send(err);
   }
 });
 

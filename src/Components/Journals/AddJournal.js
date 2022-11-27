@@ -100,17 +100,23 @@ const AddJournal = () => {
           ></IconButton>
         </Show>
       </HStack>
-      {showCamera ? (
-        <>
-          <Cam
-            setAllText={setAllText}
-            setModalLoading={setModalLoading}
-            modalLoading={modalLoading}
-            value={content}
-          />
-          <br />
-        </>
-      ) : null}
+      {showCamera ? <>This feature is unavailable at the moment</> : null}
+      {/*
+      // this displays the camera feature that uses Google's Cloud Vision API
+      // to run OCR and turn handwritten journals into text. If we decided to 
+      // pay for GCV this feature could be reinstated by replacing the above 
+      // <>This feature is unavailable at the moment</> with the below:
+      // 
+      // <>
+      //   <Cam
+      //     setAllText={setAllText}
+      //     setModalLoading={setModalLoading}
+      //     modalLoading={modalLoading}
+      //     value={content}
+      //   />
+      //   <br />
+      // </>
+      */}
       <Textarea
         value={content}
         onChange={(evt) =>

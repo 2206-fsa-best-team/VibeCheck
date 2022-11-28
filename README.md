@@ -17,7 +17,7 @@
     <a href="https://github.com/2206-fsa-best-team/VibeCheck"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/2206-fsa-best-team/VibeCheck">View Demo</a> (coming soon)
+    <a href="https://youtu.be/ZkAHRSJC-rw">View Demo</a> (coming soon)
   </p>
 </div>
 
@@ -187,8 +187,8 @@ You're all set!
 * Create charts based on vibe data for moments and journal entries ✔
 * Enable filtering for moments and journal entries ✔
 * Enhance responsiveness throughout all components to account for desktop and mobile usage ✔
-* Deploy the app via Heroku ✔
-* Enable continuous integration using Heroku and Github ✔
+* Deploy the app via Heroku (later Render) ✔
+* Enable continuous integration using Heroku (later Render) and Github ✔
 
 ## Long-term Vision
 * Implementing NLP and incorporating sentiment analysis into the vibe values
@@ -216,7 +216,7 @@ Amaan Lakhani - [Github](https://github.com/alakhani5) - [LinkedIn](https://www.
 
 Daniel Jacobson - [Github](https://github.com/danielyj98) - [LinkedIn](https://www.linkedin.com/in/danielj98/) - [Email](Danielyjacobson@gmail.com)
 
-Evan Forde Barden - [Github](https://github.com/evanfordebarden) - [LinkedIn](https://www.linkedin.com/in/evanfordebarden/) - [Email](evanbarden@gmail.com)
+Evan Forde Barden - [Github](https://github.com/evanfordebarden) - [LinkedIn](https://www.linkedin.com/in/evanfordebarden/) - [Email](hello@evanfordebarden.com)
 
 Nicholas Angelopoulos - [Github](https://github.com/NickyAngel) - [LinkedIn](https://www.linkedin.com/in/nickyangel/) - [Email](neangelopoulos@gmail.com) 
 
@@ -231,7 +231,9 @@ Project Link: [vibe check](https://github.com/2206-fsa-best-team/VibeCheck)
 
 * [Chakra UI](https://chakra-ui.com/)
 * [Recharts](https://recharts.org)
-* [Heroku](https://cloud.google.com/vision)
+* [Google Cloud Vision](https://cloud.google.com/vision)
+* [Heroku](https://id.heroku.com/login)
+* [Render](https://render.com/)
 * [React Icons](https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
